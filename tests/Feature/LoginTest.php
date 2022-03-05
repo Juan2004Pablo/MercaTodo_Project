@@ -50,4 +50,16 @@ class LoginTest extends TestCase
 
         $response->assertRedirect(route('home'));
     }
+
+    use RefreshDatabase;
+    public function test_user_must_verify_email(): void
+    {
+        $this->withoutExceptionHandling();
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->get(route('home'));
+
+        //$this->assertAuthenticated($guard = null);
+        $response->assertStatus(200);
+    }
 }
