@@ -37,7 +37,6 @@ class LoginTest extends TestCase
         $response->assertStatus(200);
     }
 
-    use RefreshDatabase;
     public function test_user_can_be_registered(): void
     {
         $this->withoutExceptionHandling();
