@@ -27,23 +27,5 @@ class AdminTest extends TestCase
         }
         
         $this->assertAuthenticated($guard = null);
-
     }
-
-    /*
-    use RefreshDatabase;
-    public function test_user_can_be_role_admin_auth()
-    {
-        $this->withoutExceptionHandling();
-        $user = User::factory()->count(1)->create([
-            'name' => 'Admin',
-            'email' => 'admin@admin.com',
-            'password' => '12345678',
-            'role' => 'admin'
-        ]);
-        
-        $response->assertRedirect(route('admin'));
-        $this->assertAuthenticatedAs($user, $guard = null);
-
-    }*/
 }
