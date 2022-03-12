@@ -90,9 +90,6 @@ class UserTest extends TestCase
         $response = $this->actingAs($user)->get(route('home'));
         $this->assertAuthenticated($guard = null);
         $response->assertStatus(200);
-        
-        //$response->assertViewIs('admin.user.index');
-        //$response->assertViewHas('users', $user);
     }
 
     public function test_users_can_be_disabled(): void
