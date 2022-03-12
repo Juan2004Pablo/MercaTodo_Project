@@ -32,10 +32,12 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
+
+                    @if(auth()->check() && (auth()->user()->role === 'admin'))
                     <ul class="navbar-nav me-auto">
-
+                        <a class="nav-link" href="{{ route('users.index') }}">{{ __('Users') }}</a>
                     </ul>
-
+                    @endif
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
