@@ -14,7 +14,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index()//: view
     {
         /*$users = User::paginate();
 
@@ -25,14 +25,14 @@ class UserController extends Controller
         return view('admin.user.index', compact('users'));
     }
 
-    public function show($id)
+    public function show($id) //: view
     {
         $user = User::find($id);
 
         return view('admin.user.show', compact('user'));
     }
 
-    public function edit($id)
+    public function edit($id) //: view
     {
         $user = User::find($id);
 
@@ -60,7 +60,7 @@ class UserController extends Controller
         return redirect('/admin/crudUsers/{user}' . $user->id);
     } */
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id): redirect
         {
             /*$user = User::find($id);
             $user->name = $request->name;
@@ -90,7 +90,7 @@ class UserController extends Controller
                 ->with('success', 'User updated successfully');
         }*/
 
-    public function toggle(User $user)
+    public function toggle(User $user): redirect
     {
         $user->disable_at = $user->disable_at ? null : now();
 
