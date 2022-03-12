@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
+use App\Observers\ModelObserver;
 
 class UserController extends Controller
 {
@@ -60,7 +61,7 @@ class UserController extends Controller
         return redirect('/admin/crudUsers/{user}' . $user->id);
     } */
 
-    public function update(Request $request, $id): redirect
+    public function update(Request $request, $id)//: redirect
         {
             /*$user = User::find($id);
             $user->name = $request->name;
@@ -90,11 +91,19 @@ class UserController extends Controller
                 ->with('success', 'User updated successfully');
         }*/
 
-    public function toggle(User $user): redirect
+    public function toggle(User $user)//: redirect
     {
         $user->disable_at = $user->disable_at ? null : now();
 
         $user->save();
+
+        if ($user->disable_at === null)
+        {
+            \Log::warning('enabled user account with id: '.$user->id);
+        } else{
+            \Log::warning('disabled user account with id: '.$user->id);
+        }
+
         return redirect()->back();
     }
 
