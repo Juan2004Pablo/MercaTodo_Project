@@ -10,6 +10,7 @@ use App\Models\User;
 
 class LoginTest extends TestCase
 {
+    use RefreshDatabase;
     public function test_login_displays_the_login_form(): void
     {
         $response = $this->get(route('login'));
@@ -24,11 +25,8 @@ class LoginTest extends TestCase
         $response->assertSessionHasErrors('email');
     }
 
-    use RefreshDatabase;
     public function test_login_authenticades_and_redirects_user(): void
     {
-        
-        $this->withoutExceptionHandling();
         $user = User::factory()->create();
 
         $response = $this->actingAs($user)->get(route('home'));
@@ -39,7 +37,7 @@ class LoginTest extends TestCase
 
     public function test_user_can_be_registered(): void
     {
-        $this->withoutExceptionHandling();
+        $this->withoutexceptionhandling();
         $response = $this->post(route('register'), [
             'name' => 'Cristiano Ronaldo',
             'email' => 'cristiano@ronaldo.com',
@@ -50,10 +48,8 @@ class LoginTest extends TestCase
         $response->assertRedirect(route('home'));
     }
 
-    use RefreshDatabase;
     public function test_user_must_verify_email(): void
     {
-        $this->withoutExceptionHandling();
         $user = User::factory()->create();
 
         $response = $this->actingAs($user)->get(route('home'));

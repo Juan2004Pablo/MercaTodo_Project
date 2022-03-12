@@ -9,23 +9,22 @@ use App\Models\User;
 
 class AdminTest extends TestCase
 {
-    public function test_user_can_be_role_admin()
+    public function test_user_can_be_role_admin(): void
     {
-        $this->withoutExceptionHandling();
+        $this->withoutexceptionhandling();
         $response = $this->post(route('register'), [
             'name' => 'Admin',
             'email' => 'admin@admin.com',
             'password' => '12345678',
             'password_confirmation' => '12345678',
-            'role' => 'admin'
+            'role' => 'admin',
         ]);
         if(auth()->user()->role === 'admin'){
             $response->assertRedirect(route('admin.index'));
+            $this->assertAuthenticated($guard = null);
         } else{
-            $response = $this->get('/');
-            $response->assertStatus(200);
+            $response = $this->get('home');
+            $response->assertStatus(302);
         }
-        
-        $this->assertAuthenticated($guard = null);
     }
 }

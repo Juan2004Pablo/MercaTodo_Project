@@ -12,7 +12,6 @@ class RouteTest extends TestCase
     
     public function test_the_welcome_view_returns_a_successful_response(): void
     {
-        $this->withoutExceptionHandling();
         $response = $this->get('/');
         $response->assertStatus(200);
     }
