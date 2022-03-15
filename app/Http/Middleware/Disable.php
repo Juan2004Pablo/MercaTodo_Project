@@ -17,7 +17,7 @@ class Disable
      */
     public function handle(Request $request, Closure $next) //
     {
-        if(auth()->check() && (auth()->user()->disable_at))
+        if(auth()->check() && (auth()->user() -> disable_at))
         {
             Auth::logout();
 
