@@ -50,7 +50,7 @@
 
                                             <td>
                                                 <a class="btn btn-sm btn-primary " href="{{ route('users.show',$user->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
-                                                <a class="btn btn-sm btn-success"  href="{{ route('users.edit',$user->id) }}"><i class="fa fa-fw fa-edit"><i class="fa fa-fw fa-edit"></i> Update</a>
+                                                <a class="btn btn-sm btn-success"  href="{{ route('users.edit',$user->id) }}"><i class="fa fa-fw fa-edit"></i> Update</a>
                                                 @if($user->disable_at)
                                                 <a class="btn btn-sm btn-warning " href="{{ route('admin.users.toggle',$user) }}"><i class="fa fa-fw fa-eye"></i> Enable</a>
                                                 @else

@@ -36,6 +36,8 @@
                     @if(auth()->check() && (auth()->user()->role === 'admin'))
                     <ul class="navbar-nav me-auto">
                         <a class="nav-link" href="{{ route('users.index') }}">{{ __('Users') }}</a>
+                        <br>
+                        <a class="nav-link" href="{{ route('products.index') }}">{{ __('Products') }}</a>
                     </ul>
                     @endif
                     <!-- Right Side Of Navbar -->
