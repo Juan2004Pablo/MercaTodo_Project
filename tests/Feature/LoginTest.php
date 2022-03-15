@@ -37,7 +37,6 @@ class LoginTest extends TestCase
 
     public function test_user_can_be_registered(): void
     {
-        $this->withoutexceptionhandling();
         $response = $this->post(route('register'), [
             'name' => 'Cristiano Ronaldo',
             'email' => 'cristiano@ronaldo.com',
