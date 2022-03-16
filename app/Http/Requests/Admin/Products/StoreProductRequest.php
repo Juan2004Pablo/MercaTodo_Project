@@ -15,7 +15,7 @@ class StoreProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'code' => ['required', 'size:6', Rule::unique('products')],
+            'code' => ['required', 'size:6', Rule::unique('products')->ignore(optional($this->product)->id, 'id')],
             'name' => ['required', 'min:3', 'max:100'],
             'price' => ['required', 'integer', 'min:1'],
             'quantity' => ['required', 'integer', 'min:0'],
@@ -23,8 +23,8 @@ class StoreProductRequest extends FormRequest
             'images' => ['required', 'array'],
             'images.*' => [
                 'image',
-                'max:200',
-                Rule::dimensions()->maxWidth(500)->maxHeight(250)->ratio(2/1),
+                //'max:200',
+                //Rule::dimensions()->maxWidth(500)->maxHeight(250)->ratio(2/1),
             ]
         ];
     }

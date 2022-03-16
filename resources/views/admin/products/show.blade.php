@@ -53,6 +53,11 @@
                             @endforeach
                         </div>
                 </div>
+                <div class="row mb-3">
+                    <div class="col d-grid">
+                        <a href="{{ route('products.index') }}" class="btn btn-danger">Back</a>
+                    </div>
+                </div>
             </div>
     </div>
 @endsection

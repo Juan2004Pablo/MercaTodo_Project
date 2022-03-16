@@ -1,14 +1,4 @@
-@extends('layouts.app')
-
-@section('template_title')
-    Products
-@endsection
-
-@section('content')
-    <div class="container mt-5">
-        <form action="{{ route('products.store') }}" method="post" enctype="multipart/form-data">
-            @csrf
-
+<div class="container mt-5">
             <div class="row">
                 <div class="col-md-8">
                     <div class="card card-default mb-3">
@@ -77,7 +67,7 @@
 
             <div class="row mb-3">
                 <div class="col d-grid">
-                <a class="btn btn-sm btn-success " href="{{ route('products.index') }}"><i class="fa fa-fw fa-edit"></i>{{ trans('Save') }}</a>
+                <button class="btn btn-sm btn-success " type="submit"><i class="fa fa-fw fa-edit"></i>{{ trans('Save') }}</button>
                 </div>
                 <div class="col d-grid">
                     <a href="{{ route('products.index') }}" class="btn btn-danger">{{ trans('Cancel') }}</a>
@@ -85,4 +75,3 @@
             </div>
         </form>
     </div>
-@endsection

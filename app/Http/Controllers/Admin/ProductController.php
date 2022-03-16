@@ -20,7 +20,7 @@ class ProductController extends Controller
         return view('admin.products.index', compact('products'));
     }
 
-    public function create()//: View
+    public function create(): View
     {
         return view('admin.products.create');
         //\Log::info('The product with id: ' . $product->id . ' has been created');
@@ -47,55 +47,30 @@ class ProductController extends Controller
         return view('admin.products.show', compact('product'));
     }
 
-    public function edit($id) //: view
+    public function edit($id): View
     {
         $product = Product::find($id);
 
-        return view('admin.products.update')-> with('product', $product);
-    }
-    /*
-    public function edit($id) //: view
-    {
-        $product = Product::find($id);
-
-        return view('admin.products.update')-> with('product', $product);
-    }*/
-
-    public function update(Request $request, Product $product)
-    {
-        //request()->validate(Product::$rules);
-
-        //$product->update($request->all());
-        //return redirect()->route('products.index')
-          //  ->with('success', 'Product updated successfully');
-    
-        
-        $data = request()->validate([
-            'code' => '',//$request->input('code');
-            'name' => '',//$request->input('name');
-            'price' => '',//$request->input('price');
-            'quantity' => '', //$request->input('quantity');
-            'description' => '', //$request->input('description');
-        ]);
-
-        $product->update($data);
-
-        return redirect()->route('products.index');
-        
-
-        /*
-        $data->code = $request->input('code');
-        $data->name = $request->input('name');
-        $data->price = $request->input('price');
-        $data->quantity = $request->input('quantity');
-        $data->description = $request->input('description');
-
-        $product->update($data);
-
-        return redirect(route('products.show', $product)); */
+        return view('admin.products.update', compact('product'));
     }
 
-    public function toggle(Product $product)//: redirect
+    public function update(StoreProductRequest $request, Product $product, StoreProductImagesAction $imagesAction): RedirectResponse
+    {
+        $product->code = $request->get('code');
+        $product->name = $request->get('name');
+        $product->price = $request->get('price');
+        $product->quantity = $request->input('quantity');
+        $product->description = $request->get('description');
+
+        $product->save();
+
+        $imagesAction->execute($request->images, $product);
+
+        return redirect(route('products.show', $product));
+        //return route('products.index');
+    }
+
+    public function toggle(Product $product)
     {
         $product->disable_at = $product->disable_at ? null : now();
 

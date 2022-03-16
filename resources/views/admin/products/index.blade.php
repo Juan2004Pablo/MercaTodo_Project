@@ -7,7 +7,7 @@
 @section('content')
     <div class="container mt-5">
         <div class="card card-default">
-            <div class="card-header">{{ trans('Administration of products') }} - <a href="{{ route('products.create') }}"
+            <div class="card-header">{{ trans('admin.products.titles.adminProduct') }} - <a href="{{ route('products.create') }}"
                                                                                     class="btn btn-primary">{{ trans('Create') }}</a>
             </div>
             <div class="card-body">
