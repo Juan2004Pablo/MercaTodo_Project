@@ -14,6 +14,7 @@ return [
         ],
         'titles' => [
             'create' => 'Create a product',
+            'adminProduct' => 'Administration of products',
             'update' => 'Update a product'
         ]
     ]

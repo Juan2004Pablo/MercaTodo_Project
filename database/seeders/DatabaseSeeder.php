@@ -45,5 +45,15 @@ class DatabaseSeeder extends Seeder
         $product->disable_at = null;
 
         $product->save();
+
+        $prod = new Product;
+        $prod->code = 'ABC789';
+        $prod->name = 'televisor';
+        $prod->price = 10000;
+        $prod->quantity = 6;
+        $prod->description = 'Este es un televisor maravilloso';
+        $prod->disable_at = null;
+
+        $prod->save();
     }
 }
