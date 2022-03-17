@@ -11,7 +11,6 @@ class AdminTest extends TestCase
 {
     public function test_user_can_be_role_admin(): void
     {
-        $this->withoutexceptionhandling();
         $response = $this->post(route('register'), [
             'name' => 'Admin',
             'email' => 'admin@admin.com',
