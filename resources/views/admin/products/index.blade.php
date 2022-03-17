@@ -14,6 +14,7 @@
                 <table class="table">
                     <thead>
                     <tr>
+                        <th scope="col">{{ trans('admin.products.fields.id') }}</th>
                         <th scope="col">{{ trans('admin.products.fields.name') }}</th>
                         <th scope="col">{{ trans('admin.products.fields.price') }}</th>
                         <th scope="col">{{ trans('admin.products.fields.quantity') }}</th>
@@ -24,6 +25,7 @@
                     <tbody>
                     @foreach($products as $product)
                         <tr>
+                            <td>{{ $product->id }}</td>
                             <td>
                                 <a href="{{ route('products.show', $product) }}">
                                     {{ $product->name }}
