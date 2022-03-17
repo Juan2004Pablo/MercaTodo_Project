@@ -8,6 +8,7 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use Illuminate\Support\Facades\Event;
 use App\Models\User;
 use App\Observers\ModelObserver;
+use App\Models\Product;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -30,7 +31,7 @@ class EventServiceProvider extends ServiceProvider
     public function boot(): void
     {
         User::observe(ModelObserver::class);
-        //poner el model products: Product::observe(ModelObserver::class);
+        Product::observe(ModelObserver::class);
     }
 
     /**

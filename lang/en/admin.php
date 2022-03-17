@@ -2,6 +2,7 @@
 return [
     'products' => [
         'fields' => [
+            'id' => 'Id',
             'code' => 'Code',
             'name' => 'Name',
             'price' => 'Price',

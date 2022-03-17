@@ -12,10 +12,10 @@ class ModelObserver
         Log::info($this->getMessage($model, 'created'), $this->info($model));
     }
 
-    //public function updated(Model $model): void
-    //{
-        //Log::info($this->getMessage($model, 'updated'), $this->info($model));
-    //}
+    public function updated(Model $model): void
+    {
+        Log::info($this->getMessage($model, 'updated'), $this->info($model));
+    }
     
     public function info(Model $model): array
     {
