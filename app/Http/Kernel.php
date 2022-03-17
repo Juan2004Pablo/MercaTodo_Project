@@ -38,7 +38,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\Disable::class,
-            //\App\Http\Middleware\DisableProduct::class,
+            \App\Http\Middleware\ProductDisable::class,
         ],
 
         'api' => [
@@ -58,7 +58,7 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.admin' => \App\Http\Middleware\AdminAuth::class,
-        //'disable.product' => \App\Http\Middleware\DisableProduct::class,
+        'product.disable' => \App\Http\Middleware\ProductDisable::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
