@@ -2,7 +2,8 @@
 return [
     'products' => [
         'titles' => [
-            'products' => 'List of products'
+            'products' => 'List of products',
+            'shoppingCart' => 'Add to cart'
             
         ]
     ]    
