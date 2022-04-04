@@ -6,26 +6,24 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up(): void
-    {
+    {  
+        Schema::create('images', function (Blueprint $table)
+        {
+            $table->id();
+            $table->string('url');
+            $table->morphs('imageable');
+            $table->timestamps();
+        });
+        /*
         Schema::create('images', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained();
             $table->string('file_name', 40);
             $table->timestamps();
-        });
+        });*/
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down(): void
     {
         Schema::dropIfExists('images');
