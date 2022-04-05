@@ -7,22 +7,16 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
-    /**
-     * Define the application's command schedule.
-     *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
-     * @return void
-     */
+    //reference to the commands you have created. This way Laravel can easily load them for you
+    protected $commands = [
+        //
+    ];
+    
     protected function schedule(Schedule $schedule): void
     {
         // $schedule->command('inspire')->hourly();
     }
 
-    /**
-     * Register the commands for the application.
-     *
-     * @return void
-     */
     protected function commands(): void
     {
         $this->load(__DIR__.'/Commands');
