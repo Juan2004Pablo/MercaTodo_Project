@@ -2,27 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\CartRepository;
+use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
+use App\Models\Category;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    protected $cartShowRepo;
+    protected $prodRepo;
+
+    public function __construct(ProductRepository $prodRepository, CartRepository $cartRepository)
     {
-        $this->middleware('auth');
+        $this->prodRepo = $prodRepository;
+        $this->cartShowRepo = $cartRepository;
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index() //
+    public function index(Request $request): View
     {
-        return view('home');
+        $products = $this->prodRepo->getAllProductHome($request);
+        $carts = $this->cartShowRepo->getProductsOfCart();
+        $categories = Category::cachedCategories();
+        //dd($products);
+        return view('home', compact('products', 'carts', 'categories'));
     }
 }

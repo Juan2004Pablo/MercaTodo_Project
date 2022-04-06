@@ -2,59 +2,53 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\User;
-use App\Http\Controllers\Controller;
+use App\Http\Requests\UserUpdateRequest;
+use App\MercatodoModels\User;
+use App\Repositories\User\UserRepository;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\Http\Requests\Admin\Products\UserRequest;
-use DB;
-use App\Observers\ModelObserver;
+use Illuminate\View\View;
 
 class UserController extends Controller
 {
-    public function index()
+    protected $usersRepo;
+
+    public function __construct(UserRepository $usersRepository)
     {
-        $users = User::all();
-        return view('admin.user.index', compact('users'));
+        $this->usersRepo = $usersRepository;
     }
 
-    public function show($id)
+    public function index(): View
     {
-        $user = User::find($id);
 
-        return view('admin.user.show', compact('user'));
+        $users = $this->usersRepo->getAllUsers();
+
+        return view('user.index', compact('users'));
     }
 
-    public function edit($id)
+    public function show(User $user): View
     {
-        $user = User::find($id);
-        return view('admin.user.update', compact('user'));
-    }
- 
-    public function update(UserRequest $request, User $user)
-    {
-        $user->name = $request->get('name');
-        $user->email = $request->get('email');
-        $user->role = $request->get('role');
+        $this->authorize('view', [$user, ['user.show','userown.show']]);
 
-        $user->save();
-        
-        return redirect(route('users.show', $user));
+        $roles = $this->usersRepo->roleToUser();
+
+        return view('user.view', compact('roles', 'user'));
     }
 
-    public function toggle(User $user)
+    public function edit(User $user): View
     {
-        $user->disable_at = $user->disable_at ? null : now();
+        $this->authorize('update', [$user, ['user.edit','userown.edit']]);
 
-        $user->save();
+        $roles = $this->usersRepo->roleToUser();
 
-        if ($user->disable_at === null)
-        {
-            \Log::warning('enabled user account with id: '.$user->id);
-        } else{
-            \Log::warning('disabled user account with id: '.$user->id);
-        }
-
-        return redirect()->back();
+        return view('user.edit', compact('roles', 'user'));
     }
 
+    public function update(UserUpdateRequest $request, User $user): RedirectResponse
+    {
+        $this->usersRepo->updateUser($request, $user);
+
+        return redirect()->route('user.index')
+            ->with('status_success', 'user update successfully');
+    }
 }
