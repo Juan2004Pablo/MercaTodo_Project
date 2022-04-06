@@ -2,34 +2,37 @@
 
 namespace App\Jobs;
 
+use App\Models\Pay;
+use App\Repositories\Pay\PaymentRepository;
+use App\Repositories\Pay\PlaceToPayRepository;
+use App\Repositories\Pay\ConectionPTPRepository;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class UpdateStatusPayment implements ShouldQueue
+class UpdateStatusPay implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
 
-    /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    protected $paymen;
+
+    public function __construct(Pay $payment)
     {
-        //
+        $this->paymen = $payment;
     }
 
-    /**
-     * Execute the job.
-     *
-     * @return void
-     */
     public function handle()
     {
-        //
+        $p = new ConectionPTPRepository();
+        $paymen = new PlaceToPayRepository($p);
+        $reference = $this->paymen->reference;
+        $res = $paymen->consultPayJob($reference);
+        $actualiza = new PaymentRepository();
+        $actualiza->updateDatesJob($res);
     }
 }
