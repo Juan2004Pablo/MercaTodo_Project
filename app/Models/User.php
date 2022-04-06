@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Role;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -16,8 +18,12 @@ class User extends Authenticatable implements MustVerifyEmail
 
     static $rules = [
 		'name' => 'required',
-		'email' => 'required',
-		'role' => 'required',
+		'surname' => 'required',
+        'identification' => 'required',
+        'address' => 'required',
+        'phone' => 'required',
+        'email' => 'required',
+		'role' => 'required'
     ];
 
     /**
@@ -55,5 +61,20 @@ class User extends Authenticatable implements MustVerifyEmail
     public function setPasswordAttribute($password): void 
     {
         $this->attributes['password'] = bcrypt($password);
+    }
+
+    public function image(): MorphOne
+    {
+        return $this->morphOne('Image(Image)', '(imageable=)');
+    }
+
+    public function orders(): BelongsTo
+    {
+        return $this->belongsTo('App\MercatodoModels\Order');
+    }
+
+    public function roles(): BelongsToMany
+    {
+        return $this->belongsToMany(Role::class)->withTimesTamps();
     }
 }
