@@ -10,8 +10,17 @@ class Image extends Model
 {
     use HasFactory;
 
-    public function url(): string
+    protected $fillable =
+    [
+        'url','imageable_type','imageable_id'
+    ];
+    /*public function url(): string
     {
         return Storage::disk(config('filesystems.images_disk'))->url("{$this->product_id}/{$this->file_name}");
+    }*/
+
+    public function imageable(): MorphTo
+    {
+        return $this->morphTo();
     }
 }
