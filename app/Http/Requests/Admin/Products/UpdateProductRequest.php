@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin\Products;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class StoreProductRequest extends FormRequest
+class UpdateProductRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -22,7 +21,6 @@ class StoreProductRequest extends FormRequest
             'quantity' => ['required', 'integer', 'min:0'],
             'description' => ['required', 'min:10', 'max:250'],
             'status' => ['required', 'in:New, Used'],
-            'images' => ['required'],
             'images.*' => [
                 'image',
                 //'max:200', 'mimes:jpeg,png,jpg,
