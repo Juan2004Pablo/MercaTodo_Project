@@ -15,13 +15,6 @@ return new class extends Migration
             $table->morphs('imageable');
             $table->timestamps();
         });
-        /*
-        Schema::create('images', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('product_id')->constrained();
-            $table->string('file_name', 40);
-            $table->timestamps();
-        });*/
     }
 
     public function down(): void

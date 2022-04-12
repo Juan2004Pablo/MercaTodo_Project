@@ -12,7 +12,7 @@ return new class extends Migration
         {
             $table->id();
             $table->string('code', 10)->unique();
-            $table->int('total');
+            $table->unsignedBigInteger('total');
             $table->enum('status', ['PENDING', 'APPROVED', 'REJECTED'])->default('PENDING');
             $table->unsignedBigInteger('user_id');
             $table->string('name_receive');
@@ -20,12 +20,12 @@ return new class extends Migration
             $table->string('address');
             $table->bigInteger('phone');
 
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
 
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('orders');
     }

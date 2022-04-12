@@ -19,12 +19,12 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('surname')->nullable();
             $table->string('document_type')->nullable();
-            $table->string('document')->nullable();
+            $table->unsignedBigInteger('document')->nullable();
             $table->string('email')->nullable();
-            $table->string('phone')->nullable();
+            $table->unsignedBigInteger('phone')->nullable();
             $table->string('payment_method')->nullable();
             $table->unSignedBigInteger('order_total');
-            $table->foreign('user_id')->constrained();
+            $table->foreign('user_id')->references('user_id')->on('orders');
             $table->timestamps();
         });
     }

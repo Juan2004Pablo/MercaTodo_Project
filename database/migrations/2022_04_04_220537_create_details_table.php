@@ -12,11 +12,11 @@ return new class extends Migration
         {
             $table->id();
             $table->unsignedBigInteger('unit_price');
-            $table->integer('quantity')->default(0);
+            $table->unsignedBigInteger('quantity')->default(0);
             $table->unsignedBigInteger('products_id');
             $table->unsignedBigInteger('order_id');
-            $table->foreignId('products_id')->constrained();
-            $table->foreignId('order_id')->constrained();
+            $table->foreign('products_id')->references('id')->on('products');
+            $table->foreign('order_id')->references('id')->on('orders');
             $table->timestamps();
         });
     }
