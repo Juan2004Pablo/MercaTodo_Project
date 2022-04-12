@@ -1,8 +1,5 @@
 <?php
 
-namespace Database\Seeders;
-
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Role;
@@ -10,34 +7,33 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Support\Facades\Hash;
 
-
-
 class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        $admin = User::create([
+        $useradmin = User::create([
+
             'name' => 'admin',
             'surname' => 'Admin',
-            'identification' => '1000000000',
-            'address' => 'carrera 40 A',
-            'phone' => '3200000000',
+            'identification' => '1234567891',
+            'address' => 'Avenida 76 B # 54 38',
+            'phone' => '3002233444',
             'email' => 'admin@admin.com',
             'password' => Hash::make('12345678'),
             'email_verified_at' => now(),
         ]);
-        
-        $client = User::create([
+
+        $userclient = User::create([
             'name' => 'JUAN',
             'surname' => 'Pabon',
             'identification' => '1025000000',
-            'address' => 'carrera 70',
+            'address' => 'carrera 78 B # 00-00',
             'phone' => '3000000000',
             'email' => 'user@user.com',
             'password' => Hash::make('12345678'),
             'email_verified_at' => now(),
         ]);
-        
+
         $roladmin = Role::create([
             'name' => 'Admin',
             'description' => 'Administrator',
@@ -48,38 +44,18 @@ class DatabaseSeeder extends Seeder
             'description' => 'User client',
         ]);
 
-        $cat = Category::create([
+        $c = Category::create([
             'name' => 'Tecno',
             'description' => 'Soy la categoria de tecno'
         ]);
 
-        $dep = Category::create([
+        $d = Category::create([
             'name' => 'Deporte',
             'description' => 'Soy la categoria de deporte'
         ]);
-
-        $prod = Product::create([
-            'code' => '123456',
-            'name' => 'tablet',
-            'quantity' => 20,
-            'price' => 1000000,
-            'description' => 'soy la mejor description del mundo',
-            'status' => 'NEW',
-            'category_id' => 1
-        ]);
         
-        $pro = Product::create([
-            'code' => '123COM',
-            'name' => 'Computador',
-            'quantity' => 10,
-            'price' => 2000000,
-            'description' => 'soy el mejor del mundo',
-            'status' => 'USED',
-            'category_id' => 1
-        ]);
+        $useradmin->roles()->sync([$roladmin->id]);
 
-        $admin->roles()->sync([$roladmin->id]);
-
-        $client->roles()->sync([$roluser->id]);
+        $userclient->roles()->sync([$roluser->id]);
     }
 }
