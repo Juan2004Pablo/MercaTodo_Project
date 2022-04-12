@@ -11,8 +11,10 @@ use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\Psr7;
+use  GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Http;
 
 class PlaceToPayRepository extends BaseRepository
 {
@@ -23,22 +25,29 @@ class PlaceToPayRepository extends BaseRepository
 
     protected $conection;
 
+    /**
+     * AdminPayController constructor.
+     */
     public function __construct(ConectionPTPRepository $conection)
     {
         $this->conection = $conection;
     }
 
+    /**
+     * function to connect to the payment gateway of place to pay
+     *
+     */
     public function conectionPlaceToPay(): object
     {
         $p = Pay::inProcess()->first();
 
         if ($p) {
             $p->delete();
-            $order = $this->getModel()->pending()->rejected()->first();
+            $order = $this->getModel()->open()->rejected()->first();
             $total = $order->total;
             $reference = $order->id;
         } else {
-            $order = $this->getModel()->pending()->rejected()->first();
+            $order = $this->getModel()->open()->rejected()->first();
 
             $total = $order->total;
             $reference = $order->id;
@@ -55,7 +64,7 @@ class PlaceToPayRepository extends BaseRepository
         $payment =
             [
                 'reference' => $reference,
-                'description' => 'This is a payment',
+                'description' => 'Basic test payment',
                 'amount' => $amount,
             ];
 
@@ -68,35 +77,29 @@ class PlaceToPayRepository extends BaseRepository
                 'ipAddress' => '127.0.0.1',
                 'userAgent' => 'PlacetoPay Sandbox',
             ];
-        $url = 'https://test.placetopay.com/redirection/api/session/';
+        $url = config('app.WEBCHECKOUT_URL') . 'api/session';
 
-        $client = new Client([
-            'headers' => ['Content-Type' => 'application/json'],
-        ]);
         try {
-            $response = $client->post($url, [
-                'json' => $data,
-            ]);
+            $response = Http::withHeaders(['Content-Type' => 'application/json'])->post($url, $data);
 
             $body = $response->getBody();
             $result = json_decode($response->getBody());
 
             return $result;
-        } catch (RequestException $e) {
-            Log::channel('contlog')->error('RequestException' .
-                    Psr7\str($e->getResponse()));
-        } catch (ServerException $e) {
-            Log::channel('contlog')->error('ServerException' .
-                    Psr7\str($e->getResponse()));
-        } catch (BadResponseException $e) {
-            Log::channel('contlog')->error('BadResponseException' .
-                   Psr7\str($e->getResponse()));
+        } catch (Throwable $e) {
+            Log::channel('contlog')->error('RequestException' ,
+            ['error' => $e]);
         }
     }
 
+    /**
+     * function to check the details of the payment made
+     *
+     * @param int $reference
+     * @return object
+     */
     public function consultPay(int $reference): object
     {
-
         $pay = Pay::all()->where('reference', $reference)->last();
         $pay->reference = $reference;
         $requestId = $pay->requestId;
@@ -112,7 +115,7 @@ class PlaceToPayRepository extends BaseRepository
                 'userAgent' => 'PlacetoPay Sandbox',
             ];
 
-        $url = 'https://test.placetopay.com/redirection/api/session/' . $requestId;
+        $url = config('app.WEBCHECKOUT_URL') . 'api/session/' . $reference;
 
         $client = new Client([
             'headers' => ['Content-Type' => 'application/json'],
@@ -124,21 +127,21 @@ class PlaceToPayRepository extends BaseRepository
 
             $body = $response->getBody();
             $res = json_decode($response->getBody());
-            Log::channel('contlog')->info('Answer payment: ' . $body);
+            Log::channel('contlog')->info('payment response: ' . $body);
 
             return $res;
-        } catch (RequestException $e) {
-            Log::channel('contlog')->error('RequestException' .
-                Psr7\str($e->getResponse()));
-        } catch (ServerException $e) {
-            Log::channel('contlog')->error('ServerException' .
-                Psr7\str($e->getResponse()));
-        } catch (BadResponseException $e) {
-            Log::channel('contlog')->error('BadResponseException' .
-                Psr7\str($e->getResponse()));
+        } catch (Throwable $e) {
+            Log::channel('contlog')->error('PlaceToPayException' ,
+            ['error' => $e]);
         }
     }
 
+    /**
+     * function to check the details of the payment made after job
+     *
+     * @param int $reference
+     * @return object
+     */
     public function consultPayJob(int $reference): object
     {
         $pay = Pay::where('reference', $reference)->pending()->first();
@@ -156,7 +159,7 @@ class PlaceToPayRepository extends BaseRepository
                 'userAgent' => 'PlacetoPay Sandbox',
             ];
 
-        $url = 'https://test.placetopay.com/redirection/api/session/' . $requestId;
+        $url = $url = config('app.WEBCHECKOUT_URL') . 'api/session/' . $requestId;
 
         $client = new Client([
             'headers' => ['Content-Type' => 'application/json'],
@@ -168,18 +171,12 @@ class PlaceToPayRepository extends BaseRepository
 
             $body = $response->getBody();
             $res = json_decode($response->getBody());
-            Log::channel('contlog')->info('Answer payment: ' . $body);
+            Log::channel('contlog')->info('payment response: ' . $body);
 
             return $res;
-        } catch (RequestException $e) {
-            Log::channel('contlog')->error('RequestException' .
-                Psr7\str($e->getResponse()));
-        } catch (ServerException $e) {
-            Log::channel('contlog')->error('ServerException' .
-                Psr7\str($e->getResponse()));
-        } catch (BadResponseException $e) {
-            Log::channel('contlog')->error('BadResponseException' .
-                Psr7\str($e->getResponse()));
+        } catch (Throwable $e) {
+            Log::channel('contlog')->error('PlaceToPayException' ,
+            ['error' => $e]);
         }
     }
 }

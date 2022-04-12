@@ -2,11 +2,11 @@
 
 namespace App\Repositories\Pay;
 
-use App\Jobs\UpdateStatusPayment;
-use App\MercatodoModels\Detail;
-use App\MercatodoModels\Order;
-use App\MercatodoModels\Pay;
-use App\MercatodoModels\Product;
+use App\Jobs\UpdateStatusPay;
+use App\Models\Detail;
+use App\Models\Order;
+use App\Models\Pay;
+use App\Models\Product;
 use App\Repositories\BaseRepository;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Collection;
@@ -17,11 +17,19 @@ use PhpParser\Node\Expr\Cast\Object_;
 
 class PaymentRepository extends BaseRepository
 {
+    /**
+     * @return Pay
+     */
     public function getModel(): Pay
     {
         return new Pay();
     }
 
+    /**
+     * function to redirect to the payment gateway
+     *
+     * @return string
+     */
     public function redirect(): string
     {
         $pay = Pay::inProcess()->first();
@@ -30,10 +38,14 @@ class PaymentRepository extends BaseRepository
         return $url;
     }
 
+    /**
+     * function to save payment details
+     *
+     * @param object $data
+     */
     public function ordersData(object $data): void
     {
-
-        $order = Order::pending()->rejected()->first();
+        $order = Order::open()->rejected()->first();
 
             $paymen = new Pay();
             $paymen->status;
@@ -52,6 +64,11 @@ class PaymentRepository extends BaseRepository
             $paymen->save();
     }
 
+    /**
+     * function to update payment details
+     *
+     * @param object $dato
+     */
     public function updatePay(object $dato): void
     {
 
@@ -68,7 +85,7 @@ class PaymentRepository extends BaseRepository
         if ($dato->status->status == 'PENDING') {
             $paymen->payment_method = 'PENDING';
 
-            UpdateStatusPayment::dispatch($paymen);
+            UpdateStatusPay::dispatch($paymen);
         } else {
             foreach ($dato->payment as $d) {
                 $paymen->payment_method = $d->paymentMethod;
@@ -77,11 +94,17 @@ class PaymentRepository extends BaseRepository
         $paymen->save();
 
 
-        Log::channel('contlog')->info('Payment made by: ' .
+        Log::channel('contlog')->info('pago realizado por: ' .
             $paymen->name . ' ' . $paymen->surname . ' ' .
-            'With identification' . ' ' . $paymen->document);
+            'Con identificación' . ' ' . $paymen->document);
     }
 
+    /**
+     * function to update the payment details after executing the job
+     *
+     * @param object $dato
+     * @return void
+     */
     public function updateDatesJob(object $dato): void
     {
         $paymen = Pay::where('requestId', $dato->requestId)->pending()->first();
@@ -96,7 +119,7 @@ class PaymentRepository extends BaseRepository
         if ($dato->status->status == 'PENDING') {
             $paymen->payment_method = 'PENDING';
 
-            UpdateStatusPayment::dispatch($paymen)->delay(now()->addMinutes(15));
+            UpdateStatusPay::dispatch($paymen)->delay(now()->addMinutes(15));
         } else {
             foreach ($dato->payment as $d) {
                 $paymen->payment_method = $d->paymentMethod;
@@ -113,11 +136,21 @@ class PaymentRepository extends BaseRepository
             'With identification' . ' ' . $paymen->document);
     }
 
+    /**
+     * function to view payment details
+     *
+     * @return Model
+     */
     public function seePay(): Model
     {
         return $this->getModel()->all()->where('user_id', Auth::user()->id)->last();
     }
 
+    /**
+     * function to update payment status
+     *
+     * @return string
+     */
     public function updateStatusOfOrder(): string
     {
         $order = Order::open()->rejected()->Orwhere('status', '=', 'PENDING')->first();
@@ -138,6 +171,11 @@ class PaymentRepository extends BaseRepository
         return $order;
     }
 
+    /**
+     * function to see payments for all orders
+     *
+     * @return Collection
+     */
     public function seeAllOrders(): Collection
     {
         $c = 0;
@@ -152,6 +190,12 @@ class PaymentRepository extends BaseRepository
         return $pays;
     }
 
+    /**
+     * function for count the payments of an user
+     *
+     * @param $reference
+     * @return int
+     */
     public function countPays(int $reference): int
     {
         $payments = $this->getModel()->all()->where('status', 'APPROVED')

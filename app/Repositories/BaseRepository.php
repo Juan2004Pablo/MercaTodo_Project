@@ -42,18 +42,16 @@ abstract class BaseRepository
             ->open()->first();
     }
 
-    /*
     public function delete(object $object)
     {
         $object->delete();
         Category::flushCache();
-    }*/
+    }
 
-    /*
     public function restore(Request $data): bool
     {
         Category::flushCache();
 
         return $this->getModel()->withTrashed()->find($data->id)->restore();
-    }*/
+    }
 }

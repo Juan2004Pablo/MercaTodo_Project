@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\User;
 
 use App\Models\Role;
 use App\Models\User;
@@ -23,7 +23,7 @@ class UserRepository extends BaseRepository
 
     public function roleToUser(): Collection
     {
-        $roles = Role::orderBy('name')->get();
+        $roles = Role::orderBy('id')->get();
 
         return $roles;
     }

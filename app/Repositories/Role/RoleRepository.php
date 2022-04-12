@@ -28,6 +28,10 @@ class RoleRepository extends BaseRepository
         return $role;
     }
 
+    public function showrole(Role $role)
+    {
+    }
+
     public function updateRole(Request $data, Role $role): Role
     {
         $role->update($data->all());

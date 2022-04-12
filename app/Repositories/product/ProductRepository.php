@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\product;
 
 use App\Models\Category;
 use App\Models\Product;
 use App\Repositories\BaseRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
-use Illuminate\Http\Requests\StoreProductRequest;
+use Illuminate\Http\Requests\ProductStoreRequest;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -36,7 +36,7 @@ class ProductRepository extends BaseRepository
         }
     }
 
-    public function createProduct(ProductStoreRequest $data): void
+    public function createProduct(Request $data): void
     {
         $urlimages = [];
         if ($data->hasFile('images')) {

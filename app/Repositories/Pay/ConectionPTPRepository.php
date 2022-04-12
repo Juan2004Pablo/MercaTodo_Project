@@ -10,6 +10,11 @@ class ConectionPTPRepository extends BaseRepository
     {
     }
 
+    /**
+     * function to connect to the payment gateway of place to pay
+     *
+     * @return array
+     */
     public function conectioPlaceToPay(): array
     {
         if (function_exists('random_bytes')) {
