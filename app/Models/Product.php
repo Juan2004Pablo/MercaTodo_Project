@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\category;
 use App\Models\Image;
 use App\Models\Detail;
@@ -12,16 +13,18 @@ use App\Models\Detail;
 class Product extends Model
 {
     use HasFactory;
+    use SoftDeletes;
+
+    protected $fillable =
+        [
+            'name', 'category_id','quantity','price',
+            'description', 'status'
+        ];
 
     public function images(): MorphMany
     {
         return $this->morphMany(Image::class, 'imageable');
     }
-
-    /*public function images(): HasMany
-    {
-        return $this->hasMany(Image::class);
-    }*/
 
     public function category(): BelongsTo
     {
