@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\CartRepository;
-use App\Repositories\ProductRepository;
+use App\Repositories\cart\CartRepository;
+use App\Repositories\product\ProductRepository;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Category;
@@ -24,7 +24,6 @@ class HomeController extends Controller
         $products = $this->prodRepo->getAllProductHome($request);
         $carts = $this->cartShowRepo->getProductsOfCart();
         $categories = Category::cachedCategories();
-        //dd($products);
         return view('home', compact('products', 'carts', 'categories'));
     }
 }

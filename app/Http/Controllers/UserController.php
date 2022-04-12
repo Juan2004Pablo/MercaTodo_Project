@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\UserUpdateRequest;
-use App\MercatodoModels\User;
+use App\Models\User;
 use App\Repositories\User\UserRepository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -50,5 +50,22 @@ class UserController extends Controller
 
         return redirect()->route('user.index')
             ->with('status_success', 'user update successfully');
+    }
+
+    public function destroy(User $user): RedirectResponse
+    {
+
+        $this->usersRepo->delete($user);
+
+        return redirect()->route('user.index')
+            ->with('status_success', 'user successfully disabled');
+    }
+
+    public function restore(Request $request): RedirectResponse
+    {
+        $this->usersRepo->restore($request);
+
+        return redirect()->route('user.index')
+            ->with('status_success', 'user  enabled');
     }
 }

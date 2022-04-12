@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreRoleRequest;
-use App\Http\Requests\UpdateRoleRequest;
+use App\Http\Requests\RoleStoreRequest;
+use App\Http\Requests\RoleUpdateRequest;
 use App\Models\Role;
-use App\Repositories\RoleRepository;
+use App\Repositories\Role\RoleRepository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -53,9 +53,19 @@ class RoleController extends Controller
 
     public function update(RoleUpdateRequest $request, Role $role): RedirectResponse
     {
+        
+
         $this->rolesRepo->updateRole($request, $role);
 
         return redirect()->route('role.index')
             ->with('status_success', 'Role update successfully');
+    }
+
+    public function destroy(Role $role): RedirectResponse
+    {
+        $this->rolesRepo->delete($role);
+
+        return redirect()->route('role.index')
+            ->with('status_success', 'Role successfully removed');
     }
 }

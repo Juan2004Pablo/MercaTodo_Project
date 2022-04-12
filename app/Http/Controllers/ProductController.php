@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\ProductRepository;
+use App\Repositories\product\ProductRepository;
 use Illuminate\View\View;
 
 class ShowProductController extends Controller
