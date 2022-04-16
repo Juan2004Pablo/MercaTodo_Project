@@ -16,10 +16,6 @@
 </main>
 </body>
 
-<footer class="row">
-    @include('layouts.footer')
-</footer>
-
 </body>
 
 </html>
