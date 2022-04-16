@@ -1,9 +1,10 @@
-gitignore
+.gitignore
 /node_modules
 /public/hot
-/public/storage
+/public
 /storage/*.key
 /storage
+server.php
 /vendor
 .env
 .env.backup
