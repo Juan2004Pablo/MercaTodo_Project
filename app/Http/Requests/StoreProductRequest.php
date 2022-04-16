@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin\Products;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -18,8 +18,8 @@ class StoreProductRequest extends FormRequest
             'name' => ['required', 'min:3', 'max:100'],
             //'images.*' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
             'category_id' => ['required'],
-            'price' => ['required', 'numeric', 'min:1'],
-            'quantity' => ['required', 'numeric', 'min:0'],
+            'price' => ['required', 'integer', 'min:1'],
+            'quantity' => ['required', 'integer', 'min:0'],
             'description' => ['required', 'min:10', 'max:250'],
             'status' => ['required', 'in:New, Used'],
         ];
