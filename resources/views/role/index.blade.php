@@ -1,4 +1,4 @@
-@extends('plantilla.admin')
+@extends('template.admin')
 
 @section('title','Administration of roles')
 
@@ -48,7 +48,7 @@
                                     <td>
                                         
                                         <a class="btn btn-success"
-                                           href="{{ route('role.edit',$role->id) }}">Edit</a>
+                                           href="{{ route('role.edit',$role->id) }}">Update</a>
                                         
                                     </td>
                                     <td>

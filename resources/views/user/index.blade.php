@@ -1,5 +1,5 @@
 
-@extends('plantilla.admin')
+@extends('template.admin')
 
 @section('title','Administration of users')
 
@@ -51,7 +51,7 @@
                                     </td>
                                     <td>
                                         <a class="btn btn-success"
-                                            href="{{ route('user.edit',$user->id) }}">Edit</a>
+                                            href="{{ route('user.edit',$user->id) }}">Update</a>
                                     </td>
                                     <td>
                                         @if($user->trashed())

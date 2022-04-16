@@ -1,4 +1,4 @@
-@extends('plantilla.admin')
+@extends('template.admin')
 
 @section('title','Show role')
 

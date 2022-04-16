@@ -12,7 +12,7 @@
             <div class="album py-5 bg-light">
 
                 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-                    <h1 class="display-4">Products</h1>
+                    <h1 class="display-4">{{ trans('admin.products.titles.title') }}</h1>
 
                 </div>
 
@@ -29,7 +29,7 @@
                                         <div class="card-body">
                                             <p class="text-center" style="font-weight: 700; font-size: 1.25rem; text-transform: uppercase;">{{ $item->name }} </p>
                                             <p class="card-text">{{ $item->description }}</p>
-                                            <p class="card-text">{{ $item->price }}</p>
+                                            <p class="card-text">COP {{ number_format($item->price,0) }}</p>
                                             <p class="card-text">Available: {{ $item->quantity }}</p>
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div class="">
