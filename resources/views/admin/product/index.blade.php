@@ -1,4 +1,4 @@
-@extends('plantilla.admin')
+@extends('template.admin')
 
 @section('title','Administration of products')
 
@@ -49,8 +49,6 @@
                     
                     <table class="table table-head-fixed text-nowrap">                        <thead>
                         <tr>
-
-                            <th>Code</th>
                             <th>Name</th>
                             <th>Image</th>
                             <th>Price</th>
@@ -65,25 +63,24 @@
 
                         @foreach($products as $product)
                             <tr>
-                                <td>{{$product->code}}</td>
                                 <td>{{$product->name}}</td>
                                 <td>
 
                                     <img style="height: 100px; width: 100px" src="{{ $product->images->random()->url }}"
                                          class="rounded-circle">
                                 </td>
-                                <td>{{$product->price}}</td>
+                                <td>COP {{ number_format($product->price,0) }}</td>
                                 <td>{{$product->description}}</td>
                                 <th>{{$product->disable_at}}</th>
 
                                 
-                                <td><a class="btn btn-default"
-                                       href="{{ route('admin.product.show',$product->id) }}">See</a></td>
+                                <td><a class="btn btn-info"
+                                       href="{{ route('admin.product.show',$product->id) }}">Show</a></td>
                                
 
                                 
-                                <td><a class="btn btn-info"
-                                       href="{{ route('admin.product.edit',$product->id) }}">Edit</a></td>
+                                <td><a class="btn btn-success"
+                                       href="{{ route('admin.product.edit',$product->id) }}">Update</a></td>
                                 
                                 <td>
                                     @if($product->trashed())
