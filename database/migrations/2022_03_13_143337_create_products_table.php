@@ -14,7 +14,7 @@ return new class extends Migration
             $table->string('name', 100);
             $table->tinyText('description');
             $table->unsignedBigInteger('price');
-            $table->unsignedInteger('quantity')->default(0);
+            $table->unsignedBigInteger('quantity')->default(0);
             $table->timestamp('disable_at')->nullable();
             $table->unsignedBigInteger('category_id');
             $table->enum('status', ['New', 'Used'])->default('New');

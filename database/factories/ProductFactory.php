@@ -13,7 +13,6 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
-            'code' => $this->faker->unique()->text(6),
             'name' => $this->faker->unique()->text(10),
             'category_id' => Category::all()->first(),
             'quantity' => '18',

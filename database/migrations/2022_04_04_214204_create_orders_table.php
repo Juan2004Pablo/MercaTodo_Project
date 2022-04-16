@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('address');
             $table->bigInteger('phone');
 
-            $table->foreignId('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
