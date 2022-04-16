@@ -18,7 +18,7 @@ class UserRepository extends BaseRepository
 
     public function getAllUsers(): LengthAwarePaginator
     {
-        return $this->getModel()->withTrashed('roles')->orderBy('id', 'Desc')->paginate(8);
+        return $this->getModel()->withTrashed('roles')->orderBy('id', 'Asc')->paginate(8);
     }
 
     public function roleToUser(): Collection

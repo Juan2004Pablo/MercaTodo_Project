@@ -18,7 +18,7 @@ class RoleRepository extends BaseRepository
 
     public function getAllRoles(): LengthAwarePaginator
     {
-        return $this->getModel()->orderBy('id', 'Desc')->paginate(5);
+        return $this->getModel()->orderBy('id', 'Asc')->paginate(5);
     }
 
     public function storeRole(Request $data): object
