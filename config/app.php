@@ -13,9 +13,11 @@ return [
 
     'debug' => (bool) env('APP_DEBUG', false),
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://127.0.0.1:8000'),
 
     'asset_url' => env('ASSET_URL', null),
+
+    'ip_address' => env('DB_HOST', '127.0.0.1'),
 
     'timezone' => 'America/Bogota',
 
