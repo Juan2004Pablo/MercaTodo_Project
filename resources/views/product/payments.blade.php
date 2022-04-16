@@ -28,7 +28,7 @@
                     <th>{{ $pay->payment_method }}</th>
                     <th>{{ $pay->name }}</th>
                     <th>{{ $pay->surname }}</th>
-                    <th>{{ $pay->order_total }}</th>
+                    <th>COP {{ number_format($pay->order_total,0) }}</th>
                         @if($pay->status == 'REJECTED')
                         <td>
                             <a href="{{ route('pay.retryPayment', $pay->reference) }}" class="btn btn-info">

@@ -37,7 +37,7 @@
                     @enderror
 
                     <label for="address"
-                           class="col-md-4 col-form-label text-centert">{{ __('address') }}</label>
+                           class="col-md-4 col-form-label text-centert">{{ __('Address') }}</label>
                     <input id="address" type="text"
                            class="form-control @error('address') is-invalid @enderror"
                            name="address" value="{{ Auth::user()->address }}" required
@@ -75,9 +75,9 @@
                             @foreach($cart->details as $item)
                                 <tr>
                                     <td>{{ $item->products->name}}</td>
-                                    <td>${{ number_format($item->products->price,0) }}</td>
+                                    <td>COP {{ number_format($item->products->price,0) }}</td>
                                     <td>{{ $item->quantity }}</td>
-                                    <td>${{ number_format($item->products->price * $item->quantity,0) }}</td>
+                                    <td>COP {{ number_format($item->products->price * $item->quantity,0) }}</td>
                                 </tr>
                             @endforeach
                         </table>

@@ -26,7 +26,7 @@
                 <td>{{ $payment->payment_method }}</td>
                 <td>{{ $payment->name }}</td>
                 <td>{{ $payment->surname }}</td>
-                <td>{{ $payment->order_total}}</td>
+                <td>COP {{ number_format($payment->order_total,0) }}</td>
 
 
 

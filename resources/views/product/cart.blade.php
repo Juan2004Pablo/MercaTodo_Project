@@ -28,7 +28,7 @@
                                                  src="{{  $item->products->images->random()->url }}"
                                                  width="267" height="225" title="products"></td>
                                     <td>{{ $item->products->name}}</td>
-                                    <td>${{ number_format($item->products->price,2) }}</td>
+                                    <td>COP {{ number_format($item->products->price,0) }}</td>
                                     <td>
                                         <input
                                             type="number"
@@ -40,7 +40,7 @@
                                         >
 
                                     </td>
-                                    <td>${{ number_format($item->products->price * $item->quantity,0) }}</td>
+                                    <td>COP {{ number_format($item->products->price * $item->quantity,0) }}</td>
                                     <td>
                                         <a href="{{ route('cart.delete', $item->products->id) }}"
                                            class="btn btn-danger">
@@ -56,7 +56,7 @@
                         <hr>
                         <h3>
                         <span class="label label-success">
-                            Total: ${{ number_format($total,0) }}
+                            Total: COP {{ number_format($total,0) }}
                         </span>
                         </h3>
                     </div>
