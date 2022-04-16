@@ -7,7 +7,8 @@ use App\Models\Product;
 use App\Repositories\BaseRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
-use Illuminate\Http\Requests\ProductStoreRequest;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Requests\StoreProductRequest;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -36,7 +37,7 @@ class ProductRepository extends BaseRepository
         }
     }
 
-    public function createProduct(Request $data): void
+    public function createProduct(Request $data): RedirectResponse
     {
         $urlimages = [];
         if ($data->hasFile('images')) {
@@ -67,9 +68,11 @@ class ProductRepository extends BaseRepository
 
         $prod->images()->createMany($urlimages);
 
-        Log::channel('contlog')->info('El producto: ' .
-            $prod->name . ' ' . 'ha sido creado por: ' . ' ' .
+        Log::channel('contlog')->info('The product: ' .
+            $prod->name . ' has been created by: ' . ' ' .
             Auth::user()->name . ' ' . Auth::user()->surname);
+
+        return redirect()->route('admin.product.index');
     }
 
     public function getProductbyId(int $id): Model

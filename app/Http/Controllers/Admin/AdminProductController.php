@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ProductStoreRequest;
-use App\Http\Requests\ProductUpdateRequest;
+use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Models\Category;
 use App\Repositories\product\ProductRepository;
 use Illuminate\Http\RedirectResponse;
@@ -43,7 +43,7 @@ class AdminProductController extends Controller
         return view('admin.product.create', compact('categories', 'statusProducts'));
     }
 
-    public function store(ProductStoreRequest $request)//: RedirectResponse
+    public function store(StoreProductRequest $request)//: RedirectResponse
     {
         $this->productRepo->createProduct($request);
 
@@ -69,7 +69,7 @@ class AdminProductController extends Controller
         return view('admin.product.edit', compact('product', 'statusProducts'));
     }
 
-    public function update(ProductUpdateRequest $request, string $id): RedirectResponse
+    public function update(UpdateProductRequest $request, string $id): RedirectResponse
     {
         $this->productRepo->updateProduct($request, $id);
 
