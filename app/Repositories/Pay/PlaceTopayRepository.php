@@ -73,8 +73,8 @@ class PlaceToPayRepository extends BaseRepository
                 'auth' => $auth,
                 'payment' => $payment,
                 'expiration' => date('c', strtotime('+15 minutes')),
-                'returnUrl' => 'http://127.0.0.1:8000/pay/consultPayment/' . $reference,
-                'ipAddress' => '127.0.0.1',
+                'returnUrl' => config('app.url') . '/pay/consultPayment/' . $reference,
+                'ipAddress' => config('app.ip_address'),
                 'userAgent' => 'PlacetoPay Sandbox',
             ];
         $url = config('app.WEBCHECKOUT_URL') . 'api/session';
@@ -110,12 +110,11 @@ class PlaceToPayRepository extends BaseRepository
             [
                 'auth' => $auth,
                 'expiration' => date('c', strtotime('+15 minutes')),
-                'returnUrl' => 'http://127.0.0.1:8000/pay/updatedata/' . $reference,
-                'ipAddress' => '127.0.0.1',
+                'returnUrl' => config('app.url') . '/pay/consultPayment/' . $reference,
+                'ipAddress' => config('app.ip_address'),
                 'userAgent' => 'PlacetoPay Sandbox',
             ];
-
-        $url = config('app.WEBCHECKOUT_URL') . 'api/session/' . $reference;
+        $url = config('app.WEBCHECKOUT_URL') . 'api/session/' . $requestId;
 
         $client = new Client([
             'headers' => ['Content-Type' => 'application/json'],
@@ -154,12 +153,12 @@ class PlaceToPayRepository extends BaseRepository
             [
                 'auth' => $auth,
                 'expiration' => date('c', strtotime('+15 minutes')),
-                'returnUrl' => 'http://127.0.0.1:8000/pay/updatedata/' . $reference,
-                'ipAddress' => '127.0.0.1',
+                'returnUrl' => config('app.url') . '/pay/consultPayment/' . $reference,
+                'ipAddress' => config('app.ip_address'),
                 'userAgent' => 'PlacetoPay Sandbox',
             ];
 
-        $url = $url = config('app.WEBCHECKOUT_URL') . 'api/session/' . $requestId;
+        $url = config('app.WEBCHECKOUT_URL') . 'api/session/' . $requestId;
 
         $client = new Client([
             'headers' => ['Content-Type' => 'application/json'],

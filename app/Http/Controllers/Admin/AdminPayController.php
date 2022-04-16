@@ -43,6 +43,7 @@ class AdminPayController extends Controller
     {
         $res = $this->conection->consultPay($reference);
 
+        $this->updateOrderStatus();
         $this->updateDataOfPay($res);
 
         return redirect()->route('pay.updateOrderStatus');
@@ -50,7 +51,7 @@ class AdminPayController extends Controller
 
     public function updateDataOfPay(object $dato)
     {
-
+        $this->updateOrderStatus();
         $this->pays->updatePay($dato);
     }
 

@@ -55,8 +55,6 @@ class PaymentRepository extends BaseRepository
             $paymen->user_id = Auth::user()->id;
             $paymen->name;
             $paymen->surname;
-            $paymen->document_type;
-            $paymen->document;
             $paymen->email;
             $paymen->phone = Auth::user()->phone;
             $paymen->payment_method;
@@ -71,14 +69,11 @@ class PaymentRepository extends BaseRepository
      */
     public function updatePay(object $dato): void
     {
-
         $paymen = Pay::where('requestId', $dato->requestId)->first();
 
         $paymen->status = $dato->status->status;
         $paymen->name = $dato->request->payer->name;
         $paymen->surname = $dato->request->payer->surname;
-        $paymen->document_type = $dato->request->payer->documentType;
-        $paymen->document = $dato->request->payer->document;
         $paymen->email = $dato->request->payer->email;
         $paymen->phone = Auth::user()->phone;
 
@@ -93,10 +88,9 @@ class PaymentRepository extends BaseRepository
         }
         $paymen->save();
 
-
-        Log::channel('contlog')->info('pago realizado por: ' .
+        Log::channel('contlog')->info('payment made by:' .
             $paymen->name . ' ' . $paymen->surname . ' ' .
-            'Con identificación' . ' ' . $paymen->document);
+            'With identification' . ' ' . $paymen->document);
     }
 
     /**
@@ -112,8 +106,6 @@ class PaymentRepository extends BaseRepository
         $paymen->status = $dato->status->status;
         $paymen->name = $dato->request->payer->name;
         $paymen->surname = $dato->request->payer->surname;
-        $paymen->document_type = $dato->request->payer->documentType;
-        $paymen->document = $dato->request->payer->document;
         $paymen->email = $dato->request->payer->email;
 
         if ($dato->status->status == 'PENDING') {
