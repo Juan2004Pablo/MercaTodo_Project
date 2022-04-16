@@ -21,14 +21,14 @@ class Product extends Model
             'description', 'status'
         ];
 
-    public function images(): MorphMany
+    public function images()
     {
-        return $this->morphMany(Image::class, 'imageable');
+        return $this->morphMany('App\Models\Image', 'imageable');
     }
 
-    public function category(): BelongsTo
+    public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo('App\Models\Category');
     }
 
     public function details(): HasMany
