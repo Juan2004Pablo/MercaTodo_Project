@@ -1,7 +1,10 @@
+.gitignore
 /node_modules
 /public/hot
-/public/storage
+/public
 /storage/*.key
+/storage
+server.php
 /vendor
 .env
 .env.backup
@@ -13,3 +16,4 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+.php-cs-fixer.cache
