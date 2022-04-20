@@ -2,14 +2,14 @@
 
 namespace Tests\Feature\Admin\User;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Contracts\Auth\Authenticatable;
-use Tests\TestCase;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class ShowUserTest extends TestCase
 {
+    use RefreshDatabase;
+
     use RefreshDatabase;
 
     public function test_list_of_users_created(): void
@@ -25,8 +25,6 @@ class ShowUserTest extends TestCase
         $response->assertViewIs('admin.user.index');
         $response->assertViewHas('users', $user);
     }
-
-    use RefreshDatabase;
     public function test_users_can_be_seen(): void
     {
         $user = User::factory()->create(['role'=> 'admin']);

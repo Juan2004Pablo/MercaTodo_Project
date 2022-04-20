@@ -20,7 +20,6 @@ class UserController extends Controller
 
     public function index(): View
     {
-
         $users = $this->usersRepo->getAllUsers();
 
         return view('user.index', compact('users'));
@@ -28,8 +27,6 @@ class UserController extends Controller
 
     public function show(User $user): View
     {
-        $this->authorize('view', [$user, ['user.show','userown.show']]);
-
         $roles = $this->usersRepo->roleToUser();
 
         return view('user.view', compact('roles', 'user'));
@@ -37,8 +34,6 @@ class UserController extends Controller
 
     public function edit(User $user): View
     {
-        $this->authorize('update', [$user, ['user.edit','userown.edit']]);
-
         $roles = $this->usersRepo->roleToUser();
 
         return view('user.edit', compact('roles', 'user'));
@@ -54,7 +49,6 @@ class UserController extends Controller
 
     public function destroy(User $user): RedirectResponse
     {
-
         $this->usersRepo->delete($user);
 
         return redirect()->route('user.index')

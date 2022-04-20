@@ -2,11 +2,9 @@
 
 namespace Tests\Feature\Admin\Product;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Contracts\Auth\Authenticatable;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class CreateProductTest extends TestCase
 {

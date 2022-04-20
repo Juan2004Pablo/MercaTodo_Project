@@ -2,11 +2,8 @@
 
 namespace Tests\Feature\Admin\User;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Contracts\Auth\Authenticatable;
-use Tests\TestCase;
 use App\Models\User;
+use Tests\TestCase;
 
 class UpdateUserTest extends TestCase
 {

@@ -1,4 +1,5 @@
 <?php
+
 return [
     'products' => [
         'fields' => [
@@ -10,7 +11,7 @@ return [
             'status' => 'Status',
             'image' => 'Image',
             'description' => 'Description',
-            'disable' => 'Disable'
+            'disable' => 'Disable',
         ],
         'titles' => [
             'title' => 'Products',
@@ -21,19 +22,19 @@ return [
             'pricing' => 'Pricing Section',
             'descriptions' => 'Product descriptions',
             'addImage' => 'Add image',
-            'cop' => 'COP'
+            'cop' => 'COP',
         ],
         'options' => [
             'cancel' => 'Cancel',
             'show' => 'Show',
-            'update' => 'Update'
-        ]
+            'update' => 'Update',
+        ],
     ],
     'categories' => [
         'fields' => [
             'id' => 'Id',
             'name' => 'Name',
-            'description' => 'Description'
+            'description' => 'Description',
         ],
         'titles' => [
             'title' => 'Categories',
@@ -46,8 +47,8 @@ return [
             'show' => 'Show',
             'update' => 'Update',
             'activate' => 'Activate',
-            'inactive' => 'Inactive'
-        ]
+            'inactive' => 'Inactive',
+        ],
     ],
     'details' =>[
         'fields' => [
@@ -55,24 +56,24 @@ return [
             'quantity' => 'Quantity',
             'product' => 'product',
             'price' => 'Price',
-            'subtotal' => 'Subtotal'
-        ]
+            'subtotal' => 'Subtotal',
+        ],
     ],
     'orders' =>[
         'fields' => [
             'code' => 'Code',
-            'status' => 'Status'
+            'status' => 'Status',
         ],
         'titles' => [
             'title' => 'Orders',
             'dates' => 'Order dates',
             'section' => 'Section of orders',
-            'admin' => 'Administration of orders'
+            'admin' => 'Administration of orders',
         ],
         'options' => [
             'cancel' => 'Cancel',
             'show' => 'Show',
-            'update' => 'Update'
-        ]
-    ]
+            'update' => 'Update',
+        ],
+    ],
 ];

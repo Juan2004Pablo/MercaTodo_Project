@@ -57,7 +57,7 @@ return [
         'contlog' => [
             'driver' => 'daily',
             'path' => storage_path('logs/controllers.log'),
-            'level' => 'debug'
+            'level' => 'debug',
         ],
 
         'slack' => [

@@ -2,14 +2,13 @@
 
 namespace App\Repositories\category;
 
+use App\Helpers\Paginator;
 use App\Models\Category;
 use App\Repositories\BaseRepository;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Http\Request;
-use App\Helpers\Paginator;
 
 class CategoryRepository extends BaseRepository
 {

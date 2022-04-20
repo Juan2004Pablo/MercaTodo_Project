@@ -5,9 +5,6 @@ namespace App\Repositories\Order;
 use App\Models\Order;
 use App\Repositories\BaseRepository;
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 
@@ -24,17 +21,15 @@ class OrderRepository extends BaseRepository
         $status = $request->get('searchbystate');
         $date = $request->get('searchbydate');
 
-        if (request()->page)
-        {
+        if (request()->page) {
             $key = 'orders' . request()->page;
-        }else{
+        } else {
             $key = 'orders';
         }
 
-        if (Cache::has($key))
-        {
+        if (Cache::has($key)) {
             $orders = Cache::get($key);
-        } else{
+        } else {
             $orders = Order::statusorder($status)->dateorder($date)->paginate(8);
             Cache::put($key, $orders);
         }

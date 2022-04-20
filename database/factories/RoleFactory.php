@@ -13,7 +13,7 @@ class RoleFactory extends Factory
     {
         return [
             'name' => $this->faker->unique()->text(8),
-            'description' => $this->faker->text(200)
+            'description' => $this->faker->text(200),
         ];
     }
 }

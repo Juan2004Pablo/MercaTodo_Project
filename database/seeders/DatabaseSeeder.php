@@ -1,10 +1,9 @@
 <?php
 
-use Illuminate\Database\Seeder;
-use App\Models\User;
-use App\Models\Role;
 use App\Models\Category;
-use App\Models\Product;
+use App\Models\Role;
+use App\Models\User;
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
@@ -46,14 +45,14 @@ class DatabaseSeeder extends Seeder
 
         $c = Category::create([
             'name' => 'Tecno',
-            'description' => 'Soy la categoria de tecno'
+            'description' => 'Soy la categoria de tecno',
         ]);
 
         $d = Category::create([
             'name' => 'Deporte',
-            'description' => 'Soy la categoria de deporte'
+            'description' => 'Soy la categoria de deporte',
         ]);
-        
+
         $useradmin->roles()->sync([$roladmin->id]);
 
         $userclient->roles()->sync([$roluser->id]);

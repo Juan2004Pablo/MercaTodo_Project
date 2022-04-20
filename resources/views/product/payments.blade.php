@@ -4,10 +4,10 @@
     <div class="container text-center">
         <div class="page-header">
             <h1><i class="fas fa-file-invoice-dollar"></i>Payment history</h1>
-
+            <br>
             <div class="table-responsive">
 
-                <table class="table table-striped table-hover table-bordered">
+                <table class="table table-hover table-bordered">
                     <thead>
                     <tr>
                         <th>Date</th>

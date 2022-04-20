@@ -6,10 +6,9 @@ use App\Models\Detail;
 use App\Models\Order;
 use App\Models\Product;
 use App\Repositories\BaseRepository;
-use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
 
 class CartRepository extends BaseRepository
 {
@@ -66,7 +65,7 @@ class CartRepository extends BaseRepository
     }
 
     /**
-     * Function for update quantity of products
+     * Function for update quantity of products.
      *
      * @param string $sluug
      * @param int $quantity
@@ -105,7 +104,7 @@ class CartRepository extends BaseRepository
     }
 
     /**
-     * Function for delete product of cart
+     * Function for delete product of cart.
      *
      * @param Request $data
      */
@@ -118,7 +117,7 @@ class CartRepository extends BaseRepository
     }
 
     /**
-     *Function for empty cart
+     *Function for empty cart.
      */
     public function emptyCart(): void
     {
@@ -128,7 +127,7 @@ class CartRepository extends BaseRepository
     }
 
     /**
-     * function to receive delivery data
+     * function to receive delivery data.
      *
      * @param Request $data
      * @return Model
@@ -146,7 +145,7 @@ class CartRepository extends BaseRepository
     }
 
     /**
-     * Function for see detail of order
+     * Function for see detail of order.
      *
      * @return Model
      */

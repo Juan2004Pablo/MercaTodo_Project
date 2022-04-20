@@ -30,7 +30,6 @@ class UserPolicy
      */
     public function view(User $usera, User $user, $perm = null)
     {
-        
     }
 
     /**
@@ -54,6 +53,5 @@ class UserPolicy
      */
     public function update(User $usera, User $user, $perm = null)
     {
-        
     }
 }

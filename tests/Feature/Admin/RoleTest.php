@@ -2,10 +2,7 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
-use App\Models\User;
 
 class AdminTest extends TestCase
 {
@@ -18,10 +15,10 @@ class AdminTest extends TestCase
             'password_confirmation' => '12345678',
             'role' => 'admin',
         ]);
-        if(auth()->user()->role === 'admin'){
+        if (auth()->user()->role === 'admin') {
             $response->assertRedirect(route('admin.index'));
             $this->assertAuthenticated($guard = null);
-        } else{
+        } else {
             $response = $this->get('home');
             $response->assertStatus(302);
         }

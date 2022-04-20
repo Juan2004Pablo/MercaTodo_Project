@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Facade;
-
 return [
     'name' => env('APP_NAME', 'Laravel'),
 
@@ -11,7 +9,7 @@ return [
 
     'env' => env('APP_ENV', 'production'),
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool)env('APP_DEBUG', false),
 
     'url' => env('APP_URL', 'http://127.0.0.1:8000'),
 

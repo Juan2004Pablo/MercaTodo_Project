@@ -2,18 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Order;
 
 class Pay extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'reference','total','status','user_id','order_id',
+        'reference', 'total', 'status', 'user_id', 'order_id',
     ];
 
     public function orders(): BelongsTo

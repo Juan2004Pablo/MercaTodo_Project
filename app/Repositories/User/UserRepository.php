@@ -5,9 +5,9 @@ namespace App\Repositories\User;
 use App\Models\Role;
 use App\Models\User;
 use App\Repositories\BaseRepository;
-use Illuminate\Http\Request;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
 
 class UserRepository extends BaseRepository
 {

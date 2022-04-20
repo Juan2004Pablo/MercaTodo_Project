@@ -5,16 +5,9 @@ namespace App\Repositories\Pay;
 use App\Models\Order;
 use App\Models\Pay;
 use App\Repositories\BaseRepository;
-use App\Repositories\Pay\ConectionPTPRepository;
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\BadResponseException;
-use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Exception\ServerException;
-use GuzzleHttp\Psr7;
-use  GuzzleHttp\Psr7\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class PlaceToPayRepository extends BaseRepository
 {
@@ -34,8 +27,7 @@ class PlaceToPayRepository extends BaseRepository
     }
 
     /**
-     * function to connect to the payment gateway of place to pay
-     *
+     * function to connect to the payment gateway of place to pay.
      */
     public function conectionPlaceToPay(): object
     {
@@ -87,13 +79,15 @@ class PlaceToPayRepository extends BaseRepository
 
             return $result;
         } catch (Throwable $e) {
-            Log::channel('contlog')->error('RequestException' ,
-            ['error' => $e]);
+            Log::channel('contlog')->error(
+                'RequestException',
+                ['error' => $e]
+            );
         }
     }
 
     /**
-     * function to check the details of the payment made
+     * function to check the details of the payment made.
      *
      * @param int $reference
      * @return object
@@ -130,13 +124,15 @@ class PlaceToPayRepository extends BaseRepository
 
             return $res;
         } catch (Throwable $e) {
-            Log::channel('contlog')->error('PlaceToPayException' ,
-            ['error' => $e]);
+            Log::channel('contlog')->error(
+                'PlaceToPayException',
+                ['error' => $e]
+            );
         }
     }
 
     /**
-     * function to check the details of the payment made after job
+     * function to check the details of the payment made after job.
      *
      * @param int $reference
      * @return object
@@ -174,8 +170,10 @@ class PlaceToPayRepository extends BaseRepository
 
             return $res;
         } catch (Throwable $e) {
-            Log::channel('contlog')->error('PlaceToPayException' ,
-            ['error' => $e]);
+            Log::channel('contlog')->error(
+                'PlaceToPayException',
+                ['error' => $e]
+            );
         }
     }
 }

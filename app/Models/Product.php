@@ -6,9 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Models\category;
-use App\Models\Image;
-use App\Models\Detail;
+
 
 class Product extends Model
 {
@@ -17,8 +15,8 @@ class Product extends Model
 
     protected $fillable =
         [
-            'name', 'category_id','quantity','price',
-            'description', 'status'
+            'name', 'category_id', 'quantity', 'price',
+            'description', 'status',
         ];
 
     public function images()
@@ -53,7 +51,7 @@ class Product extends Model
     public function scopeCategory($query, $category)
     {
         if ($category) {
-                 return $query->where('category_id', 'like', "%$category%");
+            return $query->where('category_id', 'like', "%$category%");
         }
     }
 }

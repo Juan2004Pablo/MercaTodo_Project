@@ -11,7 +11,7 @@ class ConectionPTPRepository extends BaseRepository
     }
 
     /**
-     * function to connect to the payment gateway of place to pay
+     * function to connect to the payment gateway of place to pay.
      *
      * @return array
      */

@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Helpers\Paginator;
 use App\Http\Controllers\Controller;
-use App\Models\Category;
 use App\Repositories\category\CategoryRepository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -47,9 +45,9 @@ class AdminCategoryController extends Controller
         return view('admin.category.show', compact('cat', 'edit'));
     }
 
-    public function edit( int $id): View
+    public function edit(int $id): View
     {
-        $cat = $this->categoryRepo->findCategory( $id);
+        $cat = $this->categoryRepo->findCategory($id);
         $edit = 'Si';
 
         return view('admin.category.edit', compact('cat', 'edit'));

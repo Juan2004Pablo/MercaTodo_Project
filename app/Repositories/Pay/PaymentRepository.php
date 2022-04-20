@@ -8,12 +8,10 @@ use App\Models\Order;
 use App\Models\Pay;
 use App\Models\Product;
 use App\Repositories\BaseRepository;
-use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-use PhpParser\Node\Expr\Cast\Object_;
 
 class PaymentRepository extends BaseRepository
 {
@@ -26,7 +24,7 @@ class PaymentRepository extends BaseRepository
     }
 
     /**
-     * function to redirect to the payment gateway
+     * function to redirect to the payment gateway.
      *
      * @return string
      */
@@ -39,7 +37,7 @@ class PaymentRepository extends BaseRepository
     }
 
     /**
-     * function to save payment details
+     * function to save payment details.
      *
      * @param object $data
      */
@@ -47,23 +45,23 @@ class PaymentRepository extends BaseRepository
     {
         $order = Order::open()->rejected()->first();
 
-            $paymen = new Pay();
-            $paymen->status;
-            $paymen->reference = $order->id;
-            $paymen->requestId = $data->requestId;
-            $paymen->process_url = $data->processUrl;
-            $paymen->user_id = Auth::user()->id;
-            $paymen->name;
-            $paymen->surname;
-            $paymen->email;
-            $paymen->phone = Auth::user()->phone;
-            $paymen->payment_method;
-            $paymen->order_total = $order->total;
-            $paymen->save();
+        $paymen = new Pay();
+        $paymen->status;
+        $paymen->reference = $order->id;
+        $paymen->requestId = $data->requestId;
+        $paymen->process_url = $data->processUrl;
+        $paymen->user_id = Auth::user()->id;
+        $paymen->name;
+        $paymen->surname;
+        $paymen->email;
+        $paymen->phone = Auth::user()->phone;
+        $paymen->payment_method;
+        $paymen->order_total = $order->total;
+        $paymen->save();
     }
 
     /**
-     * function to update payment details
+     * function to update payment details.
      *
      * @param object $dato
      */
@@ -94,7 +92,7 @@ class PaymentRepository extends BaseRepository
     }
 
     /**
-     * function to update the payment details after executing the job
+     * function to update the payment details after executing the job.
      *
      * @param object $dato
      * @return void
@@ -129,7 +127,7 @@ class PaymentRepository extends BaseRepository
     }
 
     /**
-     * function to view payment details
+     * function to view payment details.
      *
      * @return Model
      */
@@ -139,7 +137,7 @@ class PaymentRepository extends BaseRepository
     }
 
     /**
-     * function to update payment status
+     * function to update payment status.
      *
      * @return string
      */
@@ -164,7 +162,7 @@ class PaymentRepository extends BaseRepository
     }
 
     /**
-     * function to see payments for all orders
+     * function to see payments for all orders.
      *
      * @return Collection
      */
@@ -183,7 +181,7 @@ class PaymentRepository extends BaseRepository
     }
 
     /**
-     * function for count the payments of an user
+     * function for count the payments of an user.
      *
      * @param $reference
      * @return int

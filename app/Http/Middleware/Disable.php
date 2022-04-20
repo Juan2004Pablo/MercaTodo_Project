@@ -10,8 +10,7 @@ class Disable
 {
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->check() && (auth()->user() -> disable_at))
-        {
+        if (auth()->check() && (auth()->user()->disable_at)) {
             Auth::logout();
 
             $request->session()->invalidate();
@@ -20,7 +19,7 @@ class Disable
 
             return redirect()->route('login')->with('error', 'Your account has been disabled, contact the admin');
         }
-        
+
         return $next($request);
     }
 }

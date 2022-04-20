@@ -2,15 +2,9 @@
 
 namespace Tests\Feature\Admin\Product;
 
-use App\Models\Image;
 use App\Models\Product;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Http\Testing\File;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class UpdateProductTest extends TestCase
@@ -29,7 +23,7 @@ class UpdateProductTest extends TestCase
             'description' => 'Amazing test product',
             'images' => [
                UploadedFile::fake()->image('product.png', 500, 250)->size(50),
-            ]
+            ],
         ]);
 
         $this->assertCount(1, Product::all());
@@ -47,5 +41,4 @@ class UpdateProductTest extends TestCase
 
         $response->assertRedirect('products.update', ['product' => $product->id]);
     }
-
 }

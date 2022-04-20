@@ -5,12 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
-use App\Models\Category;
 use App\Repositories\product\ProductRepository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 
 class AdminProductController extends Controller
@@ -60,7 +57,7 @@ class AdminProductController extends Controller
         return view('admin.product.show', compact('product', 'statusProducts'));
     }
 
-    public function edit( int $id): View
+    public function edit(int $id): View
     {
         $product = $this->productRepo->getProductbyId($id);
 

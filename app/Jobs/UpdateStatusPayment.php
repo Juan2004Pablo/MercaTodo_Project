@@ -3,9 +3,9 @@
 namespace App\Jobs;
 
 use App\Models\Pay;
+use App\Repositories\Pay\ConectionPTPRepository;
 use App\Repositories\Pay\PaymentRepository;
 use App\Repositories\Pay\PlaceToPayRepository;
-use App\Repositories\Pay\ConectionPTPRepository;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;

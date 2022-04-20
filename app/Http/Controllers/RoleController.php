@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\RoleStoreRequest;
-use App\Http\Requests\RoleUpdateRequest;
+use App\Http\Requests\UpdateRoleRequest;
 use App\Models\Role;
 use App\Repositories\Role\RoleRepository;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
 
 class RoleController extends Controller
@@ -47,14 +44,11 @@ class RoleController extends Controller
 
     public function edit(Role $role): View
     {
-
         return view('role.edit', compact('role'));
     }
 
-    public function update(RoleUpdateRequest $request, Role $role): RedirectResponse
+    public function update(UpdateRoleRequest $request, Role $role): RedirectResponse
     {
-        
-
         $this->rolesRepo->updateRole($request, $role);
 
         return redirect()->route('role.index')

@@ -16,12 +16,12 @@ class ModelObserver
     {
         Log::info($this->getMessage($model, 'updated'), $this->info($model));
     }
-    
+
     public function info(Model $model): array
     {
         return [
             'model_id' => $model->getKey(),
-            'user_id' => auth()->id()
+            'user_id' => auth()->id(),
         ];
     }
 

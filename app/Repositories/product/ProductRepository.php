@@ -6,11 +6,10 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Repositories\BaseRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Requests\StoreProductRequest;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
@@ -99,7 +98,6 @@ class ProductRepository extends BaseRepository
         }
         $category = Category::where('name', $data->category_id)->first();
 
-
         $prod = $this->getModel()->findOrFail($id);
 
         $prod->name = $data->name;
@@ -110,7 +108,6 @@ class ProductRepository extends BaseRepository
         $prod->status = $data->status;
 
         $prod->save();
-
 
         $prod->images()->createMany($urlimages);
 
