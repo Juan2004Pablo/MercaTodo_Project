@@ -1,14 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\OrderController;
-use App\Http\Controllers\Admin\CartController;
-use App\Http\Controllers\Admin\DetailController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,74 +15,140 @@ use App\Http\Controllers\Admin\DetailController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes(['verify' => true]);
 
-Route::get('home', [HomeController::class, 'index'])->name('home')->middleware('verified');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('verified')
+    ->middleware('auth');
 
-Route::get('admin', [AdminController::class, 'index'])
-    ->middleware(['auth.admin', 'auth'])
-    ->name('admin.index');
+Route::resource('/role', 'RoleController')->names('role');
 
-Route::resource('users', UserController::class)->middleware(['auth', 'auth.admin']);
+Route::resource('/user', 'UserController')->names('user');
 
-Route::get('admin/users/{user}/toggle', [UserController::class, 'toggle'])->middleware(['auth', 'auth.admin'])->name('admin.users.toggle');
+Route::post('restore/{id}', ['as' => 'user.restore', 'uses' => 'UserController@restore']);
 
-Route::resource('admin/category', CategoryController::class)->name('admin.category')->middleware('auth');
+Route::get('/admin', function () {
+    return view('plantilla.admin');
+})->name('admin');
 
-Route::resource('products', ProductController::class)->middleware(['auth', 'auth.admin']);
+Route::resource('admin/category', 'Admin\AdminCategoryController')
+    ->names('admin.category')->middleware('auth');
+
+Route::resource('admin/product', 'Admin\AdminProductController')->names('admin.product')
+    ->middleware('auth');
 
 Route::get('cancel/{ruta}', function ($ruta) {
     return redirect()->route($ruta)->with('cancel', 'Action Canceled!');
 })->name('cancel');
 
-Route::resource('/product', ShowProductController::class)->name('product');
+Route::post('restoreproduct/{id}', ['as' => 'admin.product.restore', 'uses'
+=> 'Admin\AdminProductController@restore']);
 
-Route::get('admin/products/{product}/toggle', [ProductController::class, 'toggle'])->middleware(['auth', 'product.disable'])->name('admin.products.toggle');
+Route::post('restorecategory/{id}', ['as' => 'admin.category.restore', 'uses'
+=> 'Admin\AdminCategoryController@restore']);
 
-Route::resource('admin/order', OrderController::class)->name('admin.order');
+Route::resource('/product', 'ProductController')->names('product');
 
-Route::resource('admin/detail', DetailController::class)->name('admin.detail');
+Route::resource('admin/order', 'Admin\AdminOrderController')->names('admin.order');
 
-Route::get('cart/show', [CartController::class, 'show'])->name('cart.show')->middleware('auth');
+Route::resource('admin/detail', 'Admin\AdminDetailController')->names('admin.detail');
 
-Route::get('cart/add/{id}', [CartController::class, 'add'])->name('cart.add')->middleware('auth');
+Route::get('cart/show', [
+    'as' => 'cart.show',
+    'uses' => 'Admin\AdminCartController@show'
+])->middleware('auth');
 
-Route::get('cart/delete/{id}', [CartController::class, 'delete'])->name('cart.delete');
+Route::get('cart/add/{id}', [
+    'as' => 'cart.add',
+    'uses' => 'Admin\AdminCartController@add'
+])->middleware('auth');
 
-Route::get('cart/trash', [CartController::class, 'trash'])->name('cart.trash');
+Route::get('cart/delete/{id}', [
+    'as' => 'cart.delete',
+    'uses' => 'Admin\AdminCartController@delete'
+]);
 
-Route::get('cart/update/{id}/{quantity?}', [CartController::class, 'update'])->name('cart.update');
+Route::get('cart/trash', [
+    'as' => 'cart.trash',
+    'uses' => 'Admin\AdminCartController@trash'
+]);
 
-Route::get('order-detail', [DetailController::class, 'update'])->name('order.detail');
+Route::get('cart/update/{id}/{quantity?}', [
+    'as' => 'cart.update',
+    'uses' => 'Admin\AdminCartController@update'
+]);
 
-Route::post('cart/datesReceive', [CartController::class, 'datesReceive'])->name('cart.Datesreceive');
+Route::get('order-detail', [
+    'as' => 'order-detail',
+    'uses' => 'Admin\AdminCartController@orderDetail'
+]);
 
-Route::get('pay/createPay/{reference?}', [PayController::class, 'createPay'])->name('pay.createPay');
+Route::post('cart/datesReceive', [
+    'as' => 'cart.Datesreceive',
+    'uses' => 'Admin\AdminCartController@Datesreceive'
+]);
 
-Route::get('pay/payAgain/{reference?}', [PayController::class, 'payAgain'])->name('pay.payAgain');
+Route::get('pay/createPay/{reference?}', [
+    'as' => 'pay.createPay',
+    'uses' => 'Admin\AdminPayController@createPay'
+]);
 
-Route::get('pay/dataOfOrder', [PayController::class, 'dataOfOrder'])->name('pay.dataOfOrder');
+Route::get('pay/payAgain/{reference?}', [
+    'as' => 'pay.payAgain',
+    'uses' => 'Admin\AdminPayController@payAgain'
+]);
 
-Route::get('pay/dataOfOrderrejected', [PayController::class, 'dataOfOrderrejected'])->name('pay.dataOfOrderrejected');
+Route::get('pay/dataOfOrder', [
+    'as' => 'pay.dataOfOrder',
+    'uses' => 'Admin\AdminPayController@dataOfOrder'
+]);
 
-Route::get('pay/consultPayment/{reference?}', [PayController::class, 'consultPayment'])->name('pay.consultPayment');
+Route::get('pay/dataOfOrderrejected', [
+    'as' => 'pay.dataOfOrderrejected',
+    'uses' => 'Admin\AdminPayController@dataOfOrderrejected'
+]);
 
-Route::get('pay/status', [PayController::class, 'status'])->name('pay.status');
+Route::get('pay/consultPayment/{reference?}', [
+    'as' => 'pay.consultPayment',
+    'uses' => 'Admin\AdminPayController@consultPayment'
+]);
 
-Route::get('pay/updateDataOfPay', [PayController::class, 'updateDataOfPay'])->name('pay.updateDataOfPay');
+Route::get('pay/status', [
+    'as' => 'pay.status',
+    'uses' => 'Admin\AdminPayController@status'
+]);
 
-Route::get('pay/show', [PayController::class, 'show'])->name('pay.show');
+Route::get('pay/updateDataOfPay', [
+    'as' => 'pay.updateDataOfPay',
+    'uses' => 'Admin\AdminPayController@updateDataOfPay'
+]);
 
-Route::get('pay/updateOrderStatus', [PayController::class, 'updateOrderStatus'])->name('pay.updateOrderStatus');
+Route::get('pay/show', [
+    'as' => 'pay.show',
+    'uses' => 'Admin\AdminPayController@show'
+]);
 
-Route::get('pay/showAllOrders', [PayController::class, 'showAllOrders'])->name('pay.showAllOrders');
+Route::get('pay/updateOrderStatus', [
+    'as' => 'pay.updateOrderStatus',
+    'uses' => 'Admin\AdminPayController@updateOrderStatus'
+]);
 
-Route::get('pay/retryPayment', [PayController::class, 'retryPayment'])->name('pay.retryPayment');
+Route::get('pay/showAllOrders', [
+    'as' => 'pay.showAllOrders',
+    'uses' => 'Admin\AdminPayController@showAllOrders'
+]);
 
-Route::get('pay/redirection', [PayController::class, 'redirection'])->name('pay.redirection');
+Route::get('pay/retryPayment', [
+    'as' => 'pay.retryPayment',
+    'uses' => 'Admin\AdminPayController@retryPayment'
+]);
+
+Route::get('pay/redirection', [
+    'as' => 'pay.redirection',
+    'uses' => 'Admin\AdminPayController@redirection'
+]);
 
 Route::get('markAsRead', function(){
     auth()->user()->unreadNotifications->markAsRead();
