@@ -2,10 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
 
-//php-cs-fixer fix src
-//php-cs-fixer fix .
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,17 +15,8 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-<<<<<<< Updated upstream
-    return view('auth.login');
-});
-=======
-<<<<<<< Updated upstream
-    return view('welcome');
-});
-=======
     return view('home');
 });
->>>>>>> Stashed changes
 
 Auth::routes(['verify' => true]);
 
@@ -41,7 +29,6 @@ Route::resource('/user', 'UserController')->names('user');
 
 Route::post('restore/{id}', ['as' => 'user.restore', 'uses' => 'UserController@restore']);
 
-<<<<<<< Updated upstream
 Route::get('/admin', function () {
     return view('plantilla.admin');
 })->name('admin');
@@ -52,13 +39,10 @@ Route::resource('admin/category', 'Admin\AdminCategoryController')
 Route::resource('admin/product', 'Admin\AdminProductController')->names('admin.product')
     ->middleware('auth');
 
-=======
->>>>>>> Stashed changes
 Route::get('cancel/{ruta}', function ($ruta) {
     return redirect()->route($ruta)->with('cancel', 'Action Canceled!');
 })->name('cancel');
 
-<<<<<<< Updated upstream
 Route::post('restoreproduct/{id}', ['as' => 'admin.product.restore', 'uses' => 'Admin\AdminProductController@restore']);
 
 Route::post('restorecategory/{id}', ['as' => 'admin.category.restore', 'uses' => 'Admin\AdminCategoryController@restore']);
@@ -168,10 +152,3 @@ Route::get('markAsRead', function () {
     auth()->user()->unreadNotifications->markAsRead();
     return redirect()->back();
 })->name('markAsRead');
-=======
-Route::get('markAsRead', function(){
-    auth()->user()->unreadNotifications->markAsRead();
-    return redirect()->back();
-})->name('markAsRead');
->>>>>>> Stashed changes
->>>>>>> Stashed changes
