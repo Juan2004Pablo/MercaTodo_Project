@@ -33,6 +33,15 @@ class RouteServiceProvider extends ServiceProvider
         parent::boot();
     }
 
+<<<<<<< Updated upstream
+=======
+<<<<<<< Updated upstream
+        $this->routes(function () {
+            Route::prefix('api')
+                ->middleware('api')
+                ->group(base_path('routes/api.php'));
+=======
+>>>>>>> Stashed changes
     /**
      * Define the routes for the application.
      *
@@ -43,7 +52,18 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapApiRoutes();
 
         $this->mapWebRoutes();
+<<<<<<< Updated upstream
     }
+=======
+
+        $this->mapAdminRoutes();
+
+        $this->mapCartRoutes();
+
+        $this->mapPayRoutes();
+    }
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 
     /**
      * Define the "web" routes for the application.
@@ -59,6 +79,28 @@ class RouteServiceProvider extends ServiceProvider
             ->group(base_path('routes/web.php'));
     }
 
+    protected function mapAdminRoutes(): void
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/admin.php'));
+    }
+
+    protected function mapCartRoutes(): void
+    {
+        Route::prefix('cart')  
+            ->middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/cart.php'));
+    }
+
+    protected function mapPayRoutes(): void
+    {
+        Route::prefix('pay')  
+            ->middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/pay.php'));
+    }
     /**
      * Define the "api" routes for the application.
      *
