@@ -21,6 +21,8 @@ class HomeController extends Controller
 
     public function index(Request $request): View
     {
+        $this->authorize('home.index');
+
         $products = $this->prodRepo->getAllProductHome($request);
         $carts = $this->cartShowRepo->getProductsOfCart();
         $categories = Category::cachedCategories();

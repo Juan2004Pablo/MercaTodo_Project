@@ -23,6 +23,8 @@ class AdminProductController extends Controller
 
     public function index(Request $request): View
     {
+        $this->authorize('product.index');
+
         $products = $this->productRepo->getAllProductAdmin($request);
         $category = $this->productRepo->categoryForProduct();
 
@@ -33,6 +35,8 @@ class AdminProductController extends Controller
 
     public function create(): View
     {
+        $this->authorize('product.create');
+
         $statusProducts = $this->statusProducts;
 
         $categories = $this->productRepo->categoryForProduct();
@@ -42,23 +46,15 @@ class AdminProductController extends Controller
 
     public function store(StoreProductRequest $request)//: RedirectResponse
     {
+        $this->authorize('product.create');
+
         $this->productRepo->createProduct($request);
-
-        //return redirect()->route('admin.product.index')
-           // ->with('data', 'Record created successfully!');
-    }
-
-    public function show(int $id): View
-    {
-        $product = $this->productRepo->getProductbyId($id);
-
-        $statusProducts = $this->statusProducts;
-
-        return view('admin.product.show', compact('product', 'statusProducts'));
     }
 
     public function edit(int $id): View
     {
+        $this->authorize('product.update');
+
         $product = $this->productRepo->getProductbyId($id);
 
         $statusProducts = $this->statusProducts;
@@ -68,14 +64,29 @@ class AdminProductController extends Controller
 
     public function update(UpdateProductRequest $request, string $id): RedirectResponse
     {
+        $this->authorize('product.update');
+
         $this->productRepo->updateProduct($request, $id);
 
         return redirect()->route('admin.product.index')
             ->with('data', 'Record updated successfully!');
     }
 
+    public function show(int $id): View
+    {
+        $this->authorize('product.show');
+
+        $product = $this->productRepo->getProductbyId($id);
+
+        $statusProducts = $this->statusProducts;
+
+        return view('admin.product.show', compact('product', 'statusProducts'));
+    }
+
     public function destroy(string $id): RedirectResponse
     {
+        $this->authorize('product.disable');
+
         $product = $this->productRepo->findId($id);
         $this->productRepo->delete($product);
 
@@ -85,6 +96,8 @@ class AdminProductController extends Controller
 
     public function restore(Request $request): RedirectResponse
     {
+        $this->authorize('product.disable');
+
         $this->productRepo->restore($request);
 
         return redirect()->route('admin.product.index')

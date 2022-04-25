@@ -19,6 +19,8 @@ class AdminCategoryController extends Controller
 
     public function index(Request $request): View
     {
+        $this->authorize('category.index');
+
         $categories = $this->categoryRepo->getAllCategories($request);
 
         return view('admin.category.index', compact('categories'));
@@ -26,27 +28,25 @@ class AdminCategoryController extends Controller
 
     public function create(): View
     {
+        $this->authorize('category.create');
+
         return view('admin.category.create');
     }
 
     public function store(Request $request): RedirectResponse
     {
+        $this->authorize('category.create');
+
         $this->categoryRepo->createCategory($request->all());
 
         return redirect()->route('admin.category.index')
             ->with('data', 'Record created successfully!');
     }
 
-    public function show(int $id): View
-    {
-        $cat = $this->categoryRepo->findCategory($id);
-        $edit = 'Si';
-
-        return view('admin.category.show', compact('cat', 'edit'));
-    }
-
     public function edit(int $id): View
     {
+        $this->authorize('category.update');
+
         $cat = $this->categoryRepo->findCategory($id);
         $edit = 'Si';
 
@@ -55,6 +55,8 @@ class AdminCategoryController extends Controller
 
     public function update(Request $request, int $id): RedirectResponse
     {
+        $this->authorize('category.update');
+
         $cat = $this->categoryRepo->findId($id);
         $this->categoryRepo->updateCategory($cat, $request->all());
 
@@ -62,8 +64,20 @@ class AdminCategoryController extends Controller
             ->with('data', 'Record updated successfully!');
     }
 
+    public function show(int $id): View
+    {
+        $this->authorize('category.show');
+
+        $cat = $this->categoryRepo->findCategory($id);
+        $edit = 'Si';
+
+        return view('admin.category.show', compact('cat', 'edit'));
+    }
+
     public function destroy(int $id): RedirectResponse
     {
+        $this->authorize('category.disable');
+
         $cat = $this->categoryRepo->findId($id);
         $this->categoryRepo->delete($cat);
 
@@ -73,6 +87,8 @@ class AdminCategoryController extends Controller
 
     public function restore(Request $request): RedirectResponse
     {
+        $this->authorize('category.disable');
+
         $this->categoryRepo->restore($request);
 
         return redirect()->route('admin.category.index')
