@@ -17,37 +17,29 @@ class AdminCartController extends Controller
         $this->cartRepo = $carRepository;
     }
 
+    public function add(Request $request): RedirectResponse
+    {
+        $this->authorize('cart.add');
+
+        $this->cartRepo->addToCart($request);
+
+        return redirect()->route('cart.show');
+    }
+
     public function show(): View
     {
+        $this->authorize('cart.show');
+
         $cart = $this->cartRepo->getProductsOfCart();
         $total = $this->cartRepo->total();
 
         return view('product.cart', compact('cart', 'total'));
     }
 
-    public function add(Request $request): RedirectResponse
-    {
-        $this->cartRepo->addToCart($request);
-
-        return redirect()->route('cart.show');
-    }
-
-    public function delete(Request $request): RedirectResponse
-    {
-        $this->cartRepo->deleteProductOfCart($request);
-
-        return redirect()->route('cart.show');
-    }
-
-    public function trash(): RedirectResponse
-    {
-        $this->cartRepo->emptyCart();
-
-        return redirect()->route('home');
-    }
-
     public function update(int $id, int $quantity): RedirectResponse
     {
+        $this->authorize('cart.update');
+
         $this->cartRepo->updateQuantity($id, $quantity);
 
         return redirect()->route('cart.show');
@@ -65,5 +57,23 @@ class AdminCartController extends Controller
         $cart = $this->cartRepo->detail();
 
         return view('product.order-detail', compact('cart'));
+    }
+
+    public function delete(Request $request): RedirectResponse
+    {
+        $this->authorize('cart.delete');
+
+        $this->cartRepo->deleteProductOfCart($request);
+
+        return redirect()->route('cart.show');
+    }
+
+    public function trash(): RedirectResponse
+    {
+        $this->authorize('cart.trash');
+
+        $this->cartRepo->emptyCart();
+
+        return redirect()->route('home');
     }
 }

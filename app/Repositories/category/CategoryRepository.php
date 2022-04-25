@@ -24,11 +24,6 @@ class CategoryRepository extends BaseRepository
 
     public function getAllCategories(Request $request)
     {
-        /*$name = $data->get('name');
-
-        return $this->getModel()->withTrashed('category')
-            ->where('name', 'like', "%$name%")->orderBy('name')->paginate(1);*/
-
         return Paginator::paginate($request, Category::cachedCategories());
     }
 

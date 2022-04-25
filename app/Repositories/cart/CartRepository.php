@@ -64,12 +64,6 @@ class CartRepository extends BaseRepository
         }
     }
 
-    /**
-     * Function for update quantity of products.
-     *
-     * @param string $sluug
-     * @param int $quantity
-     */
     public function updateQuantity(int $id, int $quantity): void
     {
         $product = Product::where('id', $id)->first();
@@ -103,11 +97,6 @@ class CartRepository extends BaseRepository
         $order->save();
     }
 
-    /**
-     * Function for delete product of cart.
-     *
-     * @param Request $data
-     */
     public function deleteProductOfCart(Request $data): void
     {
         $product = Product::find($data->id);
@@ -116,9 +105,6 @@ class CartRepository extends BaseRepository
         $detailproduct->delete();
     }
 
-    /**
-     *Function for empty cart.
-     */
     public function emptyCart(): void
     {
         $order = Order::open()->first();
@@ -126,12 +112,6 @@ class CartRepository extends BaseRepository
         Order::open()->delete();
     }
 
-    /**
-     * function to receive delivery data.
-     *
-     * @param Request $data
-     * @return Model
-     */
     public function datesReceiveOrder(Request $data): Model
     {
         $order = $this->getModel()->open()->first();
@@ -144,11 +124,6 @@ class CartRepository extends BaseRepository
         return $order;
     }
 
-    /**
-     * Function for see detail of order.
-     *
-     * @return Model
-     */
     public function detail(): Model
     {
         return $this->getModel()->with('details', 'details.products')->open()->first();

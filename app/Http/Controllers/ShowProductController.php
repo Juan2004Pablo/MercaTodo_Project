@@ -16,6 +16,8 @@ class ShowProductController extends Controller
 
     public function show(int $id): View
     {
+        $this->authorize('show.product');
+
         $product = $this->productsRepo->findId($id);
 
         return view('product.show', compact('product'));

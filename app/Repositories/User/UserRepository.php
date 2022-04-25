@@ -2,12 +2,12 @@
 
 namespace App\Repositories\User;
 
-use App\Models\Role;
 use App\Models\User;
 use App\Repositories\BaseRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class UserRepository extends BaseRepository
 {

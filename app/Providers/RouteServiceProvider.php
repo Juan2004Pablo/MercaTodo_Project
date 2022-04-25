@@ -33,25 +33,27 @@ class RouteServiceProvider extends ServiceProvider
         parent::boot();
     }
 
-    /**
-     * Define the routes for the application.
-     *
-     * @return void
-     */
     public function map(): void
     {
         $this->mapApiRoutes();
 
         $this->mapWebRoutes();
+
+        $this->mapAdminRoutes();
+
+        $this->mapCartRoutes();
+
+        $this->mapPayRoutes();
     }
 
-    /**
-     * Define the "web" routes for the application.
-     *
-     * These routes all receive session state, CSRF protection, etc.
-     *
-     * @return void
-     */
+    protected function mapApiRoutes()
+    {
+        Route::prefix('api')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/api.php'));
+    }
+
     protected function mapWebRoutes(): void
     {
         Route::middleware('web')
@@ -59,18 +61,26 @@ class RouteServiceProvider extends ServiceProvider
             ->group(base_path('routes/web.php'));
     }
 
-    /**
-     * Define the "api" routes for the application.
-     *
-     * These routes are typically stateless.
-     *
-     * @return void
-     */
-    protected function mapApiRoutes(): void
+    protected function mapAdminRoutes(): void
     {
-        Route::prefix('api')
-            ->middleware('api')
+        Route::middleware('web')
             ->namespace($this->namespace)
-            ->group(base_path('routes/api.php'));
+            ->group(base_path('routes/admin.php'));
+    }
+
+    protected function mapCartRoutes(): void
+    {
+        Route::prefix('cart')
+            ->middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/cart.php'));
+    }
+
+    protected function mapPayRoutes(): void
+    {
+        Route::prefix('pay')
+            ->middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/pay.php'));
     }
 }

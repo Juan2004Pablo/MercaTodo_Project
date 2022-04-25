@@ -19,6 +19,8 @@ class AdminOrderController extends Controller
 
     public function index(Request $request): View
     {
+        $this->authorize('order.index');
+
         $orders = $this->orders->getAllOrders($request);
 
         $request = $request->all();
@@ -28,6 +30,8 @@ class AdminOrderController extends Controller
 
     public function show(int $id): RedirectResponse
     {
+        $this->authorize('order.show');
+
         $this->orders->seeOrder($id);
 
         return redirect('/admin/detail');

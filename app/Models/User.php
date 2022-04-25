@@ -10,6 +10,9 @@ use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -17,6 +20,7 @@ class User extends Authenticatable implements MustVerifyEmail
     use UserTrait;
     use SoftDeletes;
     use HasFactory;
+    use HasRoles;
 
     protected $fillable =
     [
@@ -44,4 +48,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsTo('App\Models\Order');
     }
+
+    //$role = Role::create(['name' => 'seller']);
+    //$permission = Permission::create(['name' => 'see products']);
+
+    //$role->syncPermissions($permissions);
 }

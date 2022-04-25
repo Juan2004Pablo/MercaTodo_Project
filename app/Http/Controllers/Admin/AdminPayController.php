@@ -21,6 +21,8 @@ class AdminPayController extends Controller
 
     public function createPay(): RedirectResponse
     {
+        $this->authorize('pay.create');
+
         $result = $this->conection->conectionPlaceToPay();
         $this->dataOfOrder($result);
 
@@ -29,6 +31,8 @@ class AdminPayController extends Controller
 
     public function redirection(): RedirectResponse
     {
+        $this->authorize('pay.redirection');
+
         $url = $this->pays->redirect();
 
         return redirect()->to($url);
@@ -36,11 +40,50 @@ class AdminPayController extends Controller
 
     public function dataOfOrder(object $data)
     {
+        $this->authorize('pay.dataOfOrder');
+
         $this->pays->ordersData($data);
+    }
+
+    public function show(): View
+    {
+        $this->authorize('pay.Show');
+
+        $payment = $this->pays->seePay();
+
+        return view('product.estado', compact('payment'));
+    }
+
+    public function showAllOrders(): View
+    {
+        $this->authorize('pay.showAll');
+
+        $Payments = $this->pays->seeAllOrders();
+
+        return view('product.payments', compact('Payments'));
+    }
+
+    public function updateDataOfPay(object $dato)
+    {
+        $this->authorize('pay.updateData');
+
+        $this->updateOrderStatus();
+        $this->pays->updatePay($dato);
+    }
+
+    public function updateOrderStatus(): RedirectResponse
+    {
+        $this->authorize('pay.updateOrder');
+
+        $this->pays->updateStatusOfOrder();
+
+        return redirect()->route('pay.show');
     }
 
     public function consultPayment(int $reference): RedirectResponse
     {
+        $this->authorize('pay.consultPayment');
+
         $res = $this->conection->consultPay($reference);
 
         $this->updateOrderStatus();
@@ -49,35 +92,10 @@ class AdminPayController extends Controller
         return redirect()->route('pay.updateOrderStatus');
     }
 
-    public function updateDataOfPay(object $dato)
-    {
-        $this->updateOrderStatus();
-        $this->pays->updatePay($dato);
-    }
-
-    public function show(): View
-    {
-        $payment = $this->pays->seePay();
-
-        return view('product.estado', compact('payment'));
-    }
-
-    public function updateOrderStatus(): RedirectResponse
-    {
-        $this->pays->updateStatusOfOrder();
-
-        return redirect()->route('pay.show');
-    }
-
-    public function showAllOrders(): View
-    {
-        $Payments = $this->pays->seeAllOrders();
-
-        return view('product.payments', compact('Payments'));
-    }
-
     public function retryPayment(): RedirectResponse
     {
+        $this->authorize('pay.retry');
+
         return redirect()->route('pay.createPay');
     }
 }

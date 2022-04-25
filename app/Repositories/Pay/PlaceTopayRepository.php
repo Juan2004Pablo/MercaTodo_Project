@@ -18,17 +18,11 @@ class PlaceToPayRepository extends BaseRepository
 
     protected $conection;
 
-    /**
-     * AdminPayController constructor.
-     */
     public function __construct(ConectionPTPRepository $conection)
     {
         $this->conection = $conection;
     }
 
-    /**
-     * function to connect to the payment gateway of place to pay.
-     */
     public function conectionPlaceToPay(): object
     {
         $p = Pay::inProcess()->first();
@@ -86,12 +80,6 @@ class PlaceToPayRepository extends BaseRepository
         }
     }
 
-    /**
-     * function to check the details of the payment made.
-     *
-     * @param int $reference
-     * @return object
-     */
     public function consultPay(int $reference): object
     {
         $pay = Pay::all()->where('reference', $reference)->last();
@@ -131,12 +119,6 @@ class PlaceToPayRepository extends BaseRepository
         }
     }
 
-    /**
-     * function to check the details of the payment made after job.
-     *
-     * @param int $reference
-     * @return object
-     */
     public function consultPayJob(int $reference): object
     {
         $pay = Pay::where('reference', $reference)->pending()->first();

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserUpdateRequest;
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use App\Repositories\User\UserRepository;
 use Illuminate\Http\RedirectResponse;
@@ -20,6 +20,8 @@ class UserController extends Controller
 
     public function index(): View
     {
+        $this->authorize('user.index');
+
         $users = $this->usersRepo->getAllUsers();
 
         return view('user.index', compact('users'));
@@ -27,6 +29,8 @@ class UserController extends Controller
 
     public function show(User $user): View
     {
+        $this->authorize('user.show');
+
         $roles = $this->usersRepo->roleToUser();
 
         return view('user.view', compact('roles', 'user'));
@@ -34,13 +38,17 @@ class UserController extends Controller
 
     public function edit(User $user): View
     {
+        $this->authorize('user.update');
+
         $roles = $this->usersRepo->roleToUser();
 
         return view('user.edit', compact('roles', 'user'));
     }
 
-    public function update(UserUpdateRequest $request, User $user): RedirectResponse
+    public function update(UserRequest $request, User $user): RedirectResponse
     {
+        $this->authorize('user.update');
+
         $this->usersRepo->updateUser($request, $user);
 
         return redirect()->route('user.index')
@@ -49,6 +57,8 @@ class UserController extends Controller
 
     public function destroy(User $user): RedirectResponse
     {
+        $this->authorize('user.disable');
+
         $this->usersRepo->delete($user);
 
         return redirect()->route('user.index')
@@ -57,6 +67,8 @@ class UserController extends Controller
 
     public function restore(Request $request): RedirectResponse
     {
+        $this->authorize('user.disable');
+
         $this->usersRepo->restore($request);
 
         return redirect()->route('user.index')
