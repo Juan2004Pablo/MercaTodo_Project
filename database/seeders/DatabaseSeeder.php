@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\seeders;
+
 use App\Models\Category;
 use App\Models\Role;
 use App\Models\User;
@@ -10,6 +12,11 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+        $this->call(RoleSeeder::class);
+        $this->call(CreatUsersSeeder::class);
+        $this->call(PermissionSeeder::class);
+        $this->call(RoleHasPermissionSeeder::class);
+        /*
         $useradmin = User::create([
 
             'name' => 'admin',
@@ -41,7 +48,7 @@ class DatabaseSeeder extends Seeder
         $roluser = Role::create([
             'name' => 'User',
             'description' => 'User client',
-        ]);
+        ]);*/
 
         $c = Category::create([
             'name' => 'Tecno',
@@ -53,8 +60,9 @@ class DatabaseSeeder extends Seeder
             'description' => 'Soy la categoria de deporte',
         ]);
 
+        /*
         $useradmin->roles()->sync([$roladmin->id]);
 
-        $userclient->roles()->sync([$roluser->id]);
+        $userclient->roles()->sync([$roluser->id]);*/
     }
 }
