@@ -22,7 +22,6 @@ class ProductRepository extends BaseRepository
 
     public function getAllProductAdmin(Request $request): LengthAwarePaginator
     {
-        //dd($request->all());
         if (empty($request->all())) {
             return $this->getModel()->withTrashed('images', 'category')
                 ->orderBy('name')->paginate(env('PAGINATE'));
@@ -53,7 +52,6 @@ class ProductRepository extends BaseRepository
             }
         }
 
-        //$prod = $this->getModel();
         $prod = new Product();
 
         $prod->name = $data->name;

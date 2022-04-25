@@ -32,7 +32,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         parent::boot();
     }
-                
+
     public function map(): void
     {
         $this->mapApiRoutes();
@@ -70,7 +70,7 @@ class RouteServiceProvider extends ServiceProvider
 
     protected function mapCartRoutes(): void
     {
-        Route::prefix('cart')  
+        Route::prefix('cart')
             ->middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/cart.php'));
@@ -78,7 +78,7 @@ class RouteServiceProvider extends ServiceProvider
 
     protected function mapPayRoutes(): void
     {
-        Route::prefix('pay')  
+        Route::prefix('pay')
             ->middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/pay.php'));

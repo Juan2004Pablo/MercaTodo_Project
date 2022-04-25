@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 trait UserTrait
 {
-    public function roles(): BelongsToMany
-    {
-        return $this->belongsToMany(Role::class)->withTimesTamps();
-    }
+    //public function roles(): BelongsToMany
+    //{
+      //  return $this->belongsToMany(Role::class)->withTimesTamps();
+    //}
 }

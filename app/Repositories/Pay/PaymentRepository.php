@@ -15,19 +15,11 @@ use Illuminate\Support\Facades\Log;
 
 class PaymentRepository extends BaseRepository
 {
-    /**
-     * @return Pay
-     */
     public function getModel(): Pay
     {
         return new Pay();
     }
 
-    /**
-     * function to redirect to the payment gateway.
-     *
-     * @return string
-     */
     public function redirect(): string
     {
         $pay = Pay::inProcess()->first();
@@ -36,11 +28,6 @@ class PaymentRepository extends BaseRepository
         return $url;
     }
 
-    /**
-     * function to save payment details.
-     *
-     * @param object $data
-     */
     public function ordersData(object $data): void
     {
         $order = Order::open()->rejected()->first();
@@ -60,11 +47,6 @@ class PaymentRepository extends BaseRepository
         $paymen->save();
     }
 
-    /**
-     * function to update payment details.
-     *
-     * @param object $dato
-     */
     public function updatePay(object $dato): void
     {
         $paymen = Pay::where('requestId', $dato->requestId)->first();
@@ -91,12 +73,6 @@ class PaymentRepository extends BaseRepository
             'With identification' . ' ' . $paymen->document);
     }
 
-    /**
-     * function to update the payment details after executing the job.
-     *
-     * @param object $dato
-     * @return void
-     */
     public function updateDatesJob(object $dato): void
     {
         $paymen = Pay::where('requestId', $dato->requestId)->pending()->first();
@@ -126,21 +102,11 @@ class PaymentRepository extends BaseRepository
             'With identification' . ' ' . $paymen->document);
     }
 
-    /**
-     * function to view payment details.
-     *
-     * @return Model
-     */
     public function seePay(): Model
     {
         return $this->getModel()->all()->where('user_id', Auth::user()->id)->last();
     }
 
-    /**
-     * function to update payment status.
-     *
-     * @return string
-     */
     public function updateStatusOfOrder(): string
     {
         $order = Order::open()->rejected()->Orwhere('status', '=', 'PENDING')->first();
@@ -161,11 +127,6 @@ class PaymentRepository extends BaseRepository
         return $order;
     }
 
-    /**
-     * function to see payments for all orders.
-     *
-     * @return Collection
-     */
     public function seeAllOrders(): Collection
     {
         $c = 0;
@@ -180,12 +141,6 @@ class PaymentRepository extends BaseRepository
         return $pays;
     }
 
-    /**
-     * function for count the payments of an user.
-     *
-     * @param $reference
-     * @return int
-     */
     public function countPays(int $reference): int
     {
         $payments = $this->getModel()->all()->where('status', 'APPROVED')

@@ -54,14 +54,6 @@
             <!-- Messages Dropdown Menu -->
             <!-- Notifications Dropdown Menu -->
             <li class="nav-item dropdown">
-                <a class="nav-link" data-toggle="dropdown" href="#">
-                    <i class="fas fa-bell"></i>
-                    <span class="badge badge-warning navbar-badge">
-                        @if(count(auth()->user()->unreadNotifications))
-                            <span class="badge badge-warning">{{ count(auth()->user()->unreadNotifications)}}</span>
-                        @endif
-                    </span>
-                </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 @foreach(auth()->user()->unreadNotifications as $notification)
                         <a href="#" class="dropdown-item">
