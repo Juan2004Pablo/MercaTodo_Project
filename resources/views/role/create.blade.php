@@ -28,13 +28,7 @@
 
             </div>
 
-            <div class="form-group">
-                                        <textarea class="form-control" placeholder="Decription" name="decription"
-                                                  id="decription"
-                                                  rows="3">
-                                            {{ old('description') }}
-                                        </textarea>
-            </div>
+            
 
             <hr>
             <input class="btn btn-primary" type="submit" value="Save">
