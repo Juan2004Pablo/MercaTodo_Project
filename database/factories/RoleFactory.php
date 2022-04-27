@@ -2,8 +2,8 @@
 
 namespace database\factories;
 
-use App\Models\Role;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Spatie\Permission\Models\Role;
 
 class RoleFactory extends Factory
 {
@@ -13,7 +13,6 @@ class RoleFactory extends Factory
     {
         return [
             'name' => $this->faker->unique()->text(8),
-            'description' => $this->faker->text(200),
         ];
     }
 }

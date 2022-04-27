@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreRoleRequest;
 use App\Http\Requests\UpdateRoleRequest;
-use App\Models\Role;
 use App\Repositories\Role\RoleRepository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
@@ -33,7 +34,7 @@ class RoleController extends Controller
         return view('role.create');
     }
 
-    public function store(RoleStoreRequest $request): RedirectResponse
+    public function store(StoreRoleRequest $request): RedirectResponse
     {
         $this->authorize('role.create');
 

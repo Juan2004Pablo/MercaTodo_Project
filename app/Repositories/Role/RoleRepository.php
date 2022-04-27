@@ -2,10 +2,10 @@
 
 namespace App\Repositories\Role;
 
-use App\Models\Role;
 use App\Repositories\BaseRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class RoleRepository extends BaseRepository
 {

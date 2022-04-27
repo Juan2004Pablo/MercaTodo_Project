@@ -30,7 +30,6 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Name</th>
-                                <th scope="col">Description</th>
                                 <th colspan="3"></th>
                             </tr>
                             </thead>
@@ -40,7 +39,6 @@
                                 <tr>
                                     <th scope="row">{{ $role->id }}</th>
                                     <td>{{ $role->name }}</td>
-                                    <td>{{ $role->description }}</td>
 
                                     <td>
                                         <a class="btn btn-info" href="{{ route('role.show',$role->id) }}">Show</a>

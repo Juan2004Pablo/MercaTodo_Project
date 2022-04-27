@@ -30,11 +30,7 @@
 
                                 </div>
 
-                                <div class="form-group">
-                                    <textarea readonly class="form-control" placeholder="Description" name="description"
-                                              id="description"
-                                              rows="3">{{old('description', $role->description)}}</textarea>
-                                </div>
+            
 
                                 <hr>
 
