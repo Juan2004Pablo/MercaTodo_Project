@@ -27,12 +27,6 @@
 
             </div>
 
-            <div class="form-group">
-              <textarea class="form-control" placeholder="Description" name="description"
-              id="description"
-              rows="3">{{old('description', $role->description)}}</textarea>
-            </div>
-
             <hr>
             <input class="btn btn-primary" type="submit" value="Save">
 

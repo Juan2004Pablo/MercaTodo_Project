@@ -16,9 +16,9 @@ class UserRequest extends FormRequest
         return [
             'name' => ['required', 'alpha_num', 'max:100'],
             'surname' => ['required', 'alpha_num', 'max:100'],
-            'identification' => ['required', 'numeric', 'min:8', 'max:10', 'unique:users,identification,'],
+            'identification' => ['required', 'numeric'],
             'address' => ['required', 'max:50,'],
-            'phone' => ['required', 'numeric', 'min:10', 'max:10,'],
+            'phone' => ['required', 'numeric'],
             'email' => ['required', 'email:rfc,dns', 'max:250'],
         ];
     }
