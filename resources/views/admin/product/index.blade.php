@@ -18,6 +18,10 @@
                 <div class="card-header">
                     <h3 class="card-title">Section of products</h3>
 
+                    <a class="btn btn-Dark" href="{{ route('products.export') }}"> Export </a>
+
+                    <a class="btn btn-Secondary" href=""> Import </a>
+
                     @include('custom.modal_search-product-admin')
 
                 </div>
