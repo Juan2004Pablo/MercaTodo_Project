@@ -16,33 +16,43 @@
 
         <div class="container">
 
-            <h3>Required data</h3>
+            <h3>Name</h3>
 
             <div class="form-group">
-                <input type="text" class="form-control"
-                       id="name"
-                       placeholder="Name"
-                       name="name"
-                       value="{{ old('name') }}"
-                >
+
+                <input type="text" class="form-control" id="name" placeholder="Name" name="name" value="{{ old('name') }}">
 
             </div>
 
-            
+            <h3>Permission List</h3>
+
+            @foreach($permissions as $permission)
+
+                <div class="custom-control custom-checkbox">
+
+                    <input type="checkbox" class="custom-control-input" id="permission_{{ $permission->id }}" value="{{ $permission->id }}" name="permission[]"
+
+                        @if(is_array(old('permission')) && in_array("$permission->id", old("permission")))
+                           
+                            checked
+
+                        @endif
+                    >
+
+                    <label class="custom-control-label" for="permission_{{ $permission->id }}"> {{ $permission->id }} - {{ $permission->name }} </label>
+
+                </div>
+
+            @endforeach
 
             <hr>
+
             <input class="btn btn-primary" type="submit" value="Save">
 
+            <a class="btn btn-danger" href="{{route('role.index')}}">Back</a>
 
         </div>
 
-
     </form>
 
-
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
 @endsection
