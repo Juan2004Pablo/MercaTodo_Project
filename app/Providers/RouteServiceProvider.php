@@ -44,6 +44,8 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapCartRoutes();
 
         $this->mapPayRoutes();
+
+        $this->mapExportRoutes();
     }
 
     protected function mapApiRoutes()
@@ -82,5 +84,13 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/pay.php'));
+    }
+
+    protected function mapExportRoutes(): void
+    {
+        Route::prefix('export')
+            ->middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/export.php'));
     }
 }
