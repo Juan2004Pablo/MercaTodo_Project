@@ -10,6 +10,5 @@ class ExportProductController extends Controller
     public function export()
     {
         return new ProductsExport();
-        //return Excel::download(new ProductsExport, 'products.xlsx');
     }
 }
