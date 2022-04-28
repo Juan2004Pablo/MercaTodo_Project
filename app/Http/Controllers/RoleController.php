@@ -31,7 +31,9 @@ class RoleController extends Controller
     {
         $this->authorize('role.create');
 
-        return view('role.create');
+        $permissions = $this->rolesRepo->permissionCreate();
+
+        return view('role.create', compact('permissions'));
     }
 
     public function store(StoreRoleRequest $request): RedirectResponse
@@ -41,21 +43,29 @@ class RoleController extends Controller
         $this->rolesRepo->storeRole($request);
 
         return redirect()->route('role.index')
-            ->with('status_success', 'Role Saved successfully');
+            ->with('status_success', 'Role Created successfully');
     }
 
     public function show(Role $role): View
     {
         $this->authorize('role.show');
 
-        return view('role.view', compact('role'));
+        $roleHasPermissions = $this->rolesRepo->rolePermissions($role);
+
+        $permissions = $this->rolesRepo->permissionCreate();
+
+        return view('role.view', compact('role', 'permissions', 'roleHasPermissions'));
     }
 
     public function edit(Role $role): View
     {
         $this->authorize('role.update');
 
-        return view('role.edit', compact('role'));
+        $roleHasPermissions = $this->rolesRepo->rolePermissions($role);
+
+        $permissions = $this->rolesRepo->permissionCreate();
+
+        return view('role.edit', compact('role', 'permissions', 'roleHasPermissions'));
     }
 
     public function update(UpdateRoleRequest $request, Role $role): RedirectResponse

@@ -7,44 +7,54 @@
     <li class="breadcrumb-item active">@yield('title')</li>
 @endsection
 
-
 @section('content')
 
-            @include('custom.message')
+    @include('custom.message')
 
+    <form action="{{ route('role.update', $role->id) }}" method="POST">
 
-                        <form action="{{ route('role.update', $role->id) }}" method="POST">
-                            @csrf
-                            @method('PUT')
+        @csrf
+        @method('PUT')
 
-                            <div class="container">
+        <div class="container">
 
-                                <div class="form-group">
-                                    <input type="text" class="form-control"
-                                           id="name"
-                                           placeholder="Name"
-                                           name="name"
-                                           value="{{ old('name',$role->name) }}"
-                                           readonly
-                                    >
+            <div class="form-group">
 
-                                </div>
+                <input type="text" class="form-control" id="name" placeholder="Name" name="name" value="{{ $role->name }}" readonly>
 
-            
+            </div>
 
-                                <hr>
+            <h3>Permission List</h3>
 
-                                <a class="btn btn-success" href="{{route('role.edit',$role->id)}}">Edit</a>
-                                <a class="btn btn-danger" href="{{route('role.index')}}">Back</a>
+            @foreach($permissions as $permission)
 
+                <div class="custom-control custom-checkbox">
 
-                            </div>
+                    <input type="checkbox" disabled class="custom-control-input" id="permission_{{ $permission->id }}" value="{{ $permission->id }}" name="permission[]"
 
+                        @if(is_array(old('permission')) && in_array("$permission->id", old("permission")))
 
-                        </form>
+                            checked
 
+                        @elseif(is_array($roleHasPermissions) && in_array("$permission->id", $roleHasPermissions))
 
-                    </div>
+                            checked
+
+                        @endif
+                    >
+
+                    <label class="custom-control-label" for="permission_{{ $permission->id }}"> {{ $permission->id }} - {{ $permission->name }} </label>
+                    
                 </div>
 
+            @endforeach
+
+            <hr>
+
+            <a class="btn btn-success" href="{{route('role.edit',$role->id)}}">Edit</a>
+            <a class="btn btn-danger" href="{{route('role.index')}}">Back</a>
+
+        </div>
+
+    </form>
 @endsection
