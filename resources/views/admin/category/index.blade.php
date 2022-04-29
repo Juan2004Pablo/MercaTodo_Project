@@ -43,7 +43,9 @@
 
                 <div class="card-body table-responsive p-0" style="height: 300px;">
                     
-                    <td><a class=" m-2 float-right btn btn-primary" href="{{ route('admin.category.create') }}">{{ trans('admin.categories.titles.create') }}</a></td>
+                    <a class="m-2 float-left btn btn-Dark" href="{{ route('categories.export') }}"> Export </a>
+
+                    <a class="m-2 float-right btn btn-primary" href="{{ route('admin.category.create') }}">{{ trans('admin.categories.titles.create') }}</a>
                     
                     <table class="table table-head-fixed text-nowrap">
 
