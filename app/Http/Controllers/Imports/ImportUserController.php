@@ -10,6 +10,8 @@ class ImportUserController extends Controller
 {
     public function import(Request $request)
     {
+        $this->authorize('users.import');
+
         $file = $request->file('file');
         $import = new UsersImport();
 
