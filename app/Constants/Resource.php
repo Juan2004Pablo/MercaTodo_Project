@@ -61,6 +61,9 @@ class Resource extends Enum
     public const PAY_SHOWALL = 'pay.showAll';
     public const PAY_RETRY = 'pay.retry';
 
+    //Export roles
+    public const ROLES_EXPORT = 'roles.export';
+
     //Export products
     public const PRODUCTS_EXPORT = 'products.export';
 
