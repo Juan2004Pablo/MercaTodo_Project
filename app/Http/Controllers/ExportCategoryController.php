@@ -8,6 +8,7 @@ class ExportCategoryController extends Controller
 {
     public function export()
     {
+        $this->authorize('categories.export');
         return new CategoriesExport();
     }
 }

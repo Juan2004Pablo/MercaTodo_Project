@@ -64,6 +64,18 @@ class Resource extends Enum
     //Import categories
     public const CATEGORIES_IMPORT = 'categories.import';
 
+    //Export roles
+    public const ROLES_EXPORT = 'roles.export';
+
+    //Export products
+    public const PRODUCTS_EXPORT = 'products.export';
+
+    //Export categories
+    public const CATEGORIES_EXPORT = 'categories.export';
+  
+    //Export users
+    public const USERS_EXPORT = 'users.export';
+  
     //Home
     public const HOME_INDEX = 'home.index';
 
