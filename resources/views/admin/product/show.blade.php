@@ -30,14 +30,18 @@
                             <div class="row">
 
                                 <div class="col-md-6">
-    
-                                    <label>{{ trans('admin.products.fields.name') }}</label>
-                                        
-                                    <div class="input-prepend">
-                                        <span class="input-group-text">{{ $product->name }}</span>
-                                    </div>
 
-                                    <br v-if="div_appear">
+                                    <div class="form-group">
+
+                                        <label>{{ trans('admin.products.fields.name') }}</label>
+
+                                        <div class="input-group-text">{{ $product->name }}</div>
+
+                                        <label>{{ trans('admin.products.fields.quantity') }}</label>
+                                        
+                                        <div class="input-group-text" type="number">{{ $product->quantity }}</div>
+
+                                    </div>
 
                                 </div>
 
@@ -47,14 +51,11 @@
 
                                         <label>{{ trans('admin.products.fields.category') }}</label>
 
-                                        <select disabled name="category_id" class="form-control select2" style="width: 100%;">
+                                        <div class="input-group-text">{{ $product->category->name }}</div>
 
-                                            <option selected="selected">{{ $product->category->name }}</option>
+                                        <label>{{ trans('admin.products.fields.created_at') }}</label>
 
-                                        </select>
-
-                                        <label>{{ trans('admin.products.fields.quantity') }}</label>
-                                        <input readonly class="form-control" type="number" id="quantity" name="quantity" value="{{ $product->quantity }}">
+                                        <div class="input-group-text" type="number">{{ $product->created_at }}</div>
                                     
                                     </div>
 
@@ -84,11 +85,9 @@
 
                                         <div class="input-group">
 
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">{{ trans('admin.products.titles.cop') }}</span>
-                                            </div>
+                                            <div class="input-group-text">{{ trans('admin.products.titles.cop') }}</div>
 
-                                            <input readonly class="form-control" type="number" id="price" name="price" min="0" step=".01" value="{{ $product->price }}">
+                                            <div class="input-group-text" id="price" name="price" min="1" type="number">{{ number_format($product->price, 0) }}</div>
                                         
                                         </div>
 
@@ -184,23 +183,7 @@
 
                                         <label>{{ trans('admin.products.fields.status') }}</label>
 
-                                        <select disabled name="status" class="form-control select2" style="width: 100%;">
-                                            
-                                            @foreach($statusProducts as $status )
-
-                                                @if ($status == $product->status)
-
-                                                    <option value="{{ $status }}" selected="selected">{{ $status }}</option>
-                                                
-                                                @else
-
-                                                    <option value="{{ $status }}">{{ $status }}</option>
-
-                                                @endif
-
-                                            @endforeach
-
-                                        </select>
+                                        <div class="input-group-text">{{ $product->status }}</div>
 
                                     </div>
 
