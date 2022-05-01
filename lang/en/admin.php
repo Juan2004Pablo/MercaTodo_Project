@@ -12,6 +12,7 @@ return [
             'image' => 'Image',
             'description' => 'Description',
             'disable' => 'Disable',
+            'created_at' => 'Created At',
         ],
         'titles' => [
             'title' => 'Products',
@@ -46,6 +47,8 @@ return [
             'cancel' => 'Cancel',
             'show' => 'Show',
             'update' => 'Update',
+            'import' => 'Import',
+            'export' => 'Export',
             'activate' => 'Activate',
             'inactive' => 'Inactive',
         ],

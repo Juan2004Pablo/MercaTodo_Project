@@ -23,8 +23,7 @@ class Category extends Model
     public static function cachedCategories()
     {
         return Cache::rememberForever('categories', function () {
-            return self::withTrashed('category')->select('id', 'name', 'description')
-                ->orderBy('name')->get();
+            return self::withTrashed('category')->select('id', 'name', 'description')->orderBy('id', 'Asc')->get();
         });
     }
 
@@ -32,13 +31,4 @@ class Category extends Model
     {
         Cache::forget('categories');
     }
-
-    /*
-    /**
-     * Softdelete category.
-     *
-     * @var string[]
-     *
-    protected $dates = ['deleted_at'];
-    */
 }
