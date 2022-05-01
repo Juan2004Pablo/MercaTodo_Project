@@ -26,6 +26,22 @@
 
                     <div class="card-body">
 
+                        <form action="{{ route('roles.import') }}" method="post" enctype="multipart/form-data">
+
+                            @csrf
+                            
+                            @if(Session::has('message'))
+
+                                <p>{{ Session::get('message') }} </p>
+
+                            @endif
+
+                            <input type="file" name="file">
+
+                            <button class="btn btn-secondary"> Import </button>
+
+                        </form>
+
                         <a class="float-left btn btn-Dark" href="{{ route('roles.export') }}"> Export </a>
 
                         <a href="{{route('role.create')}}" class="btn btn-primary float-right"> Create </a>
