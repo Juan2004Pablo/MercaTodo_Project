@@ -64,6 +64,9 @@ class Resource extends Enum
     //Home
     public const HOME_INDEX = 'home.index';
 
+    //Export categories
+    public const CATEGORIES_EXPORT = 'categories.export';
+
     public static function supported(): array
     {
         return collect(static::toArray())->values()->toArray();
