@@ -30,18 +30,14 @@
                             <div class="row">
 
                                 <div class="col-md-6">
-
-                                    <div class="form-group">
-
-                                        <label>{{ trans('admin.products.fields.name') }}</label>
-
-                                        <div class="input-group-text">{{ $product->name }}</div>
-
-                                        <label>{{ trans('admin.products.fields.quantity') }}</label>
+    
+                                    <label>{{ trans('admin.products.fields.name') }}</label>
                                         
-                                        <div class="input-group-text" type="number">{{ $product->quantity }}</div>
-
+                                    <div class="input-prepend">
+                                        <span class="input-group-text">{{ $product->name }}</span>
                                     </div>
+
+                                    <br v-if="div_appear">
 
                                 </div>
 
@@ -51,11 +47,14 @@
 
                                         <label>{{ trans('admin.products.fields.category') }}</label>
 
-                                        <div class="input-group-text">{{ $product->category->name }}</div>
+                                        <select disabled name="category_id" class="form-control select2" style="width: 100%;">
 
-                                        <label>{{ trans('admin.products.fields.created_at') }}</label>
+                                            <option selected="selected">{{ $product->category->name }}</option>
 
-                                        <div class="input-group-text" type="number">{{ $product->created_at }}</div>
+                                        </select>
+
+                                        <label>{{ trans('admin.products.fields.quantity') }}</label>
+                                        <input readonly class="form-control" type="number" id="quantity" name="quantity" value="{{ $product->quantity }}">
                                     
                                     </div>
 
@@ -85,9 +84,11 @@
 
                                         <div class="input-group">
 
-                                            <div class="input-group-text">{{ trans('admin.products.titles.cop') }}</div>
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">{{ trans('admin.products.titles.cop') }}</span>
+                                            </div>
 
-                                            <div class="input-group-text" id="price" name="price" min="1" type="number">{{ number_format($product->price, 0) }}</div>
+                                            <input readonly class="form-control" type="number" id="price" name="price" min="0" step=".01" value="{{ $product->price }}">
                                         
                                         </div>
 
@@ -183,7 +184,23 @@
 
                                         <label>{{ trans('admin.products.fields.status') }}</label>
 
-                                        <div class="input-group-text">{{ $product->status }}</div>
+                                        <select disabled name="status" class="form-control select2" style="width: 100%;">
+                                            
+                                            @foreach($statusProducts as $status )
+
+                                                @if ($status == $product->status)
+
+                                                    <option value="{{ $status }}" selected="selected">{{ $status }}</option>
+                                                
+                                                @else
+
+                                                    <option value="{{ $status }}">{{ $status }}</option>
+
+                                                @endif
+
+                                            @endforeach
+
+                                        </select>
 
                                     </div>
 
