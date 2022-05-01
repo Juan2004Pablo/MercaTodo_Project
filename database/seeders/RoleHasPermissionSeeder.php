@@ -12,7 +12,7 @@ class RoleHasPermissionSeeder extends Seeder
     public const ADMINPERMISSIONS = [Resource::USER_INDEX, Resource::USER_UPDATE, Resource::USER_SHOW, Resource::USER_DISABLE, Resource::ROLE_INDEX,
         Resource::ROLE_CREATE, Resource::ROLE_UPDATE, Resource::ROLE_SHOW, Resource::ROLE_DISABLE, Resource::CATEGORY_INDEX, Resource::CATEGORY_CREATE,
         Resource::CATEGORY_SHOW, Resource::CATEGORY_UPDATE, Resource::CATEGORY_DISABLE, Resource::PRODUCT_INDEX, Resource::PRODUCT_CREATE, Resource::PRODUCT_SHOW,
-        Resource::PRODUCT_UPDATE, Resource::PRODUCT_DISABLE, Resource::HOME_INDEX, ];
+        Resource::PRODUCT_UPDATE, Resource::PRODUCT_DISABLE, Resource::ROLES_EXPORT, Resource::HOME_INDEX, ];
 
     public const SELLERPERMISSIONS = [Resource::CATEGORY_INDEX, Resource::CATEGORY_CREATE, Resource::CATEGORY_SHOW, Resource::CATEGORY_UPDATE, Resource::CATEGORY_DISABLE,
         Resource::PRODUCT_INDEX, Resource::PRODUCT_CREATE, Resource::PRODUCT_SHOW, Resource::PRODUCT_UPDATE, Resource::PRODUCT_DISABLE, Resource::SHOW_PRODUCT, Resource::CART_SHOW,
