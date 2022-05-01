@@ -10,6 +10,8 @@ class ImportRoleController extends Controller
 {
     public function import(Request $request)
     {
+        $this->authorize('roles.import');
+
         $file = $request->file('file');
         $import = new RolesImport();
 
