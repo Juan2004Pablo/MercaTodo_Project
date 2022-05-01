@@ -11,6 +11,7 @@ class ImportCategoryController extends Controller
 {
     public function import(Request $request)
     {
+        $this->authorize('categories.import');
         Category::flushCache();
         $file = $request->file('file');
         $import = new CategoriesImport();
