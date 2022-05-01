@@ -23,6 +23,22 @@
 
                     <div class="card-body">
 
+                        <form action="{{ route('users.import') }}" method="post" enctype="multipart/form-data">
+
+                            @csrf
+                            
+                            @if(Session::has('message'))
+
+                                <p>{{ Session::get('message') }} </p>
+
+                            @endif
+
+                            <input type="file" name="file">
+
+                            <button class="btn btn-secondary"> Import </button>
+
+                        </form>
+
                         <a class="btn btn-Dark" href="{{ route('users.export') }}"> Export </a>
 
                         <br><br>
@@ -35,11 +51,12 @@
 
                                 <tr>
 
-                                    <th scope="col">#</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Role</th>
-                                    <th colspan="3"></th>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Identification</th>
+                                    <th>Role</th>
+                                    <th>Disable At</th>
 
                                 </tr>
 
@@ -51,16 +68,12 @@
 
                                     <tr>
 
-                                        <th scope="row">{{ $user->id }}</th>
+                                        <td>{{ $user->id }}</td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
-                                        <td>
-                                            
-                                            @isset($user->roles[0]->name)
-                                                {{ $user->roles[0]->name }}
-                                            @endisset
-
-                                        </td>
+                                        <td>{{ $user->identification }}</td>
+                                        <td>{{ $user->roles[0]->name}}</td>
+                                        <td>{{ $user->disable_at }}</td>
 
                                         <td>
                                             <a class="btn btn-info" href="{{ route('user.show',$user->id) }}">Show</a>
