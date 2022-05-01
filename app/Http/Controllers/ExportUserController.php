@@ -8,6 +8,7 @@ class ExportUserController extends Controller
 {
     public function export()
     {
+        $this->authorize('users.export');
         return new UsersExport();
     }
 }
