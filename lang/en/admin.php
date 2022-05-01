@@ -12,6 +12,7 @@ return [
             'image' => 'Image',
             'description' => 'Description',
             'disable' => 'Disable',
+            'created_at' => 'Created At',
         ],
         'titles' => [
             'title' => 'Products',
