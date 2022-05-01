@@ -14,3 +14,8 @@ Route::post('roles/import/', [
     'as' => 'roles.import',
     'uses' => 'Imports\ImportRoleController@import',
 ]);
+
+Route::post('users/import/', [
+    'as' => 'users.import',
+    'uses' => 'Imports\ImportUserController@import',
+]);

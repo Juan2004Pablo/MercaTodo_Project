@@ -3,18 +3,15 @@
 namespace App\Http\Controllers\Imports;
 
 use App\Http\Controllers\Controller;
-use App\Imports\CategoriesImport;
-use App\Models\Category;
+use App\Imports\UsersImport;
 use Illuminate\Http\Request;
 
-class ImportCategoryController extends Controller
+class ImportUserController extends Controller
 {
     public function import(Request $request)
     {
-        $this->authorize('categories.import');
-        Category::flushCache();
         $file = $request->file('file');
-        $import = new CategoriesImport();
+        $import = new UsersImport();
 
         try {
             $import->import($file);
@@ -30,5 +27,12 @@ class ImportCategoryController extends Controller
         }
 
         return back()->with('success', 'All good!');
+    }
+
+    public function RoleAssigment(array $name, array $roleId)
+    {
+        $user = DB::table('users')->where('name', $name)->first();
+
+        $user->roles()->sync($roleId);
     }
 }
