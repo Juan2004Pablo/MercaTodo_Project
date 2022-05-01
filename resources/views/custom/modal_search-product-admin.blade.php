@@ -9,6 +9,11 @@
             </div>
             <div class="modal-body">
                 <form class="form-inline">
+                    <select name="searchbyisInactive" class="form-control select2" style="width: 50%;">
+                        <option value="inactive">Inactive</option>
+                        <option value="active">Active</option>
+                        <option selected></option>
+                    </select>
 
                     <select name="searchbycategory" class="form-control select2" style="width: 50%;">
                         @foreach($category as $c)

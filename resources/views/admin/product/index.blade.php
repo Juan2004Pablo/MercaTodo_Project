@@ -20,25 +20,9 @@
 
                     <a class="btn btn-Dark" href="{{ route('products.export') }}"> Export </a>
 
-                    <br><br>
+                    <a class="btn btn-Secondary" href=""> Import </a>
 
-                    <form action="{{ route('products.import') }}" method="post" enctype="multipart/form-data">
-
-                        @csrf
-                        
-                        @if(Session::has('message'))
-
-                            <p>{{ Session::get('message') }} </p>
-
-                        @endif
-
-                        <input type="file" name="file">
-
-                        <button class="btn btn-secondary"> Import </button>
-
-                        @include('custom.modal_search-product-admin')
-
-                    </form>
+                    @include('custom.modal_search-product-admin')
 
                 </div>
 
@@ -69,11 +53,10 @@
                     
                     <table class="table table-head-fixed text-nowrap">                        <thead>
                         <tr>
-                            <th>#</th>
                             <th>Name</th>
-                            <th>Category id</th>
+                            <th>Image</th>
                             <th>Price</th>
-                            <th>Quantity</th>
+                            <th>Description</th>
                             <th>Disable_at</th>
                             <th colspan="3"></th>
 
@@ -84,11 +67,14 @@
 
                         @foreach($products as $product)
                             <tr>
-                                <td>{{$product->id}}</td>
                                 <td>{{$product->name}}</td>
-                                <td>{{$product->category_id}}</td>
+                                <td>
+
+                                    <img style="height: 100px; width: 100px" src="{{ $product->images->random()->url }}"
+                                         class="rounded-circle">
+                                </td>
                                 <td>COP {{ number_format($product->price,0) }}</td>
-                                <td>{{$product->quantity}}</td>
+                                <td>{{$product->description}}</td>
                                 <th>{{$product->disable_at}}</th>
 
                                 
