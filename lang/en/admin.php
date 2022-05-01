@@ -47,6 +47,8 @@ return [
             'cancel' => 'Cancel',
             'show' => 'Show',
             'update' => 'Update',
+            'import' => 'Import',
+            'export' => 'Export',
             'activate' => 'Activate',
             'inactive' => 'Inactive',
         ],
