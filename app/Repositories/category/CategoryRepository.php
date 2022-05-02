@@ -2,6 +2,7 @@
 
 namespace App\Repositories\category;
 
+use App\Exports\CategoriesExport;
 use App\Helpers\Paginator;
 use App\Models\Category;
 use App\Repositories\BaseRepository;
@@ -9,8 +10,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-use App\Exports\CategoriesExport;
-use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class CategoryRepository extends BaseRepository
@@ -49,6 +48,6 @@ class CategoryRepository extends BaseRepository
 
     public function categoriesExport(): BinaryFileResponse
     {
-        return (new CategoriesExport)->download('categories.xlsx');
+        return (new CategoriesExport())->download('categories.xlsx');
     }
 }
