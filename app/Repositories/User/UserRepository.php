@@ -2,12 +2,14 @@
 
 namespace App\Repositories\User;
 
+use App\Exports\UsersExport;
 use App\Models\User;
 use App\Repositories\BaseRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class UserRepository extends BaseRepository
 {
@@ -35,5 +37,10 @@ class UserRepository extends BaseRepository
         $user->roles()->sync($data->get('roles'));
 
         return $user;
+    }
+
+    public function usersExport(): BinaryFileResponse
+    {
+        return (new UsersExport())->download('users.xlsx');
     }
 }
