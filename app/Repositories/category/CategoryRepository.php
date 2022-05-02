@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use App\Exports\CategoriesExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class CategoryRepository extends BaseRepository
 {
@@ -39,10 +42,13 @@ class CategoryRepository extends BaseRepository
         $object->fill($data);
         $object->save();
         Category::flushCache();
-        Log::channel('contlog')->info('La categoria: ' .
-            $object->name . ' ' . 'ha sido editada por: ' . ' ' .
-            Auth::user()->name . ' ' . Auth::user()->surname);
+        Log::channel('contlog')->info('The category: ' . $object->name . ' ' . 'has been updated by: ' . ' ' . Auth::user()->name . ' ' . Auth::user()->surname);
 
         return $object;
+    }
+
+    public function categoriesExport(): BinaryFileResponse
+    {
+        return (new CategoriesExport)->download('categories.xlsx');
     }
 }
