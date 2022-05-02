@@ -2,12 +2,14 @@
 
 namespace App\Repositories\Role;
 
+use App\Exports\RolesExport;
 use App\Repositories\BaseRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class RoleRepository extends BaseRepository
 {
@@ -52,5 +54,10 @@ class RoleRepository extends BaseRepository
         $role->save();
 
         return $role;
+    }
+
+    public function rolesExport(): BinaryFileResponse
+    {
+        return (new RolesExport())->download('roles.xlsx');
     }
 }
