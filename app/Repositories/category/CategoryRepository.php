@@ -53,7 +53,7 @@ class CategoryRepository extends BaseRepository
         return (new CategoriesExport())->download('categories.xlsx');
     }
 
-    public function categoriesImport(Request $request)
+    public function categoriesImport(Request $request): void
     {
         Category::flushCache();
         $file = $request->file('file');
