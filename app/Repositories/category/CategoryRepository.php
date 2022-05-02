@@ -2,15 +2,16 @@
 
 namespace App\Repositories\category;
 
+use App\Exports\CategoriesExport;
 use App\Helpers\Paginator;
+use App\Imports\CategoriesImport;
 use App\Models\Category;
 use App\Repositories\BaseRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-use App\Exports\CategoriesExport;
-use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class CategoryRepository extends BaseRepository
@@ -25,7 +26,7 @@ class CategoryRepository extends BaseRepository
         return $this->getModel()->where('id', $id)->firstOrFail();
     }
 
-    public function getAllCategories(Request $request)
+    public function getAllCategories(Request $request): LengthAwarePaginator
     {
         return Paginator::paginate($request, Category::cachedCategories());
     }
@@ -49,6 +50,26 @@ class CategoryRepository extends BaseRepository
 
     public function categoriesExport(): BinaryFileResponse
     {
-        return (new CategoriesExport)->download('categories.xlsx');
+        return (new CategoriesExport())->download('categories.xlsx');
+    }
+
+    public function categoriesImport(Request $request): void
+    {
+        Category::flushCache();
+        $file = $request->file('file');
+        $import = new CategoriesImport();
+
+        try {
+            $import->import($file);
+        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+            $failures = $e->failures();
+
+            foreach ($failures as $failure) {
+                $failure->row(); // row that went wrong
+                $failure->attribute(); // either heading key (if using heading row concern) or column index
+                $failure->errors(); // Actual error messages from Laravel validator
+                $failure->values(); // The values of the row that has failed.
+            }
+        }
     }
 }
