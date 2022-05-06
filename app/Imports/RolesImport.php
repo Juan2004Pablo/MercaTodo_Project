@@ -9,13 +9,12 @@ use Maatwebsite\Excel\Concerns\SkipsFailures;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithUpserts;
 use Maatwebsite\Excel\Concerns\WithValidation;
 use Spatie\Permission\Models\Role;
 
-//use Illuminate\Validation\Rule;
-
-class RolesImport implements ToModel, WithBatchInserts, WithUpserts, WithChunkReading, WithValidation, SkipsEmptyRows
+class RolesImport implements ToModel, WithBatchInserts, WithUpserts, WithChunkReading, WithValidation, SkipsEmptyRows, WithHeadingRow
 {
     use Importable;
     use RemembersChunkOffset;
@@ -26,8 +25,9 @@ class RolesImport implements ToModel, WithBatchInserts, WithUpserts, WithChunkRe
         $chunkOffset = $this->getChunkOffset();
 
         return new Role([
-            'name' => $row[0],
-            'guard_name' => $row[1],
+            'id' => $row['id'],
+            'name' => $row['name'],
+            'guard_name' => 'web',
         ]);
     }
 
@@ -38,7 +38,7 @@ class RolesImport implements ToModel, WithBatchInserts, WithUpserts, WithChunkRe
 
     public function uniqueBy(): string
     {
-        return 'name';
+        return 'id';
     }
 
     public function chunkSize(): int
@@ -49,14 +49,16 @@ class RolesImport implements ToModel, WithBatchInserts, WithUpserts, WithChunkRe
     public function rules(): array
     {
         return [
-        '0' => ['required', 'string', 'min:3', 'max:100'/*Rule::unique('roles')*/],
+            'id' => ['required', 'numeric'],
+            'name' => ['required', 'string', 'min:3', 'max:100'],
         ];
     }
 
     public function customValidationMessages(): array
     {
         return [
-            '0' => 'The name is required with a minimum of 3, a maximum of 100 characters and must be unique',
+            'id' => 'The id of the role is required',
+            'name' => 'The name is required with a minimum of 3, a maximum of 100 characters and must be unique',
         ];
     }
 }
