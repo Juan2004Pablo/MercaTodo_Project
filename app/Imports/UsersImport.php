@@ -12,12 +12,11 @@ use Maatwebsite\Excel\Concerns\SkipsFailures;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithUpserts;
 use Maatwebsite\Excel\Concerns\WithValidation;
 
-//use Illuminate\Validation\Rule;
-
-class UsersImport implements ToModel, WithBatchInserts, WithUpserts, WithChunkReading, WithValidation, SkipsEmptyRows
+class UsersImport implements ToModel, WithBatchInserts, WithUpserts, WithChunkReading, WithValidation, SkipsEmptyRows, WithHeadingRow
 {
     use Importable;
     use RemembersChunkOffset;
@@ -34,7 +33,7 @@ class UsersImport implements ToModel, WithBatchInserts, WithUpserts, WithChunkRe
     {
         $users = User::find($user->id);
 
-        $role = DB::table('roles')->where('name', $row[7])->first();
+        $role = DB::table('roles')->where('name', $row['role'])->first();
 
         $users->roles()->sync([$role->id]);
     }
@@ -44,14 +43,14 @@ class UsersImport implements ToModel, WithBatchInserts, WithUpserts, WithChunkRe
         $chunkOffset = $this->getChunkOffset();
 
         $user = new User([
-            'name' => $row[0],
-            'surname' => $row[1],
-            'identification' => $row[2],
-            'address' => $row[3],
-            'phone' => $row[4],
-            'email' => $row[5],
-            'password' => Hash::make($row[6]),
-            'role' => $row[7],
+            'name' => $row['name'],
+            'surname' => $row['surname'],
+            'identification' => $row['identification'],
+            'address' => $row['address'],
+            'phone' => $row['phone'],
+            'email' => $row['email'],
+            'password' => Hash::make($row['password']),
+            'role' => $row['role'],
         ]);
 
         $user->save();
@@ -66,7 +65,7 @@ class UsersImport implements ToModel, WithBatchInserts, WithUpserts, WithChunkRe
 
     public function uniqueBy(): string
     {
-        return 'identification';
+        return 'id';
     }
 
     public function chunkSize(): int
@@ -77,28 +76,28 @@ class UsersImport implements ToModel, WithBatchInserts, WithUpserts, WithChunkRe
     public function rules(): array
     {
         return [
-            '0' => ['required', 'string', 'max:100'],
-            '1' => ['required', 'string', 'max:100'],
-            '2' => ['required', 'numeric'/*, 'min:8', 'max:10'/*Rule::unique('users')*/],
-            '3' => ['required', 'string'/*, 'min:5', 'max:50,'*/],
-            '4' => ['required', 'numeric'/*, 'min:7', 'max:10'*/],
-            '5' => ['required', 'email:rfc,dns', 'max:250'/*Rule::unique('users')*/],
-            '6' => ['required', 'min:5', 'max:10'],
-            '7' => ['required'], //must exist in database
+            'name' => ['required', 'string', 'max:100'],
+            'surname' => ['required', 'string', 'max:100'],
+            'identification' => ['required', 'numeric', 'unique:users'],
+            'address' => ['required', 'string'],
+            'phone' => ['required', 'numeric'],
+            'email' => ['required', 'email:rfc,dns', 'max:250', 'unique:users'],
+            'role' => ['required', 'exists:roles,name'],
         ];
     }
 
     public function customValidationMessages(): array
     {
         return [
-            '0' => 'The name is required with a maximum of 100 characters',
-            '1' => 'The surname is required with a maximum of 100 characters',
-            '2' => 'The identification is required with a minimum of 8, a maximum of 10 characters and must be unique and numeric',
-            '3' => 'The address is required with a minimum of 5 and a maximum of 50 characters',
-            '4' => 'The phone is required with a minimum of 7 and a maximum of 10 characters',
-            '5' => 'The email is required with a maximum of 250 characters and must be unique',
-            '6' => 'The password is required with a minimum of 5 and a maximum of 10 characters',
-            '7' => 'The name role is required and must exist',
+            'id' => 'The id is required',
+            'name' => 'The name is required with a maximum of 100 characters',
+            'surname' => 'The surname is required with a maximum of 100 characters',
+            'identification' => 'The identification is required and must be unique and numeric',
+            'address' => 'The address is required with a minimum of 5 and a maximum of 50 characters',
+            'phone' => 'The phone is required with a minimum of 7 and a maximum of 10 characters',
+            'email' => 'The email is required with a maximum of 250 characters and must be unique',
+            'password' => 'The password is required with a minimum of 5 and a maximum of 10 characters',
+            'role' => 'The name role is required and must exist',
         ];
     }
 }
