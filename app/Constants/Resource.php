@@ -81,10 +81,10 @@ class Resource extends Enum
 
     //Export categories
     public const CATEGORIES_EXPORT = 'categories.export';
-  
+
     //Export users
     public const USERS_EXPORT = 'users.export';
-  
+
     //Home
     public const HOME_INDEX = 'home.index';
 

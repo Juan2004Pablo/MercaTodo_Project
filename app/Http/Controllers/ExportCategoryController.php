@@ -2,13 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\CategoriesExport;
+use App\Repositories\category\CategoryRepository;
 
 class ExportCategoryController extends Controller
 {
+    protected $categoryRepo;
+
+    public function __construct(CategoryRepository $categoryRepository)
+    {
+        $this->categoryRepo = $categoryRepository;
+    }
+
     public function export()
     {
         $this->authorize('categories.export');
-        return new CategoriesExport();
+
+        return $this->categoryRepo->categoriesExport();
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Repositories\product;
 
+use App\Exports\ProductsExport;
 use App\Models\Category;
 use App\Models\Product;
 use App\Repositories\BaseRepository;
@@ -12,6 +13,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ProductRepository extends BaseRepository
 {
@@ -103,13 +105,16 @@ class ProductRepository extends BaseRepository
 
         $prod->images()->createMany($urlimages);
 
-        Log::channel('contlog')->info('El producto: ' .
-            $prod->name . ' ' . 'ha sido editado por: ' . ' ' .
-            Auth::user()->name . ' ' . Auth::user()->surname);
+        Log::channel('contlog')->info('The product ' . $prod->name . ' ' . 'has been updated by: ' . ' ' . Auth::user()->name . ' ' . Auth::user()->surname);
     }
 
     public function categoryForProduct(): Collection
     {
         return Category::cachedCategories();
+    }
+
+    public function productsExport(): BinaryFileResponse
+    {
+        return (new ProductsExport())->download('products.xlsx');
     }
 }

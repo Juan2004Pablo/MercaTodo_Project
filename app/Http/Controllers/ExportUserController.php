@@ -2,13 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\UsersExport;
+use App\Repositories\User\UserRepository;
 
 class ExportUserController extends Controller
 {
+    protected $usersRepo;
+
+    public function __construct(UserRepository $usersRepository)
+    {
+        $this->usersRepo = $usersRepository;
+    }
+
     public function export()
     {
         $this->authorize('users.export');
-        return new UsersExport();
+
+        return $this->usersRepo->usersExport();
     }
 }

@@ -8,7 +8,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class Paginator
 {
-    public static function paginate(Request $request, Collection $collection, $perPage = 8): LengthAwarePaginator
+    public static function paginate(Request $request, Collection $collection, $perPage = 50): LengthAwarePaginator
     {
         $page = $request->input('page', 1);
 
