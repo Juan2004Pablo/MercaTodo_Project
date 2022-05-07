@@ -3,6 +3,7 @@
 namespace App\Repositories\product;
 
 use App\Exports\ProductsExport;
+use App\Imports\ProductsImport;
 use App\Models\Category;
 use App\Models\Product;
 use App\Repositories\BaseRepository;
@@ -116,5 +117,25 @@ class ProductRepository extends BaseRepository
     public function productsExport(): BinaryFileResponse
     {
         return (new ProductsExport())->download('products.xlsx');
+    }
+
+    public function productsImport(Request $request): void
+    {
+        $file = $request->file('file');
+        $import = new ProductsImport();
+
+        try {
+            $import->import($file);
+        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+            $failures = $e->failures();
+
+            foreach ($failures as $failure) {
+                $failure->row(); // row that went wrong
+                $failure->attribute(); // either heading key (if using heading row concern) or column index
+                $failure->errors(); // Actual error messages from Laravel validator
+                $failure->values(); // The values of the row that has failed.
+                dd($failure);
+            }
+        }
     }
 }
