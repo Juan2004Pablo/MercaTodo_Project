@@ -35,6 +35,8 @@ class CategoryRepository extends BaseRepository
     {
         Category::flushCache();
 
+        Log::channel('contlog')->info('The user ' . Auth::user()->name . ' ' . Auth::user()->surname . ' has created a category');
+
         return $this->getModel()->create($data);
     }
 
@@ -42,7 +44,9 @@ class CategoryRepository extends BaseRepository
     {
         $object->fill($data);
         $object->save();
+
         Category::flushCache();
+
         Log::channel('contlog')->info('The category: ' . $object->name . ' ' . 'has been updated by: ' . ' ' . Auth::user()->name . ' ' . Auth::user()->surname);
 
         return $object;
@@ -50,12 +54,15 @@ class CategoryRepository extends BaseRepository
 
     public function categoriesExport(): BinaryFileResponse
     {
+        Log::channel('contlog')->info('The user ' . Auth::user()->name . ' ' . Auth::user()->surname . ' has exported a list of categories for possible modification');
+
         return (new CategoriesExport())->download('categories.xlsx');
     }
 
     public function categoriesImport(Request $request): void
     {
         Category::flushCache();
+
         $file = $request->file('file');
         $import = new CategoriesImport();
 
@@ -69,6 +76,7 @@ class CategoryRepository extends BaseRepository
                 $failure->attribute(); // either heading key (if using heading row concern) or column index
                 $failure->errors(); // Actual error messages from Laravel validator
                 $failure->values(); // The values of the row that has failed.
+                dd($failure);
             }
         }
     }

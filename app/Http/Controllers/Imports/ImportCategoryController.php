@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Imports;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ImportFileRequest;
 use App\Repositories\category\CategoryRepository;
-use Illuminate\Http\Request;
 
 class ImportCategoryController extends Controller
 {
@@ -15,7 +15,7 @@ class ImportCategoryController extends Controller
         $this->categoryRepo = $categoryRepository;
     }
 
-    public function import(Request $request)
+    public function import(ImportFileRequest $request)
     {
         $this->authorize('categories.import');
 

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Imports;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ImportFileRequest;
 use App\Repositories\Role\RoleRepository;
-use Illuminate\Http\Request;
 
 class ImportRoleController extends Controller
 {
@@ -15,7 +15,7 @@ class ImportRoleController extends Controller
         $this->rolesRepo = $rolesRepository;
     }
 
-    public function import(Request $request)
+    public function import(ImportFileRequest $request)
     {
         $this->authorize('roles.import');
 

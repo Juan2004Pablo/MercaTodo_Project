@@ -10,10 +10,11 @@ use Maatwebsite\Excel\Concerns\SkipsFailures;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithUpserts;
 use Maatwebsite\Excel\Concerns\WithValidation;
 
-class CategoriesImport implements ToModel, WithBatchInserts, WithUpserts, WithChunkReading, WithValidation, SkipsEmptyRows
+class CategoriesImport implements ToModel, WithBatchInserts, WithUpserts, WithChunkReading, WithValidation, SkipsEmptyRows, WithHeadingRow
 {
     use Importable;
     use RemembersChunkOffset;
@@ -24,8 +25,8 @@ class CategoriesImport implements ToModel, WithBatchInserts, WithUpserts, WithCh
         $chunkOffset = $this->getChunkOffset();
 
         return new Category([
-            'name' => $row[0],
-            'description' => $row[1],
+            'name' => $row['name'],
+            'description' => $row['description'],
         ]);
     }
 
@@ -36,7 +37,7 @@ class CategoriesImport implements ToModel, WithBatchInserts, WithUpserts, WithCh
 
     public function uniqueBy(): string
     {
-        return 'name';
+        return 'id';
     }
 
     public function chunkSize(): int
@@ -47,16 +48,16 @@ class CategoriesImport implements ToModel, WithBatchInserts, WithUpserts, WithCh
     public function rules(): array
     {
         return [
-            '0' => ['required', 'string', 'min:3', 'max:100'],
-            '1' => ['required', 'string', 'min:10', 'max:250'],
+            'name' => ['required', 'string', 'min:3', 'max:100'],
+            'description' => ['required', 'string', 'min:10', 'max:250'],
         ];
     }
 
     public function customValidationMessages(): array
     {
         return [
-            '0' => 'The name is required with a minimum of 3 and a maximum of 100 characters',
-            '1' => 'The description is required with a minimum of 10 and a maximum of 250 characters',
+            'name' => 'The name is required with a minimum of 3 and a maximum of 100 characters and must be unique in categories table',
+            'description' => 'The description is required with a minimum of 10 and a maximum of 250 characters',
         ];
     }
 }
