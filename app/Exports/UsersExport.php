@@ -28,22 +28,24 @@ class UsersExport implements FromCollection, Responsable, WithHeadings, ShouldAu
     public function headings(): array
     {
         return [
-            '#',
-            'Name',
-            'Surname',
-            'Identification',
-            'Address',
-            'Phone',
-            'Email',
-            'Disable at',
-            'Created at',
-            'Updated at',
+            'id',
+            'name',
+            'surname',
+            'identification',
+            'address',
+            'phone',
+            'role',
+            'email',
+            'password',
+            'disable at',
+            'created at',
+            'updated at',
         ];
     }
 
     public function collection(): Collection
     {
-        return User::select('id', 'name', 'surname', 'identification', 'address', 'phone', 'email', 'disable_at', 'created_at', 'updated_at')->get();
+        return User::select('id', 'name', 'surname', 'identification', 'address', 'phone', 'email', 'password', 'disable_at', 'created_at', 'updated_at')->get();
     }
 
     public function styles(Worksheet $sheet): array
