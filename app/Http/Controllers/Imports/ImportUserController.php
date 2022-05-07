@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Imports;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ImportFileRequest;
 use App\Repositories\User\UserRepository;
-use Illuminate\Http\Request;
 
 class ImportUserController extends Controller
 {
@@ -15,7 +15,7 @@ class ImportUserController extends Controller
         $this->usersRepo = $usersRepository;
     }
 
-    public function import(Request $request)
+    public function import(ImportFileRequest $request)
     {
         $this->authorize('users.import');
       
