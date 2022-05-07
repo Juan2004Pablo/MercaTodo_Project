@@ -17,7 +17,7 @@ class ProductsExport implements FromCollection, Responsable, WithHeadings, Shoul
 {
     use Exportable;
 
-    private $fileName = 'productsYes.xlsx';
+    private $fileName = 'Products.xlsx';
 
     private $writerType = Excel::XLSX;
 
@@ -28,16 +28,16 @@ class ProductsExport implements FromCollection, Responsable, WithHeadings, Shoul
     public function headings(): array
     {
         return [
-            '#',
-            'Name',
-            'Description',
-            'Price',
-            'Quantity',
-            'Disable at',
-            'Category id',
-            'Status',
-            'Created at',
-            'Updated at',
+            'id',
+            'name',
+            'description',
+            'price',
+            'quantity',
+            'disable_at',
+            'category_id',
+            'status',
+            'created_at',
+            'updated_at',
         ];
     }
 
