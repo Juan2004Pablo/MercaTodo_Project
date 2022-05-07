@@ -18,7 +18,7 @@ class ImportUserController extends Controller
     public function import(ImportFileRequest $request)
     {
         $this->authorize('users.import');
-      
+
         $this->usersRepo->usersImport($request);
 
         return back()->with('success', 'All good!');

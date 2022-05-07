@@ -28,7 +28,7 @@ class ProductRepository extends BaseRepository
             return $this->getModel()->withTrashed('images', 'category')->orderBy('id')->paginate(env('PAGINATE'));
         } else {
             $category = $request->get('searchbycategory');
-    
+
             return $this->getModel()->withTrashed('images', 'category')->category($category)->orderBy('id')->paginate(env('PAGINATE'));
         }
     }
@@ -62,7 +62,7 @@ class ProductRepository extends BaseRepository
 
             $prod->images()->createMany($urlimages);
 
-        Log::channel('contlog')->info('The product: ' . $prod->name . ' has been created by: ' . ' ' . Auth::user()->name . ' ' . Auth::user()->surname);
+            Log::channel('contlog')->info('The product: ' . $prod->name . ' has been created by: ' . ' ' . Auth::user()->name . ' ' . Auth::user()->surname);
 
             return redirect()->route('admin.product.index');
         }
