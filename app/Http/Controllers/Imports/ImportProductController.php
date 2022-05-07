@@ -10,6 +10,8 @@ class ImportProductController extends Controller
 {
     public function import(ImportFileRequest $request)
     {
+        $this->authorize('products.import');
+
         $file = $request->file('file');
         $import = new ProductsImport();
 
