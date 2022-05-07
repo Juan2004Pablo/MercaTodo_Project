@@ -2,20 +2,20 @@
 
 Route::get('users/export/', [
     'as' => 'users.export',
-    'uses' => 'ExportUserController@export',
+    'uses' => 'Exports\ExportUserController@export',
 ]);
 
 Route::get('roles/export/', [
     'as' => 'roles.export',
-    'uses' => 'ExportRoleController@export',
+    'uses' => 'Exports\ExportRoleController@export',
 ]);
 
 Route::get('products/export/', [
     'as' => 'products.export',
-    'uses' => 'ExportProductController@export',
+    'uses' => 'Exports\ExportProductController@export',
 ]);
 
 Route::get('categories/export/', [
     'as' => 'categories.export',
-    'uses' => 'ExportCategoryController@export',
+    'uses' => 'Exports\ExportCategoryController@export',
 ]);
