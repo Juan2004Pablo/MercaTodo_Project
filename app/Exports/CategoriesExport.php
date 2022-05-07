@@ -28,12 +28,12 @@ class CategoriesExport implements FromCollection, Responsable, WithHeadings, Sho
     public function headings(): array
     {
         return [
-            '#',
-            'Name',
-            'Description',
-            'Disable at',
-            'Created at',
-            'Updated at',
+            'id',
+            'name',
+            'description',
+            'disable_at',
+            'created_at',
+            'updated_at',
         ];
     }
 
