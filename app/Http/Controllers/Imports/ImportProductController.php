@@ -4,30 +4,22 @@ namespace App\Http\Controllers\Imports;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ImportFileRequest;
-use App\Imports\ProductsImport;
+use App\Repositories\product\ProductRepository;
 
 class ImportProductController extends Controller
 {
+    protected $productRepo;
+
+    public function __construct(ProductRepository $productRepository)
+    {
+        $this->productRepo = $productRepository;
+    }
+
     public function import(ImportFileRequest $request)
     {
         $this->authorize('products.import');
 
-        $file = $request->file('file');
-        $import = new ProductsImport();
-
-        try {
-            $import->import($file);
-        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
-            $failures = $e->failures();
-
-            foreach ($failures as $failure) {
-                $failure->row(); // row that went wrong
-                $failure->attribute(); // either heading key (if using heading row concern) or column index
-                $failure->errors(); // Actual error messages from Laravel validator
-                $failure->values(); // The values of the row that has failed.
-                dd($failure);
-            }
-        }
+        $this->productRepo->productsImport($request);
 
         return back()->with('success', 'All good!');
     }
