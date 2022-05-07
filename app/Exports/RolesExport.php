@@ -27,10 +27,10 @@ class RolesExport implements FromCollection, Responsable, WithHeadings, ShouldAu
     public function headings(): array
     {
         return [
-            '#',
-            'Name',
-            'Created at',
-            'Updated at',
+            'id',
+            'name',
+            'created_at',
+            'updated_at',
         ];
     }
 
