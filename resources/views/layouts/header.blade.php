@@ -3,15 +3,8 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/home') }}">
-                    Mercatodo
-                <!--{{ config('app.name', 'Mercatodo') }}-->
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse"
-                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+
+                <a href="{{ url('/home') }}"><img class="mr-3 rounded-lg hvr-pulse-grow" src="{{ asset('images/logos/Logo.jpg') }}" alt="Mercatodo Logo" height="53" width="117" /></a>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
@@ -21,11 +14,11 @@
                         
                             <li class="nav-item"><a href="{{route('user.index')}}" class="nav-link">User</a></li>
                         
-                            <li class="nav-item"><a href="{{route('admin.product.index')}}"
-                                class="nav-link">Product</a></li>
+                            <li class="nav-item"><a href="{{route('admin.product.index')}}" class="nav-link">Product</a></li>
                         
-                            <li class="nav-item"><a href="{{route('admin.category.index')}}"
-                                class="nav-link">Category</a></li>
+                            <li class="nav-item"><a href="{{route('admin.category.index')}}" class="nav-link">Category</a></li>
+
+                            <li class="nav-item"><a href="{{route('report.index')}}" class="nav-link">Report</a></li>
                         
                     </ul>
 
