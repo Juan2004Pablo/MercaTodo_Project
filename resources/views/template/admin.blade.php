@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <script src="{{ asset('jquery-3.5.1.min.js')}}"></script>
-    <script src="{{ asset('/js/validations.js')}}"></script>
 
     <!-- Font Awesome -->
     <!-- Ionicons -->
@@ -24,28 +23,23 @@
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
         <!-- Left navbar links -->
         <div class="card">
-        <ul class="navbar-nav">
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href={{ route('home')}} class="nav-link">Home</a>
-            </li>
-
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="{{ route('user.index') }}" class="nav-link">Users</a>
-            </li>
-
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="{{ route('admin.category.index') }}" class="nav-link">Categories</a>
-            </li>
             
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="{{ route('admin.product.index') }}" class="nav-link">Products</a>
-            </li>
+            <ul class="navbar-nav">
+                <li class="nav-item"> <a href={{ route('home')}} class="nav-link">Home</a></li>
 
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="{{ route('admin.order.index') }}" class="nav-link">Orders</a>
-            </li>
+                <li class="nav-item"><a href="{{route('role.index')}}" class="nav-link">Role</a></li>
 
-        </ul>
+                <li class="nav-item"> <a href="{{ route('user.index') }}" class="nav-link">Users</a></li>
+
+                <li class="nav-item"><a href="{{ route('admin.category.index') }}" class="nav-link">Categories</a></li>
+                
+                <li class="nav-item"><a href="{{ route('admin.product.index') }}" class="nav-link">Products</a></li>
+
+                <li class="nav-item"><a href="{{ route('admin.order.index') }}" class="nav-link">Orders</a></li>
+                
+                <li class="nav-item"><a href="{{route('report.index')}}" class="nav-link">Reports</a></li>
+            </ul>
+
         </div>
 
 
