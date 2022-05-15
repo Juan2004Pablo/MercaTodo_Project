@@ -25,14 +25,14 @@ Route::post('dailySales/report/generate', [
     'uses' => 'Report\DailySalesReportController@generate',
 ]);
 
-Route::get('weekly/sales/report/index', [
-    'as' => 'weeklySales.report.index',
-    'uses' => 'Report\WeeklySalesReportController@index',
+Route::get('salesByDays/report/index', [
+    'as' => 'salesByDays.report.index',
+    'uses' => 'Report\salesByDaysReportController@index',
 ]);
 
-Route::post('weeklySales/report/generate', [
-    'as' => 'weeklySales.report.generate',
-    'uses' => 'Report\WeeklySalesReportController@generate',
+Route::post('salesByDays/report/generate', [
+    'as' => 'salesByDays.report.generate',
+    'uses' => 'Report\salesByDaysReportController@generate',
 ]);
 
 Route::get('monthly/sales/report/index', [
