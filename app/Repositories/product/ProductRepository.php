@@ -9,12 +9,9 @@ use App\Models\Product;
 use App\Repositories\BaseRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ProductRepository extends BaseRepository
 {
@@ -34,7 +31,7 @@ class ProductRepository extends BaseRepository
         }
     }
 
-    public function createProduct(Request $data): RedirectResponse
+    public function createProduct(Request $data): void
     {
         $urlimages = [];
         if ($data->hasFile('images')) {
@@ -64,17 +61,10 @@ class ProductRepository extends BaseRepository
             $prod->images()->createMany($urlimages);
 
             Log::channel('contlog')->info('The product: ' . $prod->name . ' has been created by: ' . ' ' . Auth::user()->name . ' ' . Auth::user()->surname);
-
-            return redirect()->route('admin.product.index');
         }
     }
 
-    public function getProductbyId(int $id): Model
-    {
-        return $this->getModel()->with('images', 'category')->where('id', $id)->firstOrFail();
-    }
-
-    public function updateProduct(Request $data, string $id): void
+    public function updateProduct(Request $data, Product $product): void
     {
         $urlimages = [];
         if ($data->hasFile('images')) {
@@ -93,20 +83,18 @@ class ProductRepository extends BaseRepository
 
         $category = Category::where('name', $data->category_id)->first();
 
-        $prod = $this->getModel()->findOrFail($id);
+        $product->name = $data->name;
+        $product->category_id = $category->id;
+        $product->quantity = $data->quantity;
+        $product->price = $data->price;
+        $product->description = $data->description;
+        $product->status = $data->status;
 
-        $prod->name = $data->name;
-        $prod->category_id = $category->id;
-        $prod->quantity = $data->quantity;
-        $prod->price = $data->price;
-        $prod->description = $data->description;
-        $prod->status = $data->status;
+        $product->save();
 
-        $prod->save();
+        $product->images()->createMany($urlimages);
 
-        $prod->images()->createMany($urlimages);
-
-        Log::channel('contlog')->info('The product ' . $prod->name . ' ' . 'has been updated by: ' . ' ' . Auth::user()->name . ' ' . Auth::user()->surname);
+        Log::channel('contlog')->info('The product ' . $product->name . ' has been updated by: ' . ' ' . Auth::user()->name . ' ' . Auth::user()->surname);
     }
 
     public function categoryForProduct(): Collection
