@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -17,6 +18,7 @@ class User extends Authenticatable implements MustVerifyEmail
     use SoftDeletes;
     use HasFactory;
     use HasRoles;
+    use HasApiTokens;
 
     protected $fillable =
     [

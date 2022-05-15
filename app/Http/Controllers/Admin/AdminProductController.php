@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Models\Product;
 use App\Repositories\product\ProductRepository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -44,54 +45,47 @@ class AdminProductController extends Controller
         return view('admin.product.create', compact('categories', 'statusProducts'));
     }
 
-    public function store(StoreProductRequest $request)//: RedirectResponse
+    public function store(StoreProductRequest $request): void
     {
         $this->authorize('product.create');
 
         $this->productRepo->createProduct($request);
     }
 
-    public function edit(int $id): View
+    public function edit(Product $product): View
     {
         $this->authorize('product.update');
-
-        $product = $this->productRepo->getProductbyId($id);
 
         $statusProducts = $this->statusProducts;
 
         return view('admin.product.edit', compact('product', 'statusProducts'));
     }
 
-    public function update(UpdateProductRequest $request, string $id): RedirectResponse
+    public function update(UpdateProductRequest $request, Product $product): RedirectResponse
     {
         $this->authorize('product.update');
 
-        $this->productRepo->updateProduct($request, $id);
+        $this->productRepo->updateProduct($request, $product);
 
-        return redirect()->route('admin.product.index')
-            ->with('data', 'Record updated successfully!');
+        return redirect()->route('admin.product.index')->with('data', 'Record updated successfully!');
     }
 
-    public function show(int $id): View
+    public function show(Product $product): View
     {
         $this->authorize('product.show');
-
-        $product = $this->productRepo->getProductbyId($id);
 
         $statusProducts = $this->statusProducts;
 
         return view('admin.product.show', compact('product', 'statusProducts'));
     }
 
-    public function destroy(string $id): RedirectResponse
+    public function destroy(Product $product): RedirectResponse
     {
         $this->authorize('product.disable');
 
-        $product = $this->productRepo->findId($id);
         $this->productRepo->delete($product);
 
-        return redirect()->route('admin.product.index')
-            ->with('data', 'Product disabled');
+        return redirect()->route('admin.product.index')->with('data', 'Product disabled');
     }
 
     public function restore(Request $request): RedirectResponse
@@ -100,7 +94,6 @@ class AdminProductController extends Controller
 
         $this->productRepo->restore($request);
 
-        return redirect()->route('admin.product.index')
-            ->with('data', 'Product  enabled');
+        return redirect()->route('admin.product.index')->with('data', 'Product  enabled');
     }
 }
