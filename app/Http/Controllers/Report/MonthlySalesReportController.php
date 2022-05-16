@@ -21,6 +21,8 @@ class MonthlySalesReportController extends Controller
 
     public function index(): View
     {
+        $this->authorize('monthlySalesReport.generate');
+
         $initialDate = Carbon::now()->format('Y-m-d');
         return view('report.monthlySales.index', compact('initialDate'));
     }

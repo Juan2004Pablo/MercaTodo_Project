@@ -21,6 +21,8 @@ class ProductsReportController extends Controller
 
     public function index(): View
     {
+        $this->authorize('productsReport.generate');
+
         $initialDate = Carbon::now()->format('Y-m-d');
         return view('report.products.index', compact('initialDate'));
     }
