@@ -25,23 +25,24 @@
         <div class="card">
             
             <ul class="navbar-nav">
-                <li class="nav-item"> <a href={{ route('home')}} class="nav-link">Home</a></li>
 
-                <li class="nav-item"><a href="{{route('role.index')}}" class="nav-link">Role</a></li>
+                <li class="nav-item"> <a href={{ route('home')}} class="nav-link">{{ trans('template.admin.home') }}</a></li>
 
-                <li class="nav-item"> <a href="{{ route('user.index') }}" class="nav-link">Users</a></li>
+                <li class="nav-item"><a href="{{route('role.index')}}" class="nav-link">{{ trans('template.admin.role') }}</a></li>
 
-                <li class="nav-item"><a href="{{ route('admin.category.index') }}" class="nav-link">Categories</a></li>
+                <li class="nav-item"> <a href="{{ route('user.index') }}" class="nav-link">{{ trans('template.admin.users') }}</a></li>
+
+                <li class="nav-item"><a href="{{ route('admin.category.index') }}" class="nav-link">{{ trans('template.admin.categories') }}</a></li>
                 
-                <li class="nav-item"><a href="{{ route('admin.product.index') }}" class="nav-link">Products</a></li>
+                <li class="nav-item"><a href="{{ route('admin.product.index') }}" class="nav-link">{{ trans('template.admin.products') }}</a></li>
 
-                <li class="nav-item"><a href="{{ route('admin.order.index') }}" class="nav-link">Orders</a></li>
+                <li class="nav-item"><a href="{{ route('admin.order.index') }}" class="nav-link">{{ trans('template.admin.orders') }}</a></li>
                 
-                <li class="nav-item"><a href="{{route('report.index')}}" class="nav-link">Reports</a></li>
+                <li class="nav-item"><a href="{{route('report.index')}}" class="nav-link">{{ trans('template.admin.reports') }}</a></li>
+
             </ul>
 
         </div>
-
 
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
@@ -55,7 +56,7 @@
                             <span class="ml-3 float-right text-muted text-sm">{{ $notification->created_at->diffForHumans() }}</span>
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a href="{{ route('markAsRead') }}" class="dropdown-item dropdown-footer">Marcar como leidas</a>
+                        <a href="{{ route('markAsRead') }}" class="dropdown-item dropdown-footer">Mark as read</a>
                     @endforeach
 
                 </div>
