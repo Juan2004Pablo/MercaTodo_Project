@@ -42,6 +42,6 @@ return [
         'fields' => [
             'id' => '#',
             'name' => 'Name',
-        ]
-    ]
+        ],
+    ],
 ];
