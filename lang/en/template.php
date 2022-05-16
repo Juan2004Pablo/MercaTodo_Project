@@ -9,5 +9,5 @@ return [
         'products' => 'Products',
         'orders' => 'Orders',
         'reports' => 'Reports',
-    ]
+    ],
 ];

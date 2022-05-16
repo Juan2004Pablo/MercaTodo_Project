@@ -9,6 +9,7 @@ use App\Repositories\BaseRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Spatie\Permission\Models\Role;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -67,5 +68,28 @@ class UserRepository extends BaseRepository
                 dd($failure);
             }
         }
+    }
+
+    public function rolesSearch(Collection $users): array
+    {
+        $i = 0;
+        $roles[] = null;
+        foreach ($users as $user) {
+            $roleOfModel = DB::table('model_has_roles')->where('model_id', $user->id)->first();
+            $role = Role::where('id', $roleOfModel->role_id)->first();
+            $roles[$i] = $role->name;
+            $i++;
+        }
+
+        return $roles;
+    }
+
+    public function usersSearch(Request $request): Collection
+    {
+        $users = User::whereDate('created_at', '>=', $request->get('initial-date'))
+            ->whereDate('created_at', '<=', $request->get('end-date'))->orderBy('created_at', 'Asc')
+            ->get(['id', 'name', 'surname', 'identification', 'address', 'phone', 'email', 'created_at']);
+
+        return $users;
     }
 }
