@@ -8,7 +8,7 @@
 @endsection
 
 @section('content')
-<div id="apicategory">
+<div id="category">
     <form>
         @csrf
         <span style="display:none;" id="edit">{{$edit}}</span>

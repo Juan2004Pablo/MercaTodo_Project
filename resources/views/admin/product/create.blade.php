@@ -8,7 +8,7 @@
 @endsection
 
 @section('content')
-    <div id="apiproduct">
+    <div id="product">
 
         <form action="{{ route('admin.product.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
