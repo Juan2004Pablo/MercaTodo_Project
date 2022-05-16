@@ -81,6 +81,14 @@ class Resource extends Enum
     //Export users
     public const USERS_EXPORT = 'users.export';
 
+    //Reports
+    public const REPORT_GENERATE = 'report.generate';
+    public const DAILYSALESREPORT_GENERATE = 'dailySalesReport.generate';
+    public const MONTHLYSALESREPORT_GENERATE = 'monthlySalesReport.generate';
+    public const PRODUCTSREPORT_GENERATE = 'productsReport.generate';
+    public const SALESBYDAYSREPORT_GENERATE = 'salesByDaysReport.generate';
+    public const USERSREPORT_GENERATE = 'usersReport.generate';
+
     //Home
     public const HOME_INDEX = 'home.index';
 

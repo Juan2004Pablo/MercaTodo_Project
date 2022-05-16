@@ -81,6 +81,8 @@ class UserRepository extends BaseRepository
             $i++;
         }
 
+        Log::channel('contlog')->info('The user ' . Auth::user()->name . ' ' . Auth::user()->surname . ' has generated an users report');
+
         return $roles;
     }
 

@@ -21,6 +21,8 @@ class UsersReportController extends Controller
 
     public function index(): View
     {
+        $this->authorize('usersReport.generate');
+
         $initialDate = Carbon::now()->format('Y-m-d');
         return view('report.users.index', compact('initialDate'));
     }
