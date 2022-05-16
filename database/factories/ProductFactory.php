@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -14,7 +13,7 @@ class ProductFactory extends Factory
     {
         return [
             'name' => $this->faker->unique()->text(10),
-            'category_id' => Category::all()->first(),
+            'category_id' => 1,
             'quantity' => '18',
             'price' => '500000',
             'description' => $this->faker->text(125),
