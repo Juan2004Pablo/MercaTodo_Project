@@ -107,7 +107,6 @@ class ProductRepository extends BaseRepository
     {
         Log::channel('contlog')->info('The user ' . Auth::user()->name . ' ' . Auth::user()->surname . ' has exported a list of products');
         return (new ProductsExport())->download('products.xlsx');
-        //return (new ProductsExport())->store('products.xlsx');
     }
 
     public function productsImport(Request $request): void
