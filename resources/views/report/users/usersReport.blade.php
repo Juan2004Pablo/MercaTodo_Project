@@ -20,15 +20,15 @@
 
                 <tr>
 
-                    <th class="p-3">{{ trans('report.users_report.fields.id') }}</th>
-                    <th class="p-3">{{ trans('report.users_report.fields.role') }}</th>
-                    <th class="p-3">{{ trans('report.users_report.fields.name') }}</th>
-                    <th class="p-3">{{ trans('report.users_report.fields.surname') }}</th>
-                    <th class="p-3">{{ trans('report.users_report.fields.identification') }}</th>
-                    <th class="p-3">{{ trans('report.users_report.fields.address') }}</th>
-                    <th class="p-3">{{ trans('report.users_report.fields.phone') }}</th>
-                    <th class="p-3">{{ trans('report.users_report.fields.email') }}</th>
-                    <th class="p-3">{{ trans('report.users_report.fields.date') }}</th>
+                    <th class="p-3" id="id">{{ trans('report.users_report.fields.id') }}</th>
+                    <th class="p-3" id="role">{{ trans('report.users_report.fields.role') }}</th>
+                    <th class="p-3" id="name">{{ trans('report.users_report.fields.name') }}</th>
+                    <th class="p-3" id="surname">{{ trans('report.users_report.fields.surname') }}</th>
+                    <th class="p-3" id="identification">{{ trans('report.users_report.fields.identification') }}</th>
+                    <th class="p-3" id="address">{{ trans('report.users_report.fields.address') }}</th>
+                    <th class="p-3" id="phone">{{ trans('report.users_report.fields.phone') }}</th>
+                    <th class="p-3" id="email">{{ trans('report.users_report.fields.email') }}</th>
+                    <th class="p-3" id="date">{{ trans('report.users_report.fields.date') }}</th>
                         
                 </tr>
 
@@ -42,15 +42,15 @@
 
                     <tr class="bg-primary my-3 rounded">
 
-                        <th class="p-3">{{ $user->id }}</th>
-                        <th class="p-3">{{ $roles[$loop->index] }}</th>
-                        <th class="p-3">{{ $user->name }}</th>
-                        <th class="p-3">{{ $user->surname }}</th>
-                        <th class="p-3">{{ $user->identification }}</th>
-                        <th class="p-3">{{ $user->address }}</th>
-                        <th class="p-3">{{ $user->phone }}</th>
-                        <th class="p-3">{{ $user->email }}</th>
-                        <th class="p-3">{{ \Carbon\Carbon::parse($user->created_at)->format('d/m/Y') }}</th>
+                        <th class="p-3" id="ids">>{{ $user->id }}</th>
+                        <th class="p-3" id="roles">>{{ $roles[$loop->index] }}</th>
+                        <th class="p-3" id="names">>{{ $user->name }}</th>
+                        <th class="p-3" id="surnames">>{{ $user->surname }}</th>
+                        <th class="p-3" id="identifications">>{{ $user->identification }}</th>
+                        <th class="p-3" id="address">>{{ $user->address }}</th>
+                        <th class="p-3" id="phone">>{{ $user->phone }}</th>
+                        <th class="p-3" id="email">>{{ $user->email }}</th>
+                        <th class="p-3" id="dates">>{{ \Carbon\Carbon::parse($user->created_at)->format('d/m/Y') }}</th>
 
                     </tr>
 
