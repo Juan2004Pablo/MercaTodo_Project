@@ -20,7 +20,7 @@
 
                     <div class="card-header">
                         
-                        <h2>List of Roles</h2>
+                        <h2>{{ trans('user.role.title.list_of_roles') }}</h2>
                     
                     </div>
 
@@ -38,13 +38,13 @@
 
                             <input type="file" name="file">
 
-                            <button class="btn btn-secondary"> Import </button>
+                            <button class="btn btn-secondary"> {{ trans('user.role.options.import') }} </button>
 
                         </form>
 
-                        <a class="float-left btn btn-Dark" href="{{ route('roles.export') }}"> Export </a>
+                        <a class="float-left btn btn-Dark" href="{{ route('roles.export') }}"> {{ trans('user.role.options.export') }} </a>
 
-                        <a href="{{route('role.create')}}" class="btn btn-primary float-right"> Create </a>
+                        <a href="{{route('role.create')}}" class="btn btn-primary float-right"> {{ trans('user.role.options.create') }} </a>
 
                         <br><br>
 
@@ -56,8 +56,8 @@
 
                                 <tr>
 
-                                    <th scope="col">#</th>
-                                    <th scope="col">Name</th>
+                                    <th scope="col">{{ trans('user.role.fields.id') }}</th>
+                                    <th scope="col">{{ trans('user.role.fields.name') }}</th>
                                     <th colspan="3"></th>
                                     
                                 </tr>
@@ -74,11 +74,11 @@
                                         <td>{{ $role->name }}</td>
 
                                         <td>
-                                            <a class="btn btn-info" href="{{ route('role.show',$role->id) }}">Show</a>
+                                            <a class="btn btn-info" href="{{ route('role.show',$role->id) }}">{{ trans('user.role.options.show') }}</a>
                                         </td>
 
                                         <td>
-                                            <a class="btn btn-success" href="{{ route('role.edit',$role->id) }}">Update</a>
+                                            <a class="btn btn-success" href="{{ route('role.edit',$role->id) }}">{{ trans('user.role.options.update') }}</a>
                                         </td>
 
                                         <td>
@@ -87,7 +87,7 @@
                                                 @csrf
                                                 @method('DELETE')
 
-                                                <button class="btn btn-danger">Delete</button>
+                                                <button class="btn btn-danger">{{ trans('user.role.options.delete') }}</button>
 
                                             </form>
 

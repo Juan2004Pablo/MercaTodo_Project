@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Sales by days report</title>
+    <title>{{ trans('report.sales_by_days_report.title.title') }}</title>
 </head>
 
 <body>
@@ -18,12 +18,12 @@
 
                 <tr>
 
-                    <th class="p-3">#</th>
-                    <th class="p-3">Day</th>
-                    <th class="p-3">Date</th>
-                    <th class="p-3">Code</th>
-                    <th class="p-3">Status</th>
-                    <th class="p-3">Total</th>
+                    <th class="p-3">{{ trans('report.sales_by_days_report.fields.id') }}</th>
+                    <th class="p-3">{{ trans('report.sales_by_days_report.fields.day') }}</th>
+                    <th class="p-3">{{ trans('report.sales_by_days_report.fields.date') }}</th>
+                    <th class="p-3">{{ trans('report.sales_by_days_report.fields.code') }}</th>
+                    <th class="p-3">{{ trans('report.sales_by_days_report.fields.status') }}</th>
+                    <th class="p-3">{{ trans('report.sales_by_days_report.fields.total') }}</th>
                     
                 </tr>
 
@@ -60,10 +60,10 @@
 
                 <tr>
 
-                    <th class="p-3">Day of week</th>
-                    <th class="p-3">Accumulated</th>
-                    <th class="p-3">Growth</th>
-                    <th class="p-3">% vs. previous day</th>
+                    <th class="p-3">{{ trans('report.sales_by_days_report.fields.day_of_week') }}</th>
+                    <th class="p-3">{{ trans('report.sales_by_days_report.fields.accumulated') }}</th>
+                    <th class="p-3">{{ trans('report.sales_by_days_report.fields.growth') }}</th>
+                    <th class="p-3">{{ trans('report.sales_by_days_report.fields.previus') }}</th>
                     
                 </tr>
 

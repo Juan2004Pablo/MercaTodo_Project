@@ -51,7 +51,7 @@ class AdminPayController extends Controller
 
         $payment = $this->pays->seePay();
 
-        return view('product.estado', compact('payment'));
+        return view('product.status', compact('payment'));
     }
 
     public function showAllOrders(): View

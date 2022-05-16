@@ -20,7 +20,7 @@
 
                 <div class="card-header">
 
-                    <h3 class="card-title">Section of products</h3>
+                    <h3 class="card-title">{{ trans('admin.products.titles.section_of_products') }}</h3>
 
                     <br>
 
@@ -36,13 +36,13 @@
 
                         <input type="file" name="file">
 
-                        <button class="btn btn-secondary"> Import </button>
+                        <button class="btn btn-secondary"> {{ trans('admin.products.options.import') }} </button>
 
                         @include('custom.modal_search-product-admin')
 
                     </form>
 
-                    <a class="btn btn-Dark" href="{{ route('products.export') }}"> Export </a>
+                    <a class="btn btn-Dark" href="{{ route('products.export') }}"> {{ trans('admin.products.options.export') }} </a>
 
                 </div>
 
@@ -76,7 +76,7 @@
 
                 <div class="card-body table-responsive p-0" style="height: 300px;">
 
-                    <td><a class=" m-2 float-right btn btn-primary" href="{{ route('admin.product.create') }}"> Create product </a></td>
+                    <td><a class=" m-2 float-right btn btn-primary" href="{{ route('admin.product.create') }}"> {{ trans('admin.products.titles.create') }} </a></td>
                     
                     <table class="table table-head-fixed text-nowrap">
 
@@ -84,12 +84,11 @@
 
                             <tr>
 
-                                <th>#</th>
-                                <th>Name</th>
-                                <th>Category id</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Disable_at</th>
+                                <th>{{ trans('admin.products.fields.id') }}</th>
+                                <th>{{ trans('admin.products.fields.name') }}</th>
+                                <th>{{ trans('admin.products.fields.category') }}</th>
+                                <th>{{ trans('admin.products.fields.price') }}</th>
+                                <th>{{ trans('admin.products.fields.quantity') }}</th>
                                 <th colspan="3"></th>
 
                             </tr>
@@ -97,7 +96,6 @@
                         </thead>
 
                         <tbody>
-
 
                             @foreach($products as $product)
 
@@ -108,12 +106,10 @@
                                     <td>{{$product->category_id}}</td>
                                     <td>COP {{ number_format($product->price,0) }}</td>
                                     <td>{{$product->quantity}}</td>
-                                    <th>{{$product->disable_at}}</th>
-
                                     
-                                    <td><a class="btn btn-info" href="{{ route('admin.product.show',$product->id) }}">Show</a></td>
+                                    <td><a class="btn btn-info" href="{{ route('admin.product.show',$product->id) }}">{{ trans('admin.products.options.show') }}</a></td>
                                     
-                                    <td><a class="btn btn-success" href="{{ route('admin.product.edit',$product->id) }}">Update</a></td>
+                                    <td><a class="btn btn-success" href="{{ route('admin.product.edit',$product->id) }}">{{ trans('admin.products.options.update') }}</a></td>
                                     
                                     <td>
 
@@ -123,7 +119,7 @@
 
                                                 @csrf
 
-                                                <button class="btn btn-success"> Activate </button>
+                                                <button class="btn btn-success"> {{ trans('admin.products.options.active') }} </button>
                                             </form>
 
                                         @else
@@ -133,7 +129,7 @@
                                                 @csrf
                                                 @method('DELETE')
 
-                                                <button class="btn btn-danger" onclick="return confirm('¿do you want to disable this product?');"> Inactivate </button>
+                                                <button class="btn btn-danger" onclick="return confirm('¿do you want to disable this product?');"> {{ trans('admin.products.options.inactive') }} </button>
 
                                             </form>
 

@@ -34,12 +34,9 @@
 
                     <label for="name">{{ trans('admin.categories.fields.name') }}</label>
 
-                    <input v-model="name"
-                        @blur="getCategory"
-                        @focus="div_appear= false"
-                    class="form-control valCaracteresRepetidos"  type="text" name="name" id="name" maxlength="20">
+                    <input class="form-control" type="text" name="name" id="name" maxlength="20">
 
-                    <br v-if="div_appear">
+                    <br>
 
                     <label for="description">{{ trans('admin.categories.fields.description') }}</label>
                     <textarea class="form-control" name="description" id="description" cols="30" rows="5" minlength="15"></textarea>

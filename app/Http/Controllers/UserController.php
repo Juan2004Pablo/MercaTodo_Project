@@ -33,7 +33,7 @@ class UserController extends Controller
 
         $roles = $this->usersRepo->roleToUser();
 
-        return view('user.view', compact('roles', 'user'));
+        return view('user.show', compact('roles', 'user'));
     }
 
     public function edit(User $user): View

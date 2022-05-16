@@ -3,7 +3,7 @@
 @section('title','Show user')
 
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('user.index') }}">Users</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('user.index') }}">{{ trans('user.user.title.title') }}</a></li>
     <li class="breadcrumb-item active">@yield('title')</li>
 @endsection
 
@@ -69,9 +69,9 @@
 
                     <hr>
 
-                    <a class="btn btn-success" href="{{route('user.edit',$user->id)}}">Update</a>
+                    <a class="btn btn-success" href="{{route('user.edit',$user->id)}}">{{ trans('user.user.options.update') }}</a>
 
-                    <a class="btn btn-danger" href="{{route('user.index')}}">Back</a>
+                    <a class="btn btn-danger" href="{{route('user.index')}}">{{ trans('user.user.options.back') }}</a>
 
                 </div>
 

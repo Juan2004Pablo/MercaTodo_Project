@@ -19,14 +19,6 @@
 
                 <h3 class="card-title">{{ trans('admin.orders.titles.section') }}</h3>
 
-                <div class="card-tools">
-
-                    <nav class="navbar navbar-light bg-light">
-                        @include('custom.modal_search-orders')
-                    </nav>
-
-                </div>
-
             </div>
 
             <div class="card-body table-responsive p-0" style="height: 300px;">
@@ -37,9 +29,14 @@
 
                         <tr>
 
+                            <td><strong>{{ trans('admin.orders.fields.id') }}</strong></td>
                             <th>{{ trans('admin.orders.fields.code') }}</th>
+                            <td><strong>{{ trans('admin.orders.fields.total') }}</strong></td>
                             <th>{{ trans('admin.orders.fields.status') }}</th>
-                            <th colspan="3"></th>
+                            <td></td>
+                            <td><strong>{{ trans('admin.orders.fields.user') }}</strong></td>
+                            <td></td>
+                            <td><strong>{{ trans('admin.orders.fields.created_at') }}</strong></td>
 
                         </tr>
 
@@ -51,18 +48,21 @@
 
                             <tr>
 
+                                <td>{{$order->id}}</td>
                                 <td>{{$order->code}}</td>
+                                <td>COP {{ number_format($order->total, 0)}}</td>
                                 <td>{{$order->status}}</td>
-
-                                <td>
-                                    <a class="btn btn-default" href="{{ route('admin.order.show',$order->id) }}">{{ trans('admin.orders.options.show') }}</a>
-                                </td>
+                                <td>{{$order->user_id}}</td>
+                                <td>{{$order->name_receive}}</td>
+                                <td>{{$order->surname}}</td>
+                                <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y') }}</td>
                                 
                             </tr>
-
+                            
                         @endforeach
 
                     </tbody>
+                    
 
                 </table>
                 

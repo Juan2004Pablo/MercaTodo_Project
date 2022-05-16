@@ -43,12 +43,8 @@ class Resource extends Enum
     public const CART_TRASH = 'cart.trash';
     public const CART_UPDATE = 'cart.update';
 
-    //Detail
-    public const DETAIL_INDEX = 'detail.index';
-
     //Order
     public const ORDER_INDEX = 'order.index';
-    public const ORDER_SHOW = 'order.show';
 
     //Pay
     public const PAY_CREATE = 'pay.create';

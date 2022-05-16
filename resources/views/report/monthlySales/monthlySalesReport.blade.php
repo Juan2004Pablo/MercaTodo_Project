@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Monthly sales report</title>
+    <title>{{ trans('report.monthly_sales_report.title.title') }}</title>
 </head>
 
 <body>
@@ -18,11 +18,11 @@
 
                 <tr>
 
-                    <th class="p-3">Date</th>
-                    <th class="p-3">Quantity</th>
-                    <th class="p-3">Total</th>
-                    <th class="p-3">Growth</th>
-                    <th class="p-3">% vs. previous month</th>
+                    <th class="p-3">{{ trans('report.monthly_sales_report.fields.date') }}</th>
+                    <th class="p-3">{{ trans('report.monthly_sales_report.fields.quantity') }}</th>
+                    <th class="p-3">{{ trans('report.monthly_sales_report.fields.total') }}</th>
+                    <th class="p-3">{{ trans('report.monthly_sales_report.fields.growth') }}</th>
+                    <th class="p-3">{{ trans('report.monthly_sales_report.fields.previous') }}</th>
                     
                 </tr>
 

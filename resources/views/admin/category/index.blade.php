@@ -11,8 +11,6 @@
 
         <span style="display:none;" id="urlbase">{{route('admin.category.index')}}</span>
 
-        @include('custom.modal_delete')
-
         <div class="col-12">
 
             <div class="card">
@@ -20,24 +18,6 @@
                 <div class="card-header">
 
                     <h3 class="card-title">{{ trans('admin.categories.titles.section') }}</h3>
-
-                    <div class="card-tools">
-
-                        <form>
-
-                            <div class="input-group input-group-sm" style="width: 150px;">
-
-                                <input type="text" name="name" class="form-control float-right" placeholder="Search" value="{{ request()->get('name') }}">
-
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-                                </div>
-
-                            </div>
-
-                        </form>
-
-                    </div>
 
                 </div>
 

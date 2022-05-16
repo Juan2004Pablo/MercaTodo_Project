@@ -6,7 +6,6 @@ use App\Models\Order;
 use App\Repositories\BaseRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Session;
 
 class OrderRepository extends BaseRepository
 {
@@ -34,10 +33,5 @@ class OrderRepository extends BaseRepository
             Cache::put($key, $orders);
         }
         return $orders;
-    }
-
-    public function seeOrder(int $id): void
-    {
-        Session::put('order_id', $id);
     }
 }
