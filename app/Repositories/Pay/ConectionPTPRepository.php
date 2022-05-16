@@ -6,10 +6,6 @@ use App\Repositories\BaseRepository;
 
 class ConectionPTPRepository extends BaseRepository
 {
-    public function getModel()
-    {
-    }
-
     public function conectioPlaceToPay(): array
     {
         if (function_exists('random_bytes')) {
