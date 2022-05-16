@@ -11,7 +11,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class AdminProductController extends Controller
+class ProductController extends Controller
 {
     protected $productRepo;
 

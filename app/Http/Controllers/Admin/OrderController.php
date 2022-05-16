@@ -7,7 +7,7 @@ use App\Repositories\Order\OrderRepository;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class AdminOrderController extends Controller
+class OrderController extends Controller
 {
     protected $orders;
 

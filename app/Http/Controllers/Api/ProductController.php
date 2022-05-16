@@ -13,7 +13,7 @@ use App\Repositories\product\ProductRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
-class ApiProductController extends Controller
+class ProductController extends Controller
 {
     protected $productRepo;
 

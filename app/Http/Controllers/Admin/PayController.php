@@ -8,7 +8,7 @@ use App\Repositories\Pay\PlaceToPayRepository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
-class AdminPayController extends Controller
+class PayController extends Controller
 {
     protected $conection;
     protected $pays;
