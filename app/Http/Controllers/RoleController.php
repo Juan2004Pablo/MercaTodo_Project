@@ -54,7 +54,7 @@ class RoleController extends Controller
 
         $permissions = $this->rolesRepo->permissionCreate();
 
-        return view('role.view', compact('role', 'permissions', 'roleHasPermissions'));
+        return view('role.show', compact('role', 'permissions', 'roleHasPermissions'));
     }
 
     public function edit(Role $role): View

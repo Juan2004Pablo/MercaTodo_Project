@@ -19,7 +19,7 @@
 
                 <div class="card-header">
 
-                    <div class="card-header"><h2>List of Users</h2></div>
+                    <div class="card-header"><h2>{{ trans('user.user.title.list_of_users') }}</h2></div>
 
                     <div class="card-body">
 
@@ -35,11 +35,11 @@
 
                             <input type="file" name="file">
 
-                            <button class="btn btn-secondary"> Import </button>
+                            <button class="btn btn-secondary"> {{ trans('user.user.options.import') }} </button>
 
                         </form>
 
-                        <a class="btn btn-Dark" href="{{ route('users.export') }}"> Export </a>
+                        <a class="btn btn-Dark" href="{{ route('users.export') }}"> {{ trans('user.user.options.export') }} </a>
 
                         <br><br>
 
@@ -51,12 +51,12 @@
 
                                 <tr>
 
-                                    <th>#</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Identification</th>
-                                    <th>Role</th>
-                                    <th>Disable At</th>
+                                    <th>{{ trans('user.user.fields.id') }}</th>
+                                    <th>{{ trans('user.user.fields.name') }}</th>
+                                    <th>{{ trans('user.user.fields.email') }}</th>
+                                    <th>{{ trans('user.user.fields.identification') }}</th>
+                                    <th>{{ trans('user.user.fields.role') }}</th>
+                                    <th>{{ trans('user.user.fields.disable_at') }}</th>
 
                                 </tr>
 
@@ -76,11 +76,11 @@
                                         <td>{{ $user->disable_at }}</td>
 
                                         <td>
-                                            <a class="btn btn-info" href="{{ route('user.show',$user->id) }}">Show</a>
+                                            <a class="btn btn-info" href="{{ route('user.show',$user->id) }}">{{ trans('user.user.options.show') }}</a>
                                         </td>
 
                                         <td>
-                                            <a class="btn btn-success" href="{{ route('user.edit',$user->id) }}">Update</a>
+                                            <a class="btn btn-success" href="{{ route('user.edit',$user->id) }}">{{ trans('user.user.options.update') }}</a>
                                         </td>
 
                                         <td>

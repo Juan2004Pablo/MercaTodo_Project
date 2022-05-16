@@ -3,7 +3,7 @@
 @section('title','Update role')
 
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('role.index') }}">Roles</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('role.index') }}">{{ trans('user.role.title.title') }}</a></li>
     <li class="breadcrumb-item active">@yield('title')</li>
 @endsection
 
@@ -16,7 +16,7 @@
 
         <div class="container">
 
-            <h3>Name</h3>
+            <h3>{{ trans('user.role.title.name') }}</h3>
 
             <div class="form-group">
 
@@ -24,7 +24,7 @@
 
             </div>
 
-            <h3>Permission List</h3>
+            <h3>{{ trans('user.role.title.permission_list') }}</h3>
 
                 @foreach($permissions as $permission)
 
@@ -54,7 +54,7 @@
 
             <input class="btn btn-primary" type="submit" value="Save">
 
-            <a class="btn btn-danger" href="{{route('role.index')}}">Back</a>
+            <a class="btn btn-danger" href="{{route('role.index')}}">{{ trans('user.role.options.back') }}</a>
 
         </div>
 
