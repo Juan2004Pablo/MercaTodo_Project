@@ -32,19 +32,22 @@
 
             <tbody>
             
-                @foreach($monthlySales as $monthlySale)
-                    
+                @for($i=0; $i<12; $i++)
+                
                     <tr class="bg-primary my-3 rounded">
 
-                        <th class="p-3">{{ $months[$loop->index] }}</th>
-                        <th class="p-3">{{ $count[$loop->index] }}</th>
-                        <th class="p-3">COP {{ number_format($totalSales[$loop->index], 0) }}</th>
-                        <th class="p-3">COP {{ number_format($growth[$loop->index], 0) }}</th>
-                        <th class="p-3">{{ number_format($growthRate[$loop->index], 2) }}%</th>
+                        <th class="p-3">{{ $monthsOfYear[$i] }}</th>
+                        <th class="p-3">{{ $count[$i] }}</th>
+                        <th class="p-3">COP {{ number_format($totalSales[$i], 0) }}</th>
+                        <th class="p-3">COP {{ number_format($growth[$i], 0) }}</th>
+                        <th class="p-3">{{ number_format($growthRate[$i], 2) }}%</th>
+                    
 
                     </tr>
 
-                @endforeach
+                @endfor
+
+            
 
             </tbody>
 
