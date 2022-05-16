@@ -3,7 +3,9 @@
 @section('title','Administration of categories')
 
 @section('breadcrumb')
-    <li class="breadcrumb-item active">@yield('title')</li>
+    <ul>
+        <li class="breadcrumb-item active">@yield('title')</li>
+    </ul>
 @endsection
 
 @section('content')

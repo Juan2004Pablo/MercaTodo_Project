@@ -3,7 +3,9 @@
 @section('title','Monthly sales report')
 
 @section('breadcrumb')
+<ul>
     <li class="breadcrumb-item active">@yield('title')</li>
+</ul>
 @endsection
 
 @section('content')

@@ -3,7 +3,9 @@
 @section('title','Generation of reports')
 
 @section('breadcrumb')
+<ul>
     <li class="breadcrumb-item active">@yield('title')</li>
+</ul>
 @endsection
 
 @section('content')

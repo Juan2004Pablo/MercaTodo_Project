@@ -3,8 +3,10 @@
 @section('title', 'Show Product')
 
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{route('admin.product.index')}}">{{ trans('admin.products.titles.title') }}</a></li>
-    <li class="breadcrumb-item active">@yield('title')</li>
+    <ul>
+        <li class="breadcrumb-item"><a href="{{route('admin.product.index')}}">{{ trans('admin.products.titles.title') }}</a></li>
+        <li class="breadcrumb-item active">@yield('title')</li>
+    </ul>
 @endsection
 
 @section('content')

@@ -3,8 +3,10 @@
 @section('title','Update role')
 
 @section('breadcrumb')
+<ul>
     <li class="breadcrumb-item"><a href="{{ route('role.index') }}">{{ trans('user.role.title.title') }}</a></li>
     <li class="breadcrumb-item active">@yield('title')</li>
+</ul>
 @endsection
 
 @section('content')
