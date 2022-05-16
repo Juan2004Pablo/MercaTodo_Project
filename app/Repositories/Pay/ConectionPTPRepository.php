@@ -21,14 +21,11 @@ class ConectionPTPRepository extends BaseRepository
         $secretKey = config('app.SECRET_KEY');
         $tranKey = base64_encode(sha1($nonce . $seed . $secretKey, true));
 
-        $auth =
-            [
+        return [
                 'login' => config('app.LOGIN'),
                 'seed' => $seed,
                 'nonce' => $nonceBase64,
                 'tranKey' => $tranKey,
             ];
-
-        return $auth;
     }
 }
