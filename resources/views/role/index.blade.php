@@ -3,7 +3,9 @@
 @section('title','Administration of roles')
 
 @section('breadcrumb')
+<ul>
     <li class="breadcrumb-item active">@yield('title')</li>
+</ul>
 @endsection
 
 @section('content')
