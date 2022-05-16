@@ -17,7 +17,7 @@ class ConectionPTPRepository extends BaseRepository
         } elseif (function_exists('openssl_random_pseudo_bytes')) {
             $nonce = bin2hex(openssl_random_pseudo_bytes(16));
         } else {
-            $nonce = mt_rand();
+            $nonce = random_int(0,99);
         }
 
         $nonceBase64 = base64_encode($nonce);

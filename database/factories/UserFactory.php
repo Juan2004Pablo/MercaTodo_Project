@@ -16,9 +16,9 @@ class UserFactory extends Factory
         return [
             'name' => $this->faker->name,
             'surname' => $this->faker->lastName,
-            'identification' => rand(100, 120) . rand(1000000, 9999999),
+            'identification' => random_int(100,120) . random_int(1000000,9999999);
             'address' => $this->faker->address,
-            'phone' => rand(300, 320) . rand(1000000, 9999999),
+            'phone' => random_int(300, 320) . random_int(1000000, 9999999),
             'email' => $this->faker->unique()->safeEmail,
             'email_verified_at' => now(),
             'password' => Hash::make(Str::random(10)),
