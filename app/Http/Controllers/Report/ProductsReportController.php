@@ -4,32 +4,32 @@ namespace App\Http\Controllers\Report;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\GenerateReportRequest;
-use App\Models\Category;
-use App\Models\Product;
+use App\Repositories\product\ProductRepository;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
+use Illuminate\Http\Response;
 use Illuminate\View\View;
 
 class ProductsReportController extends Controller
 {
+    protected $productRepo;
+
+    public function __construct(ProductRepository $productRepository)
+    {
+        $this->productRepo = $productRepository;
+    }
+
     public function index(): View
     {
         $initialDate = Carbon::now()->format('Y-m-d');
         return view('report.products.index', compact('initialDate'));
     }
 
-    public function generate(GenerateReportRequest $request)
+    public function generate(GenerateReportRequest $request): Response
     {
-        $products = Product::whereDate('created_at', '>=', $request->get('initial-date'))
-            ->whereDate('created_at', '<=', $request->get('end-date'))
-            ->get(['id', 'name', 'price', 'category_id', 'quantity', 'description', 'created_at']);
+        $products = $this->productRepo->productsSearch($request);
 
-        $i = 0;
-        foreach ($products as $product) {
-            $category = Category::where('id', $product->category_id)->first();
-            $nameCategory[$i] = $category->name;
-            $i++;
-        }
+        $nameCategory = $this->productRepo->categorySearch($products);
 
         $pdf = PDF::loadView('report.products.productsReport', compact('products', 'nameCategory'));
         return $pdf->stream();
