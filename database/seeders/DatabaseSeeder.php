@@ -1,19 +1,27 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
-    public function run()
+    public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        $this->call(RoleSeeder::class);
+        $this->call(CreatUsersSeeder::class);
+        $this->call(PermissionSeeder::class);
+        $this->call(RoleHasPermissionSeeder::class);
+
+        $c = Category::create([
+            'name' => 'Tecno',
+            'description' => 'Soy la categoria de tecno',
+        ]);
+
+        $d = Category::create([
+            'name' => 'Deporte',
+            'description' => 'Soy la categoria de deporte',
+        ]);
     }
 }

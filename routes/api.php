@@ -14,6 +14,37 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('api/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('api/login', [\App\Http\Controllers\Api\Auth\AuthController::class, 'login']);
+
+Route::post('api/register', [\App\Http\Controllers\Api\Auth\AuthController::class, 'register']);
+
+Route::post('api/logout', [\App\Http\Controllers\Api\Auth\AuthController::class, 'logout']);
+
+Route::get('api/products/index', [
+    'as' => 'api.products.index',
+    'uses' => 'Api\ProductController@index',
+]);
+
+Route::get('api/product/show/{product}', [
+    'as' => 'api.product.show',
+    'uses' => 'Api\ProductController@show',
+]);
+
+Route::post('api/product/store', [
+    'as' => 'api.product.store',
+    'uses' => 'Api\ProductController@store',
+]);
+
+Route::put('api/product/update/{product}', [
+    'as' => 'api.product.update',
+    'uses' => 'Api\ProductController@update',
+]);
+
+Route::get('api/product/delete/{product}', [
+    'as' => 'api.product.delete',
+    'uses' => 'Api\ProductController@destroy',
+]);

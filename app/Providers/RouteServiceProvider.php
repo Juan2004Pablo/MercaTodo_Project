@@ -2,51 +2,95 @@
 
 namespace App\Providers;
 
-use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
-    /**
-     * The path to the "home" route for your application.
-     *
-     * This is used by Laravel authentication to redirect users after login.
-     *
-     * @var string
-     */
+    protected $namespace = 'App\Http\Controllers';
+
     public const HOME = '/home';
 
-    /**
-     * Define your route model bindings, pattern filters, etc.
-     *
-     * @return void
-     */
-    public function boot()
+    public function boot(): void
     {
-        $this->configureRateLimiting();
-
-        $this->routes(function () {
-            Route::prefix('api')
-                ->middleware('api')
-                ->group(base_path('routes/api.php'));
-
-            Route::middleware('web')
-                ->group(base_path('routes/web.php'));
-        });
+        parent::boot();
     }
 
-    /**
-     * Configure the rate limiters for the application.
-     *
-     * @return void
-     */
-    protected function configureRateLimiting()
+    public function map(): void
     {
-        RateLimiter::for('api', function (Request $request) {
-            return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
-        });
+        $this->mapApiRoutes();
+
+        $this->mapWebRoutes();
+
+        $this->mapAdminRoutes();
+
+        $this->mapCartRoutes();
+
+        $this->mapPayRoutes();
+
+        $this->mapExportRoutes();
+
+        $this->mapImportRoutes();
+
+        $this->mapReportRoutes();
+    }
+
+    protected function mapApiRoutes()
+    {
+        Route::middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/api.php'));
+    }
+
+    protected function mapWebRoutes(): void
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/web.php'));
+    }
+
+    protected function mapAdminRoutes(): void
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/admin.php'));
+    }
+
+    protected function mapCartRoutes(): void
+    {
+        Route::prefix('cart')
+            ->middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/cart.php'));
+    }
+
+    protected function mapPayRoutes(): void
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/pay.php'));
+    }
+
+    protected function mapExportRoutes(): void
+    {
+        Route::prefix('export')
+            ->middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/export.php'));
+    }
+
+    protected function mapImportRoutes(): void
+    {
+        Route::prefix('import')
+            ->middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/import.php'));
+    }
+
+    protected function mapReportRoutes(): void
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/report.php'));
     }
 }

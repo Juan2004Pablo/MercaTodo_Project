@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,25 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
+
+Auth::routes(['verify' => true]);
+
+Route::get('/home', 'HomeController@index')->name('home')->middleware('verified')
+    ->middleware('auth');
+
+Route::resource('/role', 'RoleController')->names('role');
+
+Route::resource('/user', 'UserController')->names('user');
+
+Route::post('restore/{id}', ['as' => 'user.restore', 'uses' => 'UserController@restore']);
+
+Route::get('cancel/{ruta}', function ($ruta) {
+    return redirect()->route($ruta)->with('cancel', 'Action Canceled!');
+})->name('cancel');
+
+Route::get('markAsRead', function () {
+    auth()->user()->unreadNotifications->markAsRead();
+    return redirect()->back();
+})->name('markAsRead');

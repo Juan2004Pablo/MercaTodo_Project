@@ -1,0 +1,122 @@
+<?php
+
+return [
+    'products' => [
+        'fields' => [
+            'id' => 'Id',
+            'name' => 'Name',
+            'price' => 'Price',
+            'category' => 'Category',
+            'quantity' => 'Quantity',
+            'status' => 'Status',
+            'image' => 'Image',
+            'description' => 'Description',
+            'disable' => 'Disable',
+            'created_at' => 'Created At',
+        ],
+        'titles' => [
+            'title' => 'Products',
+            'create' => 'Create a product',
+            'adminProduct' => 'Administration of products',
+            'section_of_products' => 'Section of products',
+            'update' => 'Update a product',
+            'dates' => 'Product dates',
+            'pricing' => 'Pricing Section',
+            'descriptions' => 'Product descriptions',
+            'addImage' => 'Add image',
+            'cop' => 'COP',
+        ],
+        'options' => [
+            'import' => 'Import',
+            'export' => 'Export',
+            'cancel' => 'Cancel',
+            'show' => 'Show',
+            'update' => 'Update',
+            'activate' => 'Activate',
+            'inactive' => 'Inactive',
+        ],
+    ],
+    'categories' => [
+        'fields' => [
+            'id' => 'Id',
+            'name' => 'Name',
+            'description' => 'Description',
+        ],
+        'titles' => [
+            'title' => 'Categories',
+            'section' => 'Section of categories',
+            'create' => 'Create',
+            'adminCategory' => 'Administration of categories',
+        ],
+        'options' => [
+            'cancel' => 'Cancel',
+            'show' => 'Show',
+            'update' => 'Update',
+            'import' => 'Import',
+            'export' => 'Export',
+            'activate' => 'Activate',
+            'inactive' => 'Inactive',
+        ],
+    ],
+    'orders' =>[
+        'fields' => [
+            'id' => 'Id',
+            'total' => 'Total',
+            'user' => 'User',
+            'code' => 'Code',
+            'status' => 'Status',
+            'created_at' => 'Created at',
+        ],
+        'titles' => [
+            'title' => 'Orders',
+            'dates' => 'Order dates',
+            'section' => 'Section of orders',
+            'admin' => 'Administration of orders',
+        ],
+    ],
+    'cart' => [
+        'fields' => [
+            'image' => 'Image',
+            'product' => 'Product',
+            'price' => 'Price',
+            'quantity' => 'Quantity',
+            'subtotal' => 'Subtotal',
+            'delete' => 'Delete',
+        ],
+        'titles' => [
+            'title' => 'Shopping cart',
+            'shipping_information' => 'Shipping information',
+            'shipping_data_confirmation' => 'Shipping data confirmation',
+            'message' => 'There are no products in the cart',
+            'order_detail' => 'Order detail',
+            'keep_buying' => 'Keep buying',
+            'continue' => 'Continue',
+            'empty_cart' => 'Empty cart',
+            'pay' => 'Pay',
+            'back' => 'Back',
+        ],
+        'user' => [
+            'name' => 'Name',
+            'surname' => 'Surname',
+            'address' => 'Address',
+            'contact' => 'Contact',
+        ],
+    ],
+    'payment' => [
+        'titles' => [
+            'history' => 'Payment history',
+            'status' => 'Payment status,',
+        ],
+        'fields' => [
+            'date' => 'Date',
+            'status' => 'Status',
+            'method' => 'Payment Method',
+            'name' => 'Name',
+            'surname' => 'Surname',
+            'total' => 'Total',
+        ],
+        'options' => [
+            'retry' => 'Retry payment',
+        ],
+    ],
+];
