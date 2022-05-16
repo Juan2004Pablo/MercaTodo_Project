@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Products report</title>
+    <title>{{ trans('report.products_report.title.title') }}</title>
 </head>
 
 <body>
@@ -18,13 +18,13 @@
 
                 <tr>
 
-                    <th class="p-3">#</th>
-                    <th class="p-3">Name</th>
-                    <th class="p-3">Price</th>
-                    <th class="p-3">Category</th>
-                    <th class="p-3">Quantity</th>
-                    <th class="p-3">Description</th>
-                    <th class="p-3">Created at</th>
+                    <th class="p-3">{{ trans('report.products_report.fields.id') }}</th>
+                    <th class="p-3">{{ trans('report.products_report.fields.name') }}</th>
+                    <th class="p-3">{{ trans('report.products_report.fields.price') }}</th>
+                    <th class="p-3">{{ trans('report.products_report.fields.category') }}</th>
+                    <th class="p-3">{{ trans('report.products_report.fields.quantity') }}</th>
+                    <th class="p-3">{{ trans('report.products_report.fields.description') }}</th>
+                    <th class="p-3">{{ trans('report.products_report.fields.date') }}</th>
                     
                 </tr>
 
@@ -40,7 +40,7 @@
 
                         <th class="p-3">{{ $product->id }}</th>
                         <th class="p-3">{{ $product->name }}</th>
-                        <th class="p-3">COP{{ number_format($product->price, 0) }}</th>
+                        <th class="p-3">COP {{ number_format($product->price, 0) }}</th>
                         <th class="p-3">{{ $nameCategory[$loop->index] }}</th>
                         <th class="p-3">{{ $product->quantity }}</th>
                         <th class="p-3">{{ $product->description }}</th>

@@ -12,7 +12,7 @@
         <div class="bg-dark rounded-lg text-white flex justify-content-center items-center ml-auto">
 
             <!-- icono de pfd -->
-            <span class="display-4 font-italic"> Download report </span>
+            <span class="display-4 font-italic"> {{ trans('report.index_report.title.download') }} </span>
 
         </div>
 
@@ -26,7 +26,7 @@
 
                     <div class="mt-3 flex flex-col gap-2">
 
-                        <label for="datepicker" class="font-bold nb-1 block"> Inicial Date </label>
+                        <label for="datepicker" class="font-bold nb-1 block"> {{ trans('report.index_report.fields.initial') }} </label>
 
                         <div class="relative">
 
@@ -38,7 +38,7 @@
 
                     <div class="mt-3 flex flex-col gap-2">
 
-                        <label for="datepicker" class="font-bold nb-1 block"> End Date </label>
+                        <label for="datepicker" class="font-bold nb-1 block"> {{ trans('report.index_report.fields.end') }} </label>
 
                         <div class="relative">
 
@@ -53,7 +53,7 @@
                 <div class="mt-3 flex flex-col gap-2">
 
                     <br>
-                    <button type="submit" class="rounded px-3 py-2 bg-danger text-white"> Download </button>
+                    <button type="submit" class="rounded px-3 py-2 bg-danger text-white"> {{ trans('report.index_report.title.down') }} </button>
                 
                 </div>
             

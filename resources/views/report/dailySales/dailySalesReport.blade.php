@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Daily sales report</title>
+    <title>{{ trans('report.daily_sales_report.title.title') }}</title>
 </head>
 
 <body>
@@ -18,13 +18,13 @@
 
                 <tr>
 
-                    <th class="p-3">Date</th>
-                    <th class="p-3">#</th>
-                    <th class="p-3">Code</th>
-                    <th class="p-3">Status</th>
-                    <th class="p-3">Total</th>
-                    <th class="p-3">Product name</th>
-                    <th class="p-3">Accumulated</th>
+                    <th class="p-3">{{ trans('report.daily_sales_report.fields.date') }}</th>
+                    <th class="p-3">{{ trans('report.daily_sales_report.fields.id') }}</th>
+                    <th class="p-3">{{ trans('report.daily_sales_report.fields.code') }}</th>
+                    <th class="p-3">{{ trans('report.daily_sales_report.fields.status') }}</th>
+                    <th class="p-3">{{ trans('report.daily_sales_report.fields.total') }}</th>
+                    <th class="p-3">{{ trans('report.daily_sales_report.fields.product_name') }}</th>
+                    <th class="p-3">{{ trans('report.daily_sales_report.fields.accumulated') }}</th>
                     
                 </tr>
 
