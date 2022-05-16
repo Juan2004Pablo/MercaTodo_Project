@@ -4,135 +4,40 @@ namespace App\Http\Controllers\Report;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\GenerateReportRequest;
-use App\Models\Order;
+use App\Repositories\Order\OrderRepository;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
+use Illuminate\Http\Response;
 use Illuminate\View\View;
 
 class MonthlySalesReportController extends Controller
 {
+    protected $orders;
+
+    public function __construct(OrderRepository $OrdersRepository)
+    {
+        $this->orders = $OrdersRepository;
+    }
+
     public function index(): View
     {
         $initialDate = Carbon::now()->format('Y-m-d');
         return view('report.monthlySales.index', compact('initialDate'));
     }
 
-    public function generate(GenerateReportRequest $request)
+    public function generate(GenerateReportRequest $request): Response
     {
-        $monthlySales = Order::whereDate('created_at', '>=', $request->get('initial-date'))
-            ->whereDate('created_at', '<=', $request->get('end-date'))
-            ->where('status', 'APPROVED')->orderBy('created_at', 'Asc')
-            ->get(['created_at', 'id', 'code', 'status', 'total']);
+        $monthlySales = $this->orders->monthlySalesSearch($request);
 
-        $i = 0;
+        $totalSales = $this->orders->totalMonthlySales($monthlySales);
 
-        for ($j = 0; $j < 12; $j++) {
-            $totalSales[$j] = 0;
-            $count[$j] = 0;
-            $growth[$j] = 0;
-        }
+        $count = $this->orders->countMonthlySales($monthlySales);
 
-        //Get month of each record
-        foreach ($monthlySales as $monthlySale) {
-            $months[$i] = $monthlySale->created_at->format('F');
+        $monthsOfYear = $this->orders->monthsOfYear();
 
-            //Get total for each month
-            //Get the amount of approved purchases in each month
-            switch ($months[$i]) {
-                case 'January':
-                    $totalSales[0] = $totalSales[0] + $monthlySale->total;
-                    $count[0] = $count[0] + 1;
-                    break;
+        $growth = $this->orders->growthMonthly($totalSales);
 
-                case 'February':
-                    $totalSales[1] = $totalSales[1] + $monthlySale->total;
-                    $count[1] = $count[1] + 1;
-                    break;
-
-                case 'March':
-                    $totalSales[2] = $totalSales[2] + $monthlySale->total;
-                    $count[2] = $count[2] + 2;
-                    break;
-
-                case 'April':
-                    $totalSales[3] = $totalSales[3] + $monthlySale->total;
-                    $count[3] = $count[3] + 1;
-                    break;
-
-                case 'May':
-                    $totalSales[4] = $totalSales[4] + $monthlySale->total;
-                    $count[4] = $count[4] + 1;
-                    break;
-
-                case 'June':
-                    $totalSales[5] = $totalSales[5] + $monthlySale->total;
-                    $count[5] = $count[5] + 1;
-                    break;
-
-                case 'July':
-                    $totalSales[6] = $totalSales[6] + $monthlySale->total;
-                    $count[6] = $count[6] + 1;
-                    break;
-
-                case 'August':
-                    $totalSales[7] = $totalSales[7] + $monthlySale->total;
-                    $count[7] = $count[7] + 1;
-                    break;
-
-                case 'September':
-                    $totalSales[8] = $totalSales[8] + $monthlySale->total;
-                    $count[8] = $count[8] + 1;
-                    break;
-
-                case 'October':
-                    $totalSales[9] = $totalSales[9] + $monthlySale->total;
-                    $count[9] = $count[9] + 1;
-                    break;
-
-                case 'November':
-                    $totalSales[10] = $totalSales[10] + $monthlySale->total;
-                    $count[10] = $count[10] + 1;
-                    break;
-
-                case 'December':
-                    $totalSales[11] = $totalSales[11] + $monthlySale->total;
-                    $count[11] = $count[11] + 1;
-                    break;
-            }
-
-            $i++;
-        }
-
-        for ($i = 0; $i < 12; $i++) {
-            if ($i === 0) {
-                $growth[$i] = $totalSales[$i] - $totalSales[11];
-                if ($totalSales[11] > 0) {
-                    $growthRate[$i] = $growth[$i] / $totalSales[11] * 100;
-                } else {
-                    $growthRate[$i] = null;
-                }
-            } else {
-                $growth[$i] = $totalSales[$i] - $totalSales[$i - 1];
-                if ($totalSales[$i - 1] > 0) {
-                    $growthRate[$i] = $growth[$i] / $totalSales[$i - 1] * 100;
-                } else {
-                    $growthRate[$i] = null;
-                }
-            }
-        }
-
-        $monthsOfYear[0] = 'January';
-        $monthsOfYear[1] = 'February';
-        $monthsOfYear[2] = 'March';
-        $monthsOfYear[3] = 'April';
-        $monthsOfYear[4] = 'May';
-        $monthsOfYear[5] = 'June';
-        $monthsOfYear[6] = 'July';
-        $monthsOfYear[7] = 'August';
-        $monthsOfYear[8] = 'September';
-        $monthsOfYear[9] = 'October';
-        $monthsOfYear[10] = 'November';
-        $monthsOfYear[11] = 'December';
+        $growthRate = $this->orders->growthRateMonthly($growth, $totalSales);
 
         $pdf = PDF::loadView('report.monthlySales.monthlySalesReport', compact('monthlySales', 'monthsOfYear', 'count', 'totalSales', 'growth', 'growthRate'));
         return $pdf->stream();
