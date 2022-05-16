@@ -21,6 +21,8 @@ class DailySalesReportController extends Controller
 
     public function index(): View
     {
+        $this->authorize('dailySalesReport.generate');
+
         $initialDate = Carbon::now()->format('Y-m-d');
         return view('report.dailySales.index', compact('initialDate'));
     }
