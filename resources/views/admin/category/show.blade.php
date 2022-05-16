@@ -54,7 +54,7 @@
 
                 <a class="btn btn-danger" href="{{ route('cancel','admin.category.index') }}">{{ trans('admin.categories.options.cancel') }}</a>
 
-                <a class="btn btn-success float-right" href="{{ route('admin.category.edit',$cat->id) }}">{{ trans('admin.categories.options.update') }}</a>
+                <a class="btn btn-success" href="{{ route('admin.category.edit',$cat->id) }}">{{ trans('admin.categories.options.update') }}</a>
 
             </div>
 

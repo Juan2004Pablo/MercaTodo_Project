@@ -22,5 +22,3 @@ Route::get('order-detail', [
     'as' => 'order-detail',
     'uses' => 'Admin\AdminCartController@orderDetail',
 ]);
-
-Route::resource('admin/detail', 'Admin\AdminDetailController')->names('admin.detail');

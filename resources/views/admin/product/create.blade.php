@@ -33,13 +33,7 @@
 
                                         <label>{{ trans('admin.products.fields.name') }}</label>
 
-                                        <input
-                                            v-model="name"
-                                            @blur="getProduct"
-                                            @focus="div_appear= false"
-
-                                        class="form-control" type="text" id="name" name="name" minlength="3"
-                                        maxlength="50" required>
+                                        <input class="form-control" type="text" id="name" name="name" min="3" max="50" required>
 
                                     </div>
 
@@ -187,8 +181,7 @@
 
                                                 @if ($status == 'New')
 
-                                                    <option value="{{ $status }}"
-                                                            selected="selected">{{ $status }}</option>
+                                                    <option value="{{ $status }}" selected="selected">{{ $status }}</option>
 
                                                 @else
 
