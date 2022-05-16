@@ -11,10 +11,10 @@ class ImportFileRequest extends FormRequest
         return true;
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
-            'file' => 'required', 'mimes:xlsx',
+            'file' => ['required', 'file', 'mimes:xlsx', 'max:8000'],
         ];
     }
 }
