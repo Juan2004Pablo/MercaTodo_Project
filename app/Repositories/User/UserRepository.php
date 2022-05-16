@@ -46,9 +46,9 @@ class UserRepository extends BaseRepository
 
     public function usersExport(): BinaryFileResponse
     {
-        return (new UsersExport())->download('users.xlsx');
-
         Log::channel('contlog')->info('The user ' . Auth::user()->name . ' ' . Auth::user()->surname . ' has exported a list of users for possible modification');
+        
+        return (new UsersExport())->download('users.xlsx');
     }
 
     public function usersImport(Request $request): void
