@@ -126,4 +126,26 @@ class ProductRepository extends BaseRepository
             }
         }
     }
+
+    public function productsSearch(Request $request): Collection
+    {
+        $products = Product::whereDate('created_at', '>=', $request->get('initial-date'))
+            ->whereDate('created_at', '<=', $request->get('end-date'))
+            ->get(['id', 'name', 'price', 'category_id', 'quantity', 'description', 'created_at']);
+
+        return $products;
+    }
+
+    public function categorysearch(Collection $products): array
+    {
+        $i = 0;
+
+        foreach ($products as $product) {
+            $category = Category::where('id', $product->category_id)->first();
+            $nameCategory[$i] = $category->name;
+            $i++;
+        }
+
+        return $nameCategory;
+    }
 }
