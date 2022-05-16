@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Product;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\Exportable;
@@ -13,7 +14,7 @@ use Maatwebsite\Excel\Concerns\WithStyles;
 use Maatwebsite\Excel\Excel;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class ProductsExport implements FromCollection, Responsable, WithHeadings, ShouldAutoSize, WithStyles
+class ProductsExport implements FromCollection, Responsable, WithHeadings, ShouldAutoSize, WithStyles, ShouldQueue
 {
     use Exportable;
 
@@ -46,7 +47,7 @@ class ProductsExport implements FromCollection, Responsable, WithHeadings, Shoul
         return Product::select('id', 'name', 'description', 'price', 'quantity', 'disable_at', 'category_id', 'status', 'created_at', 'updated_at')->get();
     }
 
-    public function styles(Worksheet $sheet)
+    public function styles(Worksheet $sheet): array
     {
         return [
             1    => ['font' => ['bold' => true]],
