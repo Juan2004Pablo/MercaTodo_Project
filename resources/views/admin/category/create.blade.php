@@ -8,7 +8,7 @@
 @endsection
 
 @section('content')
-<div id="apicategory">
+<div id="category">
 
     <form action="{{ route('admin.category.store') }}" method="POST">
         @csrf

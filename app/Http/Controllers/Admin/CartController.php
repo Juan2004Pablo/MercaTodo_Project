@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-class AdminCartController extends Controller
+class CartController extends Controller
 {
     protected $cartRepo;
 

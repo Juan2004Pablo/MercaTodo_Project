@@ -26,25 +26,25 @@ Route::post('api/logout', [\App\Http\Controllers\Api\Auth\AuthController::class,
 
 Route::get('api/products/index', [
     'as' => 'api.products.index',
-    'uses' => 'Api\ApiProductController@index',
+    'uses' => 'Api\ProductController@index',
 ]);
 
 Route::get('api/product/show/{product}', [
     'as' => 'api.product.show',
-    'uses' => 'Api\ApiProductController@show',
+    'uses' => 'Api\ProductController@show',
 ]);
 
 Route::post('api/product/store', [
     'as' => 'api.product.store',
-    'uses' => 'Api\ApiProductController@store',
+    'uses' => 'Api\ProductController@store',
 ]);
 
 Route::put('api/product/update/{product}', [
     'as' => 'api.product.update',
-    'uses' => 'Api\ApiProductController@update',
+    'uses' => 'Api\ProductController@update',
 ]);
 
 Route::get('api/product/delete/{product}', [
     'as' => 'api.product.delete',
-    'uses' => 'Api\ApiProductController@destroy',
+    'uses' => 'Api\ProductController@destroy',
 ]);

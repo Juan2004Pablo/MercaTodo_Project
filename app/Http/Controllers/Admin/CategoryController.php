@@ -8,7 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class AdminCategoryController extends Controller
+class CategoryController extends Controller
 {
     protected $categoryRepo;
 
