@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 class OrderRepository extends BaseRepository
 {
@@ -76,6 +77,8 @@ class OrderRepository extends BaseRepository
             $totalSales[$i] = $totalSales[$i - 1] + $dailySale->total;
             $i = $i + 1;
         }
+
+        Log::channel('contlog')->info('The user ' . Auth::user()->name . ' ' . Auth::user()->surname . ' has generated a daily sales report');
 
         return $totalSales;
     }
@@ -283,6 +286,8 @@ class OrderRepository extends BaseRepository
             }
         }
 
+        Log::channel('contlog')->info('The user ' . Auth::user()->name . ' ' . Auth::user()->surname . ' has generated a monthly sales report');
+
         return $growthRate;
     }
 
@@ -395,6 +400,8 @@ class OrderRepository extends BaseRepository
                 }
             }
         }
+
+        Log::channel('contlog')->info('The user ' . Auth::user()->name . ' ' . Auth::user()->surname . ' has generated a sales day report');
 
         return $growthRate;
     }

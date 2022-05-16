@@ -104,6 +104,7 @@ class ProductRepository extends BaseRepository
 
     public function productsExport(): BinaryFileResponse
     {
+        Log::channel('contlog')->info('The user ' . Auth::user()->name . ' ' . Auth::user()->surname . ' has exported a list of products');
         return (new ProductsExport())->download('products.xlsx');
     }
 
@@ -114,6 +115,7 @@ class ProductRepository extends BaseRepository
 
         try {
             $import->import($file);
+            Log::channel('contlog')->info('The user ' . Auth::user()->name . ' ' . Auth::user()->surname . ' has imported a list of products');
         } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
             $failures = $e->failures();
 
@@ -132,6 +134,8 @@ class ProductRepository extends BaseRepository
         $products = Product::whereDate('created_at', '>=', $request->get('initial-date'))
             ->whereDate('created_at', '<=', $request->get('end-date'))
             ->get(['id', 'name', 'price', 'category_id', 'quantity', 'description', 'created_at']);
+
+        Log::channel('contlog')->info('The user ' . Auth::user()->name . ' ' . Auth::user()->surname . ' has generated a products report');
 
         return $products;
     }
