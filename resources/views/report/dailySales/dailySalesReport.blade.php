@@ -13,6 +13,8 @@
     @if(count($dailySales))
 
         <table class="table table-striped">
+        
+            <caption>{{ trans('report.daily_sales_report.title.title') }}</caption>
 
             <thead class="text-white bg-secondary">
 

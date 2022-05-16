@@ -13,6 +13,8 @@
     @if(count($monthlySales))
 
         <table class="table table-striped">
+        
+            <caption>{{ trans('report.monthly_sales_report.title.title') }}</caption>
 
             <thead class="text-white bg-secondary">
 

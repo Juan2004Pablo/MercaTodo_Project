@@ -14,6 +14,8 @@
 
         <table class="table table-striped">
 
+            <caption>{{ trans('report.users_report.title.title') }}</caption>
+            
             <thead class="text-white bg-secondary">
 
                 <tr>
