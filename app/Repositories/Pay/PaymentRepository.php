@@ -23,9 +23,8 @@ class PaymentRepository extends BaseRepository
     public function redirect(): string
     {
         $pay = Pay::inProcess()->first();
-        $url = $pay->process_url;
 
-        return $url;
+        return $pay->process_url;
     }
 
     public function ordersData(object $data): void
@@ -143,9 +142,7 @@ class PaymentRepository extends BaseRepository
 
     public function countPays(int $reference): int
     {
-        $payments = $this->getModel()->all()->where('status', 'APPROVED')
+        return $this->getModel()->all()->where('status', 'APPROVED')
             ->where('reference', $reference)->count();
-
-        return $payments;
     }
 }

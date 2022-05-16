@@ -28,9 +28,7 @@ class UserRepository extends BaseRepository
 
     public function roleToUser(): Collection
     {
-        $roles = Role::orderBy('id')->get();
-
-        return $roles;
+        return Role::orderBy('id')->get();
     }
 
     public function updateUser(Request $data, User $user): User
@@ -88,10 +86,8 @@ class UserRepository extends BaseRepository
 
     public function usersSearch(Request $request): Collection
     {
-        $users = User::whereDate('created_at', '>=', $request->get('initial-date'))
+        return User::whereDate('created_at', '>=', $request->get('initial-date'))
             ->whereDate('created_at', '<=', $request->get('end-date'))->orderBy('created_at', 'Asc')
             ->get(['id', 'name', 'surname', 'identification', 'address', 'phone', 'email', 'created_at']);
-
-        return $users;
     }
 }
