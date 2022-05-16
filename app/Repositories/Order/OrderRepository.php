@@ -43,12 +43,10 @@ class OrderRepository extends BaseRepository
 
     public function dailySalesSearch(Request $request): Collection
     {
-        $dailySales = Order::whereDate('created_at', '>=', $request->get('initial-date'))
+        return Order::whereDate('created_at', '>=', $request->get('initial-date'))
             ->whereDate('created_at', '<=', $request->get('end-date'))
             ->where('status', 'APPROVED')->orderBy('created_at', 'Asc')
             ->get(['created_at', 'id', 'code', 'status', 'total']);
-
-        return $dailySales;
     }
 
     public function productNameSearch(Collection $dailySales): array
@@ -85,12 +83,10 @@ class OrderRepository extends BaseRepository
 
     public function monthlySalesSearch(Request $request): Collection
     {
-        $monthlySales = Order::whereDate('created_at', '>=', $request->get('initial-date'))
+        return Order::whereDate('created_at', '>=', $request->get('initial-date'))
             ->whereDate('created_at', '<=', $request->get('end-date'))
             ->where('status', 'APPROVED')->orderBy('created_at', 'Asc')
-            ->get(['created_at', 'id', 'code', 'status', 'total']);
-
-        return $monthlySales;
+            ->get(['created_at', 'id', 'code', 'status', 'total']);;
     }
 
     public function monthsOfYear(): array
@@ -293,12 +289,10 @@ class OrderRepository extends BaseRepository
 
     public function salesByDaysSearch(Request $request): Collection
     {
-        $salesByDays = Order::whereDate('created_at', '>=', $request->get('initial-date'))
+        return Order::whereDate('created_at', '>=', $request->get('initial-date'))
             ->whereDate('created_at', '<=', $request->get('end-date'))
             ->where('status', 'APPROVED')->orderBy('created_at', 'Asc')
             ->get(['created_at', 'id', 'code', 'status', 'total']);
-
-        return $salesByDays;
     }
 
     public function daySearch(Collection $salesByDays): array
