@@ -68,10 +68,7 @@ class PlaceToPayRepository extends BaseRepository
         try {
             $response = Http::withHeaders(['Content-Type' => 'application/json'])->post($url, $data);
 
-            $body = $response->getBody();
-            $result = json_decode($response->getBody());
-
-            return $result;
+            return json_decode($response->getBody());
         } catch (\Throwable $e) {
             Log::channel('contlog')->error(
                 'RequestException',
@@ -107,10 +104,9 @@ class PlaceToPayRepository extends BaseRepository
             'json' => $data, ]);
 
             $body = $response->getBody();
-            $res = json_decode($response->getBody());
             Log::channel('contlog')->info('payment response: ' . $body);
 
-            return $res;
+            return json_decode($response->getBody());
         } catch (\Throwable $e) {
             Log::channel('contlog')->error(
                 'PlaceToPayException',
@@ -147,10 +143,9 @@ class PlaceToPayRepository extends BaseRepository
                 'json' => $data, ]);
 
             $body = $response->getBody();
-            $res = json_decode($response->getBody());
             Log::channel('contlog')->info('payment response: ' . $body);
 
-            return $res;
+            return json_decode($response->getBody());;
         } catch (\Throwable $e) {
             Log::channel('contlog')->error(
                 'PlaceToPayException',
