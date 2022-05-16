@@ -107,21 +107,34 @@ class MonthlySalesReportController extends Controller
             if ($i === 0) {
                 $growth[$i] = $totalSales[$i] - $totalSales[11];
                 if ($totalSales[11] > 0) {
-                    $growthRate[$i] = $growth[$i] / $totalSales[11];
+                    $growthRate[$i] = $growth[$i] / $totalSales[11] * 100;
                 } else {
                     $growthRate[$i] = null;
                 }
             } else {
                 $growth[$i] = $totalSales[$i] - $totalSales[$i - 1];
                 if ($totalSales[$i - 1] > 0) {
-                    $growthRate[$i] = $growth[$i] / $totalSales[$i - 1];
+                    $growthRate[$i] = $growth[$i] / $totalSales[$i - 1] * 100;
                 } else {
                     $growthRate[$i] = null;
                 }
             }
         }
 
-        $pdf = PDF::loadView('report.monthlySales.monthlySalesReport', compact('monthlySales', 'months', 'count', 'totalSales', 'growth', 'growthRate'));
+        $monthsOfYear[0] = 'January';
+        $monthsOfYear[1] = 'February';
+        $monthsOfYear[2] = 'March';
+        $monthsOfYear[3] = 'April';
+        $monthsOfYear[4] = 'May';
+        $monthsOfYear[5] = 'June';
+        $monthsOfYear[6] = 'July';
+        $monthsOfYear[7] = 'August';
+        $monthsOfYear[8] = 'September';
+        $monthsOfYear[9] = 'October';
+        $monthsOfYear[10] = 'November';
+        $monthsOfYear[11] = 'December';
+
+        $pdf = PDF::loadView('report.monthlySales.monthlySalesReport', compact('monthlySales', 'monthsOfYear', 'count', 'totalSales', 'growth', 'growthRate'));
         return $pdf->stream();
 
         //return $pdf->download('productsReport.pdf');
