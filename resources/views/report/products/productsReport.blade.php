@@ -13,6 +13,8 @@
     @if(count($products))
 
         <table class="table table-striped">
+        
+            <caption>{{ trans('report.products_report.title.title') }}</caption>
 
             <thead class="text-white bg-secondary">
 
