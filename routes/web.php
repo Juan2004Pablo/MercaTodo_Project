@@ -20,14 +20,14 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('verified')
+Route::get('home', 'HomeController@index')->name('home')->middleware('verified')
     ->middleware('auth');
 
-Route::resource('/role', 'RoleController')->names('role');
+Route::resource('role', 'RoleController')->names('role');
 
-Route::resource('/user', 'UserController')->names('user');
+Route::resource('user', 'UserController')->names('user')->middleware('disable');
 
-Route::post('restore/{id}', ['as' => 'user.restore', 'uses' => 'UserController@restore']);
+Route::get('user/toggle/{user}', ['as' => 'user.toggle', 'uses' => 'UserController@toggle']);
 
 Route::get('cancel/{ruta}', function ($ruta) {
     return redirect()->route($ruta)->with('cancel', 'Action Canceled!');

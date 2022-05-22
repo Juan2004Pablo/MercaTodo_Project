@@ -73,38 +73,22 @@
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->identification }}</td>
                                         <td>{{ $user->roles[0]->name}}</td>
-                                        <td>{{ $user->disable_at }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($user->disable_at)->format('d/m/Y') }}</td>
 
                                         <td>
-                                            <a class="btn btn-info" href="{{ route('user.show',$user->id) }}">{{ trans('user.user.options.show') }}</a>
+                                            <a class="btn btn-sm btn-info" href="{{ route('user.show',$user->id) }}">{{ trans('user.user.options.show') }}</a>
                                         </td>
 
                                         <td>
-                                            <a class="btn btn-success" href="{{ route('user.edit',$user->id) }}">{{ trans('user.user.options.update') }}</a>
+                                            <a class="btn btn-sm btn-success" href="{{ route('user.edit',$user->id) }}">{{ trans('user.user.options.update') }}</a>
                                         </td>
 
                                         <td>
                                             
-                                            @if($user->trashed())
-
-                                                <form action=" {{ route('user.restore', ['id'=> $user->id]) }}" method="POST">
-                                                    @csrf
-
-                                                    <button class="btn btn-success"> Activate </button>
-
-                                                </form>
-
+                                            @if($user->disable_at)
+                                                <a class="btn btn-sm btn-warning " href="{{ route('user.toggle',$user) }}"><i class="fa fa-fw fa-eye"></i> Enable</a>
                                             @else
-                                            
-                                                <form action="{{ route('user.destroy',$user->id) }}" method="POST">
-
-                                                    @csrf
-                                                    @method('DELETE')
-
-                                                    <button class="btn btn-danger" onclick="return confirm('¿Desea eliminar este usuario?');"> Inactivate </button>
-
-                                                </form>
-
+                                                <a class="btn btn-sm btn-danger " href="{{ route('user.toggle',$user) }}"><i class="fa fa-fw fa-eye"></i> Disable</a>
                                             @endif
 
                                         </td>
