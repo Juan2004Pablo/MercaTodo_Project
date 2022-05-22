@@ -44,6 +44,19 @@ class UserRepository extends BaseRepository
         return $user;
     }
 
+    public function toggleUser(User $user): void
+    {
+        $user->disable_at = $user->disable_at ? null : now();
+
+        $user->save();
+
+        if ($user->disable_at === null) {
+            \Log::warning('enabled user account with id: ' . $user->id);
+        } else {
+            \Log::warning('disabled user account with id: ' . $user->id);
+        }
+    }
+
     public function usersExport(): BinaryFileResponse
     {
         return (new UsersExport())->download('users.xlsx');
