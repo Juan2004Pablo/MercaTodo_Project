@@ -54,6 +54,7 @@
                                 <th>{{ trans('admin.categories.fields.id') }}</th>
                                 <th>{{ trans('admin.categories.fields.name') }}</th>
                                 <th>{{ trans('admin.categories.fields.description') }}</th>
+                                <th>{{ trans('user.user.fields.disable_at') }}</th>
                                 <th colspan="3"></th>
 
                             </tr>
@@ -68,21 +69,21 @@
                                 <td>{{$category->id}}</td>
                                 <td>{{$category->name}}</td>
                                 <td>{{$category->description}}</td>
-
+                                <td>{{ $category->deleted_at}}</td>
                             
-                                <td><a class="btn btn-info"
+                                <td><a class="btn btn-sm btn-info"
                                 href="{{ route('admin.category.show',$category->id) }}">{{ trans('admin.categories.options.show') }}</a></td>
                             
-                                <td><a class="btn btn-success"
+                                <td><a class="btn btn-sm btn-success"
                                 href="{{ route('admin.category.edit',$category->id) }}">{{ trans('admin.categories.options.update') }}</a></td>
                             
                                 <td>
-                                    @if($category->trashed())
+                                    @if($category->deleted_at)
 
-                                        <form action=" {{ route('admin.category.restore', ['id'=> $category->id]) }}" method="POST">
+                                        <form action=" {{ route('admin.category.restore', $category) }}" method="POST">
                                             @csrf
 
-                                            <button class="btn btn-success">
+                                            <button class="btn btn-sm btn-warning">
                                                 {{ trans('admin.categories.options.activate') }}
                                             </button>
 
@@ -94,7 +95,7 @@
                                             @csrf
                                             @method('DELETE')
 
-                                            <button class="btn btn-danger"
+                                            <button class="btn btn-sm btn-danger"
                                                 onclick="return confirm('¿do you want to disable this category?');">
                                                 {{ trans('admin.categories.options.inactive') }}
                                             </button>

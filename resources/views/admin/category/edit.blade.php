@@ -14,7 +14,6 @@
         @csrf
         @method('PUT')
 
-        <span style="display:none;" id="edit">{{$edit}}</span>
         <span style="display:none;" id="nametemp">{{$cat->name}}</span>
 
         <div class="card">
@@ -35,17 +34,15 @@
             <div class="card-body">
 
                 <div class="form-group">
+
                     <label for="name">{{ trans('admin.categories.fields.name') }}</label>
-                    <input v-model="name"
-                           @blur="getCategory"
-                           @focus="div_appear= false"
-                           class="form-control valCaracteresRepetidos" type="text" name="name" id="name" maxlength="20">
+                    <input class="form-control" type="text" name="name" id="name" maxlength="20" value="{{ $cat->name }}">
                         
                     <br v-if="div_appear">
 
                     <label for="description">{{ trans('admin.categories.fields.description') }}</label>
-                    <textarea class="form-control" name="description"
-                        id="description" cols="30" rows="5" minlength="15">{{ $cat ->description}}</textarea>
+                    <textarea class="form-control" name="description" id="description" cols="30" rows="5" minlength="15">{{ $cat ->description}}</textarea>
+                
                 </div>
 
             </div>
