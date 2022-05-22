@@ -7,8 +7,10 @@ use App\Imports\RolesImport;
 use App\Repositories\BaseRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -61,6 +63,20 @@ class RoleRepository extends BaseRepository
         Log::channel('contlog')->info('The user ' . Auth::user()->name . ' ' . Auth::user()->surname . ' has updated the role: ' . $role->name);
 
         return $role;
+    }
+
+    public function deleteRole(Role $role): RedirectResponse
+    {
+        $exist = DB::table('model_has_roles')->select('role_id', 'model_id')->where('role_id', $role->id)
+            ->where('model_id', auth()->user()->id)->first();
+
+        if ($exist === null) {
+            $this->delete($role);
+
+            return redirect()->route('role.index')->with('status_success', 'Role successfully removed');
+        } else {
+            return redirect()->route('role.index')->with('status_success', 'The role cannot be removed, there is at least one user with that role');
+        }
     }
 
     public function rolesExport(): BinaryFileResponse
