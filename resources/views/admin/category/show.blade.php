@@ -11,7 +11,6 @@
 <div id="category">
     <form>
         @csrf
-        <span style="display:none;" id="edit">{{$edit}}</span>
         <span style="display:none;" id="nametemp">{{$cat->name}}</span>
 
         <div class="card">

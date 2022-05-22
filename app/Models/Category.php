@@ -23,7 +23,7 @@ class Category extends Model
     public static function cachedCategories()
     {
         return Cache::rememberForever('categories', function () {
-            return self::withTrashed('category')->select('id', 'name', 'description')->orderBy('id', 'Asc')->get();
+            return self::withTrashed('category')->select('id', 'name', 'description', 'deleted_at')->orderBy('id', 'Asc')->get();
         });
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Repositories\category\CategoryRepository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -48,9 +49,8 @@ class CategoryController extends Controller
         $this->authorize('category.update');
 
         $cat = $this->categoryRepo->findCategory($id);
-        $edit = 'Si';
 
-        return view('admin.category.edit', compact('cat', 'edit'));
+        return view('admin.category.edit', compact('cat'));
     }
 
     public function update(Request $request, int $id): RedirectResponse
@@ -69,20 +69,14 @@ class CategoryController extends Controller
         $this->authorize('category.show');
 
         $cat = $this->categoryRepo->findCategory($id);
-        $edit = 'Si';
 
-        return view('admin.category.show', compact('cat', 'edit'));
+        return view('admin.category.show', compact('cat'));
     }
 
-    public function destroy(int $id): RedirectResponse
+    public function destroy(Category $category): RedirectResponse
     {
         $this->authorize('category.disable');
-
-        $cat = $this->categoryRepo->findId($id);
-        $this->categoryRepo->delete($cat);
-
-        return redirect()->route('admin.category.index')
-            ->with('data', 'Category disabled');
+        return $this->categoryRepo->deleteCategory($category);
     }
 
     public function restore(Request $request): RedirectResponse
@@ -91,7 +85,6 @@ class CategoryController extends Controller
 
         $this->categoryRepo->restore($request);
 
-        return redirect()->route('admin.category.index')
-            ->with('data', 'Category  enabled');
+        return redirect()->route('admin.category.index')->with('data', 'Category  enabled');
     }
 }
