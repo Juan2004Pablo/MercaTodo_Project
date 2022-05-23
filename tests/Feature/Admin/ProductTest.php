@@ -2,15 +2,12 @@
 
 namespace Tests\Feature\Admin;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Constants\Resource;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
 class ProductTest extends TestCase

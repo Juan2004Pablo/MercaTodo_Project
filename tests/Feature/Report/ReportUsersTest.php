@@ -4,7 +4,6 @@ namespace Tests\Feature\Report;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class ReportUsersTest extends TestCase

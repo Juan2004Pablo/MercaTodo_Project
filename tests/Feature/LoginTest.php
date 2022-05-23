@@ -3,9 +3,9 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class LoginTest extends TestCase
 {
@@ -63,7 +63,7 @@ class LoginTest extends TestCase
 
         $this->assertGuest($guard = null);
     }
-    
+
     private function user(): User
     {
         $user = User::factory()->create();

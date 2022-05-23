@@ -3,10 +3,9 @@
 namespace Tests\Feature\Report;
 
 use App\Models\Category;
-use App\Models\User;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class ReportDailySalesTest extends TestCase
@@ -37,7 +36,7 @@ class ReportDailySalesTest extends TestCase
 
         $response->assertStatus(419);
     }
-    
+
     private function user(): User
     {
         $user = User::factory()->create();

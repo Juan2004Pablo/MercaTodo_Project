@@ -2,12 +2,11 @@
 
 namespace Tests\Feature\Export;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class ExportProductsTest extends TestCase
 {
@@ -36,7 +35,7 @@ class ExportProductsTest extends TestCase
 
         $response->assertDownload();
     }
-    
+
     private function user(): User
     {
         $user = User::factory()->create();

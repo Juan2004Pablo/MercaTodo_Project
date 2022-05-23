@@ -2,11 +2,8 @@
 
 namespace Tests\Feature\Admin;
 
-use App\Constants\Resource;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
 class UserTest extends TestCase

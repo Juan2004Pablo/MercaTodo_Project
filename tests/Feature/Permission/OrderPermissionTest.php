@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Permission;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class OrderPermissionTest extends TestCase

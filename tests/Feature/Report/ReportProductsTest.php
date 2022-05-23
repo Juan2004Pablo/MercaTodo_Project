@@ -3,10 +3,9 @@
 namespace Tests\Feature\Report;
 
 use App\Models\Category;
-use App\Models\User;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class ReportProductsTest extends TestCase

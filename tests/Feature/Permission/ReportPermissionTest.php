@@ -2,11 +2,8 @@
 
 namespace Tests\Feature\Permission;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Constants\Resource;
 use App\Models\User;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ReportPermissionTest extends TestCase
