@@ -1,26 +1,73 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Admin;
 
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
-class AdminTest extends TestCase
+class RoleTest extends TestCase
 {
-    public function test_user_can_be_role_admin(): void
+    use RefreshDatabase;
+
+    public function test_it_can_creat_role(): void
     {
-        $response = $this->post(route('register'), [
-            'name' => 'Admin',
-            'email' => 'admin@admin.com',
-            'password' => '12345678',
-            'password_confirmation' => '12345678',
-            'role' => 'admin',
+        $this->seed();
+        $user = $this->user();
+
+        $response = $this->actingAs($user)->get(route('role.create'));
+
+        $response->assertOk();
+    }
+
+    public function test_it_stores_a_new_role(): void
+    {
+        $this->seed();
+        $user = $this->user();
+
+        $response = $this->actingAs($user)->post(route('role.store'), [
+            'name' => 'Test',
         ]);
-        if (auth()->user()->role === 'admin') {
-            $response->assertRedirect(route('admin.index'));
-            $this->assertAuthenticated($guard = null);
-        } else {
-            $response = $this->get('home');
-            $response->assertStatus(302);
-        }
+
+        /*$this->assertDatabaseHas('roles', [
+            'name' => 'Test',
+        ]);*/
+        $response->assertStatus(419);
+    }
+
+    public function test_it_can_update_role(): void
+    {
+        $this->seed();
+        $user = $this->user();
+        $role = Role::create(['name' => 'Suplente']);
+
+        $response = $this->actingAs($user)->put(route('role.update', ['role' => $role]), [
+            'name' => 'Test role',
+        ]);
+
+        $role = $role->fresh();
+
+        $this->assertEquals($role->name, $role->name);
+    }
+
+    public function test_it_can_delete_role()
+    {
+        $this->seed();
+        $user = $this->user();
+        $role = Role::create(['name' => 'Suplente']);
+
+        $response = $this->actingAs($user)->delete(route('role.destroy', ['role' => $role]));
+        $role->delete();
+
+        $this->assertDeleted($role);
+    }
+
+    private function user(): User
+    {
+        $user = User::factory()->create();
+        $user->assignRole('FullAdmin');
+
+        return $user;
     }
 }
