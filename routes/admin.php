@@ -14,9 +14,9 @@ Route::post('restoreproduct/{id}', ['as' => 'admin.product.restore', 'uses' => '
 
 Route::post('restorecategory/{id}', ['as' => 'admin.category.restore', 'uses' => 'Admin\CategoryController@restore']);
 
-Route::resource('/product', 'ShowProductController')->names('product');
+Route::get('product/{product}', ['as' => 'product', 'uses' => 'ShowProductController@show']);
 
-Route::resource('admin/order', 'Admin\OrderController')->names('admin.order');
+Route::get('admin/order', ['as' => 'admin.order', 'uses' => 'Admin\OrderController@index']);
 
 Route::get('order-detail', [
     'as' => 'order-detail',

@@ -43,7 +43,7 @@
 
                                                 <div>
 
-                                                    <a class="btn btn-sm btn-dark" href="{{ route('product.show',$item->id) }}"><i class="far fa-eye"></i></a>
+                                                    <a class="btn btn-sm btn-dark" href="{{ route('product',$item->id) }}"><i class="far fa-eye"></i></a>
                                                     <a class="btn btn-sm btn-dark" href="{{ route('cart.add',$item->id) }}"><i class="fas fa-cart-plus"></i></a>
                                                 
                                                 </div>

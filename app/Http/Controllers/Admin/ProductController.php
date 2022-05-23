@@ -45,11 +45,13 @@ class ProductController extends Controller
         return view('admin.product.create', compact('categories', 'statusProducts'));
     }
 
-    public function store(StoreProductRequest $request): void
+    public function store(StoreProductRequest $request): RedirectResponse
     {
         $this->authorize('product.create');
 
         $this->productRepo->createProduct($request);
+
+        return redirect()->route('admin.product.index')->with('status_success', 'product created successfully!');
     }
 
     public function edit(Product $product): View
