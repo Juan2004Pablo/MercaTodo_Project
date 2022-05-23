@@ -129,7 +129,7 @@
                                                 @csrf
                                                 @method('DELETE')
 
-                                                <button class="btn btn-danger" onclick="return confirm('¿do you want to disable this product?');"> {{ trans('admin.products.options.inactive') }} </button>
+                                                <button class="btn btn-danger" onclick="return confirm('Do you want to disable this product?');"> {{ trans('admin.products.options.inactive') }} </button>
 
                                             </form>
 
