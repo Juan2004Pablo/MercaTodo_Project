@@ -6,7 +6,6 @@ use App\Http\Requests\UserRequest;
 use App\Models\User;
 use App\Repositories\User\UserRepository;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class UserController extends Controller
@@ -55,23 +54,12 @@ class UserController extends Controller
             ->with('status_success', 'user update successfully');
     }
 
-    public function destroy(User $user): RedirectResponse
+    public function toggle(User $user): RedirectResponse
     {
         $this->authorize('user.disable');
 
-        $this->usersRepo->delete($user);
+        $this->usersRepo->toggleUser($user);
 
-        return redirect()->route('user.index')
-            ->with('status_success', 'user successfully disabled');
-    }
-
-    public function restore(Request $request): RedirectResponse
-    {
-        $this->authorize('user.disable');
-
-        $this->usersRepo->restore($request);
-
-        return redirect()->route('user.index')
-            ->with('status_success', 'user  enabled');
+        return redirect()->route('user.index');
     }
 }

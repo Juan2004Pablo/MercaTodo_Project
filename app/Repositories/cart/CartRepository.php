@@ -19,7 +19,7 @@ class CartRepository extends BaseRepository
 
     public function addToCart(Request $data): void
     {
-        $order = Order::open()->first();
+        $order = Order::pending()->first();
 
         if ($order) {
             $product = Product::find($data->id);
@@ -67,7 +67,7 @@ class CartRepository extends BaseRepository
     public function updateQuantity(int $id, int $quantity): void
     {
         $product = Product::where('id', $id)->first();
-        $order = Order::open()->first();
+        $order = Order::pending()->first();
         $detailproduct = Detail::where('order_id', $order->id)
             ->where('products_id', $product->id)->first();
 
@@ -78,7 +78,7 @@ class CartRepository extends BaseRepository
 
     public function total(): int
     {
-        $cart = $this->getModel()->with('details.products')->open()->get();
+        $cart = $this->getModel()->with('details.products')->pending()->get();
 
         $total = 0;
 
@@ -100,21 +100,21 @@ class CartRepository extends BaseRepository
     public function deleteProductOfCart(Request $data): void
     {
         $product = Product::find($data->id);
-        $order = Order::open()->first();
+        $order = Order::pending()->first();
         $detailproduct = Detail::where('order_id', $order->id)->where('products_id', $product->id)->first();
         $detailproduct->delete();
     }
 
     public function emptyCart(): void
     {
-        $order = Order::open()->first();
+        $order = Order::pending()->first();
         Detail::where('order_id', $order->id)->delete();
-        Order::open()->delete();
+        Order::pending()->delete();
     }
 
     public function datesReceiveOrder(Request $data): Model
     {
-        $order = $this->getModel()->open()->first();
+        $order = $this->getModel()->pending()->first();
         $order->name_receive = $data->name_receive;
         $order->surname = $data->surname;
         $order->address = $data->address;
@@ -126,6 +126,6 @@ class CartRepository extends BaseRepository
 
     public function detail(): Model
     {
-        return $this->getModel()->with('details', 'details.products')->open()->first();
+        return $this->getModel()->with('details', 'details.products')->pending()->first();
     }
 }

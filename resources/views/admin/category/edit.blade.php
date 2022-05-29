@@ -16,7 +16,6 @@
         @csrf
         @method('PUT')
 
-        <span style="display:none;" id="edit">{{$edit}}</span>
         <span style="display:none;" id="nametemp">{{$cat->name}}</span>
 
         <div class="card">
@@ -26,10 +25,12 @@
                 <h3 class="card-title">{{ trans('admin.categories.titles.adminCategory') }}</h3>
 
                 <div class="card-tools">
+
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                         <i class="fas fa-minus"></i></button>
                     <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
                         <i class="fas fa-times"></i></button>
+                
                 </div>
 
             </div>

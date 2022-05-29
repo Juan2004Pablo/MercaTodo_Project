@@ -37,7 +37,7 @@
                 
                 <li class="nav-item"><a href="{{ route('admin.product.index') }}" class="nav-link">{{ trans('template.admin.products') }}</a></li>
 
-                <li class="nav-item"><a href="{{ route('admin.order.index') }}" class="nav-link">{{ trans('template.admin.orders') }}</a></li>
+                <li class="nav-item"><a href="{{ route('admin.order') }}" class="nav-link">{{ trans('template.admin.orders') }}</a></li>
                 
                 <li class="nav-item"><a href="{{route('report.index')}}" class="nav-link">{{ trans('template.admin.reports') }}</a></li>
 

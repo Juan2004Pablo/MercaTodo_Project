@@ -44,7 +44,7 @@
 
                     </form>
 
-                    <a class="btn btn-Dark" href="{{ route('products.export') }}"> {{ trans('admin.products.options.export') }} </a>
+                    <a class="btn btn-dark" href="{{ route('products.export') }}"> {{ trans('admin.products.options.export') }} </a>
 
                 </div>
 
@@ -121,7 +121,7 @@
 
                                                 @csrf
 
-                                                <button class="btn btn-success"> {{ trans('admin.products.options.active') }} </button>
+                                                <button class="btn btn-success"> {{ trans('admin.products.options.activate') }} </button>
                                             </form>
 
                                         @else
@@ -131,7 +131,7 @@
                                                 @csrf
                                                 @method('DELETE')
 
-                                                <button class="btn btn-danger" onclick="return confirm('¿do you want to disable this product?');"> {{ trans('admin.products.options.inactive') }} </button>
+                                                <button class="btn btn-danger" onclick="return confirm('Do you want to disable this product?');"> {{ trans('admin.products.options.inactive') }} </button>
 
                                             </form>
 

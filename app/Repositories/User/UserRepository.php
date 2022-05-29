@@ -9,6 +9,7 @@ use App\Repositories\BaseRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Spatie\Permission\Models\Role;
@@ -40,6 +41,19 @@ class UserRepository extends BaseRepository
         Log::channel('contlog')->info('The user ' . Auth::user()->name . ' ' . Auth::user()->surname . ' has updated the user: ' . $user->name . ' ' . $user->surname);
 
         return $user;
+    }
+
+    public function toggleUser(User $user): void
+    {
+        $user->disable_at = $user->disable_at ? null : now();
+
+        $user->save();
+
+        if ($user->disable_at === null) {
+            \Log::warning('enabled user account with id: ' . $user->id);
+        } else {
+            \Log::warning('disabled user account with id: ' . $user->id);
+        }
     }
 
     public function usersExport(): BinaryFileResponse

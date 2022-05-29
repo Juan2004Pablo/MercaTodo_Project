@@ -39,7 +39,7 @@ abstract class BaseRepository
     public function getProductsOfCart()
     {
         return $this->getModel()->with('details.products', 'details.products.images')
-            ->open()->first();
+            ->pending()->first();
     }
 
     public function delete(object $object)

@@ -82,9 +82,6 @@ class RoleController extends Controller
     {
         $this->authorize('role.disable');
 
-        $this->rolesRepo->delete($role);
-
-        return redirect()->route('role.index')
-            ->with('status_success', 'Role successfully removed');
+        return $this->rolesRepo->deleteRole($role);
     }
 }

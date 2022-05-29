@@ -17,7 +17,7 @@ class RoleHasPermissionSeeder extends Seeder
 
     public const SELLERPERMISSIONS = [Resource::CATEGORY_INDEX, Resource::CATEGORY_CREATE, Resource::CATEGORY_SHOW, Resource::CATEGORY_UPDATE, Resource::CATEGORY_DISABLE,
         Resource::PRODUCT_INDEX, Resource::PRODUCT_CREATE, Resource::PRODUCT_SHOW, Resource::PRODUCT_UPDATE, Resource::PRODUCT_DISABLE, Resource::SHOW_PRODUCT, Resource::CART_SHOW,
-        Resource::CART_ADD, Resource::CART_DELETE, Resource::CART_TRASH, Resource::CART_UPDATE, Resource::DETAIL_INDEX, Resource::ORDER_INDEX, Resource::ORDER_SHOW, Resource::PAY_CREATE,
+        Resource::CART_ADD, Resource::CART_DELETE, Resource::CART_TRASH, Resource::CART_UPDATE, Resource::ORDER_INDEX, Resource::PAY_CREATE,
         Resource::PAY_REDIRECTION, Resource::PAY_DATAOFORDER, Resource::PAY_CONSULTPAYMENT, Resource::PAY_UPDATEDATA, Resource::PAY_SHOW, Resource::PAY_UPDATEORDER, Resource::PAY_SHOWALL,
         Resource::PAY_RETRY, Resource::SHOW_PRODUCT, Resource::PRODUCTS_EXPORT, Resource::CATEGORIES_EXPORT, Resource::CATEGORIES_IMPORT, Resource::PRODUCTS_IMPORT, Resource::REPORT_GENERATE,
         Resource::DAILYSALESREPORT_GENERATE, Resource::MONTHLYSALESREPORT_GENERATE, Resource::PRODUCTSREPORT_GENERATE, Resource::SALESBYDAYSREPORT_GENERATE, Resource::HOME_INDEX, ];
@@ -25,7 +25,7 @@ class RoleHasPermissionSeeder extends Seeder
     public const GUESTPERMISSIONS = [Resource::HOME_INDEX, Resource::SHOW_PRODUCT];
 
     public const CLIENTPERMISSIONS = [Resource::SHOW_PRODUCT, Resource::CART_SHOW, Resource::CART_ADD, Resource::CART_DELETE, Resource::CART_TRASH,
-        Resource::CART_UPDATE, Resource::DETAIL_INDEX, Resource::ORDER_INDEX, Resource::ORDER_SHOW, Resource::PAY_CREATE,
+        Resource::CART_UPDATE, Resource::ORDER_INDEX, Resource::PAY_CREATE,
         Resource::PAY_REDIRECTION, Resource::PAY_DATAOFORDER, Resource::PAY_CONSULTPAYMENT, Resource::PAY_UPDATEDATA, Resource::PAY_SHOW,
         Resource::PAY_UPDATEORDER, Resource::PAY_SHOWALL, Resource::PAY_RETRY, Resource::HOME_INDEX, ];
 

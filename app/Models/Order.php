@@ -27,7 +27,7 @@ class Order extends Model
         return $this->hasMany(Detail::class);
     }
 
-    public function scopeOpen($query): Builder
+    public function scopePending($query): Builder
     {
         return $query->where('orders.user_id', '=', Auth::user()->id)
             ->where('orders.status', '=', 'PENDING');
