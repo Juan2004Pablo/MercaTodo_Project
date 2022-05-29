@@ -2,9 +2,7 @@
 
 namespace App\Repositories\Pay;
 
-use App\Repositories\BaseRepository;
-
-class ConectionPTPRepository extends BaseRepository
+class ConectionPTPRepository
 {
     public function getModel()
     {

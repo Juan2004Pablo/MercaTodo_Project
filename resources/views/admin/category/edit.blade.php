@@ -23,10 +23,12 @@
                 <h3 class="card-title">{{ trans('admin.categories.titles.adminCategory') }}</h3>
 
                 <div class="card-tools">
+
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                         <i class="fas fa-minus"></i></button>
                     <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
                         <i class="fas fa-times"></i></button>
+                
                 </div>
 
             </div>
@@ -34,15 +36,17 @@
             <div class="card-body">
 
                 <div class="form-group">
-
                     <label for="name">{{ trans('admin.categories.fields.name') }}</label>
-                    <input class="form-control" type="text" name="name" id="name" maxlength="20" value="{{ $cat->name }}">
+                    <input v-model="name"
+                           @blur="getCategory"
+                           @focus="div_appear= false"
+                           class="form-control valCaracteresRepetidos" type="text" name="name" id="name" maxlength="20">
                         
                     <br v-if="div_appear">
 
                     <label for="description">{{ trans('admin.categories.fields.description') }}</label>
-                    <textarea class="form-control" name="description" id="description" cols="30" rows="5" minlength="15">{{ $cat ->description}}</textarea>
-                
+                    <textarea class="form-control" name="description"
+                        id="description" cols="30" rows="5" minlength="15">{{ $cat ->description}}</textarea>
                 </div>
 
             </div>

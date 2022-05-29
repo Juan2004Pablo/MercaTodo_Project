@@ -41,7 +41,7 @@
 
                     </form>
 
-                    <a class="m-2 float-left btn btn-Dark" href="{{ route('categories.export') }}">{{ trans('admin.categories.options.export') }} </a>
+                    <a class="m-2 float-left btn btn-dark" href="{{ route('categories.export') }}">{{ trans('admin.categories.options.export') }} </a>
 
                     <a class="m-2 float-right btn btn-primary" href="{{ route('admin.category.create') }}">{{ trans('admin.categories.titles.create') }}</a>
                     
@@ -95,8 +95,8 @@
                                             @csrf
                                             @method('DELETE')
 
-                                            <button class="btn btn-sm btn-danger"
-                                                onclick="return confirm('Do you want to disable this category?');">
+                                            <button class="btn btn-danger"
+                                                onclick="return confirm('¿do you want to disable this category?');">
                                                 {{ trans('admin.categories.options.inactive') }}
                                             </button>
 

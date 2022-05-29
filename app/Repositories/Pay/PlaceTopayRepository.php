@@ -29,11 +29,11 @@ class PlaceToPayRepository extends BaseRepository
 
         if ($p) {
             $p->delete();
-            $order = $this->getModel()->open()->rejected()->first();
+            $order = $this->getModel()->pending()->rejected()->first();
             $total = $order->total;
             $reference = $order->id;
         } else {
-            $order = $this->getModel()->open()->rejected()->first();
+            $order = $this->getModel()->pending()->rejected()->first();
 
             $total = $order->total;
             $reference = $order->id;

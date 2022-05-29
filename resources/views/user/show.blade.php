@@ -31,10 +31,6 @@
                             
                         <br>
                             
-                        <input type="text" class="form-control" id="surname" placeholder="Surname" name="surname" value="{{ $user->surname }}" disabled>
-                            
-                        <br>
-                            
                         <input type="number" class="form-control" id="identification" placeholder="Identification" name="identification" value="{{ $user->identification }}" disabled>
                             
                         <br>

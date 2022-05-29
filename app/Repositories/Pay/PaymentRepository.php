@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Pay;
 
-use App\Jobs\UpdateStatusPay;
+use App\Jobs\UpdateStatusPayment;
 use App\Models\Detail;
 use App\Models\Order;
 use App\Models\Pay;
@@ -30,7 +30,7 @@ class PaymentRepository extends BaseRepository
 
     public function ordersData(object $data): void
     {
-        $order = Order::open()->rejected()->first();
+        $order = Order::pending()->rejected()->first();
 
         $paymen = new Pay();
         $paymen->status;
@@ -60,7 +60,7 @@ class PaymentRepository extends BaseRepository
         if ($dato->status->status == 'PENDING') {
             $paymen->payment_method = 'PENDING';
 
-            UpdateStatusPay::dispatch($paymen);
+            UpdateStatusPayment::dispatch($paymen);
         } else {
             foreach ($dato->payment as $d) {
                 $paymen->payment_method = $d->paymentMethod;
@@ -85,7 +85,7 @@ class PaymentRepository extends BaseRepository
         if ($dato->status->status == 'PENDING') {
             $paymen->payment_method = 'PENDING';
 
-            UpdateStatusPay::dispatch($paymen)->delay(now()->addMinutes(15));
+            UpdateStatusPayment::dispatch($paymen)->delay(now()->addMinutes(5));
         } else {
             foreach ($dato->payment as $d) {
                 $paymen->payment_method = $d->paymentMethod;
@@ -109,7 +109,7 @@ class PaymentRepository extends BaseRepository
 
     public function updateStatusOfOrder(): string
     {
-        $order = Order::open()->rejected()->Orwhere('status', '=', 'PENDING')->first();
+        $order = Order::pending()->rejected()->Orwhere('status', '=', 'PENDING')->first();
         $payer = Pay::all()->where('reference', $order->id)->last();
         $order->status = $payer->status;
         $order->save();
@@ -132,7 +132,7 @@ class PaymentRepository extends BaseRepository
         $c = 0;
         $pays = $this->getModel()->all()->where('user_id', Auth::user()->id);
         foreach ($pays as $p) {
-            if ($this->countPays($p->reference) > 0 & $p->status == 'REJECTED') {
+            if ($this->countPays($p->reference) > 0 && $p->status == 'REJECTED') {
                 $pays->forget($c);
             }
             $c += 1;

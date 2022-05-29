@@ -39,7 +39,7 @@
 
                         </form>
 
-                        <a class="btn btn-Dark" href="{{ route('users.export') }}"> {{ trans('user.user.options.export') }} </a>
+                        <a class="btn btn-dark" href="{{ route('users.export') }}"> {{ trans('user.user.options.export') }} </a>
 
                         <br><br>
 
@@ -88,7 +88,16 @@
                                             @if($user->disable_at)
                                                 <a class="btn btn-sm btn-warning " href="{{ route('user.toggle',$user) }}"><i class="fa fa-fw fa-eye"></i> Enable</a>
                                             @else
-                                                <a class="btn btn-sm btn-danger " href="{{ route('user.toggle',$user) }}"><i class="fa fa-fw fa-eye"></i> Disable</a>
+                                            
+                                                <form action="{{ route('user.destroy',$user->id) }}" method="POST">
+
+                                                    @csrf
+                                                    @method('DELETE')
+
+                                                    <button class="btn btn-danger" onclick="return confirm('¿Desea eliminar este usuario?');"> Inactivate </button>
+
+                                                </form>
+
                                             @endif
 
                                         </td>

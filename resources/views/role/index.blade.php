@@ -42,7 +42,7 @@
 
                         </form>
 
-                        <a class="float-left btn btn-Dark" href="{{ route('roles.export') }}"> {{ trans('user.role.options.export') }} </a>
+                        <a class="float-left btn btn-dark" href="{{ route('roles.export') }}"> {{ trans('user.role.options.export') }} </a>
 
                         <a href="{{route('role.create')}}" class="btn btn-primary float-right"> {{ trans('user.role.options.create') }} </a>
 
